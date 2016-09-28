@@ -1,0 +1,4 @@
+#!/system/bin/sh
+export CLASSPATH=/data/local/tmp/pm.jar
+exec app_process /system/bin com.android.commands.pm.Pm "$@"
+

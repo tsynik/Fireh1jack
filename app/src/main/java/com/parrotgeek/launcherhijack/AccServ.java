@@ -42,6 +42,14 @@ public class AccServ extends AccessibilityService {
         info.feedbackType = AccessibilityServiceInfo.FEEDBACK_GENERIC;
         info.packageNames = new String[]{"com.amazon.firelauncher"};
         setServiceInfo(info);
+performGlobalAction(AccessibilityService.GLOBAL_ACTION_RECENTS);
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                Log.wtf(TAG,e);
+            }
+            performGlobalAction(AccessibilityService.GLOBAL_ACTION_RECENTS);
+            startActivity(intent);
     }
 
 }
