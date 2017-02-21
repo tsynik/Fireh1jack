@@ -1,4 +1,4 @@
-package com.parrotgeek.launcherhijack;
+package com.baronkiko.launcherhijack;
 
 import android.accessibilityservice.AccessibilityService;
 import android.accessibilityservice.AccessibilityServiceInfo;

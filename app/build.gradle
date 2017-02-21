@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        applicationId "com.parrotgeek.launcherhijack"
+        applicationId "com.baronkiko.launcherhijack"
         minSdkVersion 21
         targetSdkVersion 23
         versionCode 1

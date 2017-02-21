@@ -1,4 +1,4 @@
-package com.parrotgeek.launcherhijack;
+package com.baronkiko.launcherhijack;
 
 import org.junit.Test;
 
