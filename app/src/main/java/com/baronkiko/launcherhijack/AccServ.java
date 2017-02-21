@@ -11,12 +11,10 @@ public class AccServ extends AccessibilityService {
 
     static final String TAG = "AccServ";
 
-    public Intent GetIntent()
+    public Intent GetDesiredIntent()
     {
-        SharedPreferences settings = getSharedPreferences("LauncherHijack", 0);
-        String s = settings.getString("ChosenLauncher", null);
-        if (s == null)
-            s = "com.teslacoilsw.launcher";
+        SharedPreferences settings = getSharedPreferences("LauncherHijack", MODE_WORLD_READABLE);
+        String s = settings.getString("ChosenLauncher", "com.teslacoilsw.launcher");
         return new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME).setPackage(s).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS|Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
     }
 
@@ -30,8 +28,7 @@ public class AccServ extends AccessibilityService {
                 Log.wtf(TAG,e);
             }
             performGlobalAction(AccessibilityService.GLOBAL_ACTION_RECENTS);
-            startActivity(GetIntent());
-
+            startActivity(GetDesiredIntent());
         }
     }
 
@@ -57,7 +54,7 @@ performGlobalAction(AccessibilityService.GLOBAL_ACTION_RECENTS);
                 Log.wtf(TAG,e);
             }
             performGlobalAction(AccessibilityService.GLOBAL_ACTION_RECENTS);
-            startActivity(GetIntent());
+            startActivity(GetDesiredIntent());
     }
 
 }
