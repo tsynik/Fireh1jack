@@ -31,21 +31,24 @@ public class MainActivity extends AppCompatActivity {
                 // get the list adapter
                 AppInfoAdapter appInfoAdapter = (AppInfoAdapter) parent.getAdapter();
                 // get selected item on the list
-                ApplicationInfo appInfo = (ApplicationInfo) appInfoAdapter.getItem(pos);
-
-                // We need an Editor object to make preference changes.
-                // All objects are from android.context.Context
-                SharedPreferences settings = getSharedPreferences("LauncherHijack", MODE_WORLD_READABLE);
-                SharedPreferences.Editor editor = settings.edit();
-                editor.putString("ChosenLauncher", appInfo.packageName);
-                editor.commit(); // Commit the edits!
-
+                final ApplicationInfo appInfo = (ApplicationInfo) appInfoAdapter.getItem(pos);
 
                 // Notify User
                 AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-                alertDialog.setTitle("Launcher Set");
-                alertDialog.setMessage("Your launcher has been set to " + appInfo.loadLabel(getPackageManager()) + " (" + appInfo.packageName + ")");
-                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                alertDialog.setTitle("Set Launcher");
+                alertDialog.setMessage("Set your launcher to " + appInfo.loadLabel(getPackageManager()) + " (" + appInfo.packageName + ")");
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // We need an Editor object to make preference changes.
+                                // All objects are from android.context.Context
+                                SharedPreferences settings = getSharedPreferences("LauncherHijack", MODE_WORLD_READABLE);
+                                SharedPreferences.Editor editor = settings.edit();
+                                editor.putString("ChosenLauncher", appInfo.packageName);
+                                editor.commit(); // Commit the edits!
+                            }
+                        });
+                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
