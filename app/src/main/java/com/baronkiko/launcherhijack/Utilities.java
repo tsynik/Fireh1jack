@@ -1,5 +1,6 @@
 package com.baronkiko.launcherhijack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.ActivityNotFoundException;
@@ -17,7 +18,17 @@ public class Utilities {
 	 * @return	list of installed applications
 	 */
 	public static List<ApplicationInfo> getInstalledApplication(Context c) {
-		return c.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
+		List<ApplicationInfo> list, results;
+        list = c.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
+        results = new ArrayList<ApplicationInfo>();
+		for (int n = 0; n < list.size();n++) {
+			if((list.get(n).flags & ApplicationInfo.FLAG_SYSTEM)!=1)
+			{
+				results.add(list.get(n));
+			}
+
+		}
+        return results;
 	}
 	
 	/*
