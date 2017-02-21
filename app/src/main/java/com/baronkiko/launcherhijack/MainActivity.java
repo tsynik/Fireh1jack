@@ -7,12 +7,62 @@ import android.content.pm.ApplicationInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
     private ListView mListAppInfo;
+    private MenuItem launcher, sysApps;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mainmenu, menu);
+        sysApps = menu.getItem(0);
+        launcher = menu.getItem(1);
+        launcher.setChecked(true);
+        sysApps.setChecked(true);
+        UpdateList();
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.launcher:
+                launcher.setChecked(!launcher.isChecked());
+                if (launcher.isChecked())
+                    sysApps.setChecked(true);
+                UpdateList();
+                return true;
+
+            case R.id.sysApps:
+                sysApps.setChecked(!sysApps.isChecked());
+                UpdateList();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void UpdateList()
+    {
+        boolean sys = sysApps.isChecked();
+        boolean l = launcher.isChecked();
+
+        mListAppInfo = (ListView) findViewById(R.id.lvApps);
+        // create new adapter
+        AppInfoAdapter adapter = new AppInfoAdapter(this, Utilities.getInstalledApplication(this, l, sys), getPackageManager());
+        // set adapter to list view
+        mListAppInfo.setAdapter(adapter);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +70,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(com.baronkiko.launcherhijack.R.layout.activity_main);
 
         mListAppInfo = (ListView) findViewById(R.id.lvApps);
-        // create new adapter
-        AppInfoAdapter adapter = new AppInfoAdapter(this, Utilities.getInstalledApplication(this, 2), getPackageManager());
-        // set adapter to list view
-        mListAppInfo.setAdapter(adapter);
+
         // implement event when an item on list view is selected
         mListAppInfo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

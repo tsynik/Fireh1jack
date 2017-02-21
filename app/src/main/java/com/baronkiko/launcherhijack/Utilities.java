@@ -17,13 +17,12 @@ public class Utilities {
 	/*
 	 * Get all installed application on mobile and return a list
 	 * @param	c	 Context of application
-	 * @param   type 0 = all, 1 = user apps, 2 = launchers
 	 * @return	list of installed applications
 	 */
-	public static List<ApplicationInfo> getInstalledApplication(Context c, int type) {
+	public static List<ApplicationInfo> getInstalledApplication(Context c, boolean launchers, boolean systemApps) {
 		List<ApplicationInfo> list, results;
 
-        if (type < 2) // Get all apps
+        if (!launchers) // Get all apps
           list = c.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
         else // Get launchers
         {
@@ -36,7 +35,7 @@ public class Utilities {
                 list.add(resolveInfo.activityInfo.applicationInfo);
         }
 
-        if (type == 0)
+        if (!systemApps)
             return list;
 
         // Filter system apps

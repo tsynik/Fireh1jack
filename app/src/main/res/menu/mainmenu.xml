@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Hide System Apps"
+        android:checkable="true"
+        android:id="@+id/sysApps" />
+    <item android:title="Launchers Only"
+        android:id="@+id/launcher"
+        android:checkable="true" />
+</menu>
