@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         mListAppInfo = (ListView) findViewById(R.id.lvApps);
         // create new adapter
-        AppInfoAdapter adapter = new AppInfoAdapter(this, Utilities.getInstalledApplication(this), getPackageManager());
+        AppInfoAdapter adapter = new AppInfoAdapter(this, Utilities.getInstalledApplication(this, 2), getPackageManager());
         // set adapter to list view
         mListAppInfo.setAdapter(adapter);
         // implement event when an item on list view is selected
