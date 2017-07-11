@@ -7,6 +7,7 @@ View the official thread over at XDA: https://forum.xda-developers.com/amazon-fi
 <ul>
 <li>This application will only work for Amazon devices running the fire launcher.</li>
 <li>You must enable the Accessibility Service through "Settings -> Accessibility -> To detect home button press" or nothing is going to happen.</li>
+<li>There are further trouble shooting steps on the official XDA thread</li>
 </ul>
 
 # License
