@@ -67,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ServiceMan.Start(this);
+
         setContentView(com.baronkiko.launcherhijack.R.layout.activity_main);
 
         mListAppInfo = (ListView) findViewById(R.id.lvApps);
