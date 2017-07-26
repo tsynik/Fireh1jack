@@ -23,6 +23,9 @@ public class AccServ extends AccessibilityService {
     @Override
     protected void onServiceConnected() {
         super.onServiceConnected();
+
+        ServiceMan.Start(getApplicationContext());
+
         Log.v(TAG, "onServiceConnected");
         AccessibilityServiceInfo info = new AccessibilityServiceInfo();
         info.flags = AccessibilityServiceInfo.DEFAULT;

@@ -28,10 +28,7 @@
 
         <service android:name="com.baronkiko.launcherhijack.HomeButtonService" android:enabled="true"></service>
 
-        <receiver
-            android:name="com.baronkiko.launcherhijack.BroadcastReceiverOnBootComplete"
-            android:enabled="true"
-            android:exported="false">
+        <receiver android:name="com.baronkiko.launcherhijack.BroadcastReceiverOnBootComplete">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
