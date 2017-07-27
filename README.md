@@ -1,4 +1,4 @@
-# LauncherHijackV3
+# LauncherHijack V3
 A small Android application to circumvent the default Amazon Fire launcher.
 Thanks to ParrotGeek1 for the original code and the lax licence that I have modified lightly.<br/>
 View the official thread over at XDA: https://forum.xda-developers.com/amazon-fire/general/launcher-root-launcher-hijack-v2-t3561026
