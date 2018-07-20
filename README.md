@@ -10,6 +10,10 @@ View the official thread over at XDA: https://forum.xda-developers.com/amazon-fi
 <li>There are further trouble shooting steps on the official XDA thread</li>
 </ul>
 
+# Fire OS update 5.6.2.0
+Please disable LauncherHijack in accessibility settings during Fire OS update 5.6.2.0. LauncherHijack causes issues during this update, you wont brick your device or anything with it left enabled but you wont be able to complete the update until disabled. There is nothing I can do without degrading the application during regular use.
+If you somehow end up mid update with LauncherHijack enabled the easiest solution, assuming you can't get to settings, is to uninstall LauncherHijack through ADB (plenty of guides online) and reinstall it after you complete the update.
+
 # License
 You can do whatever you want with this code but you have to credit us, Andy A (BaronKiko) and ParrotGeek, somewhere in your project, including a link to this repo. The modified version MUST be open source. You have to send us a link to the modified version if it is ever public.
 
