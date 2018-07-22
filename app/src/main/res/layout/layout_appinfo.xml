@@ -3,7 +3,10 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="fill_parent"
   android:layout_height="?android:attr/listPreferredItemHeight"
-  android:padding="5dip"
+  android:paddingLeft="@dimen/activity_horizontal_margin"
+  android:paddingRight="@dimen/activity_horizontal_margin"
+  android:paddingTop="5dip"
+  android:paddingBottom="5dip"
   android:background="?android:attr/activatedBackgroundIndicator">
   
   <ImageView
