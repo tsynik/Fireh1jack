@@ -43,7 +43,7 @@ public class HomeButtonService extends Service {
         WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                 0,
                 0,
-                WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY,
+                WindowManager.LayoutParams.TYPE_TOAST,
                 WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
                         | WindowManager.LayoutParams.FLAG_FULLSCREEN
                         | WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
