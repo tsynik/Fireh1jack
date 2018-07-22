@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -68,7 +69,11 @@ public class MainActivity extends AppCompatActivity {
         // set adapter to list view
         mListAppInfo.setAdapter(adapter);
 
-        SharedPreferences settings = getSharedPreferences("LauncherHijack", MODE_PRIVATE);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N)
+            SharedPreferences settings = getSharedPreferences("LauncherHijack", MODE_PRIVATE);
+        else
+            SharedPreferences settings = getSharedPreferences("LauncherHijack", MODE_WORLD_READABLE);
+
         String selectedPackage = settings.getString("ChosenLauncher", "com.teslacoilsw.launcher");
 
         for (int i = 0; i < appInfo.size(); i++) {
@@ -111,7 +116,10 @@ public class MainActivity extends AppCompatActivity {
 
                                 // We need an Editor object to make preference changes.
                                 // All objects are from android.context.Context
-                                SharedPreferences settings = getSharedPreferences("LauncherHijack", MODE_PRIVATE);
+                                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N)
+                                    SharedPreferences settings = getSharedPreferences("LauncherHijack", MODE_PRIVATE);
+                                else
+                                    SharedPreferences settings = getSharedPreferences("LauncherHijack", MODE_WORLD_READABLE);
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putString("ChosenLauncher", appInfo.packageName);
                                 editor.commit(); // Commit the edits!
