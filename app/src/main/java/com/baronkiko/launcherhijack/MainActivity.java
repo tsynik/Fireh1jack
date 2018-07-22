@@ -6,17 +6,19 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
     private ListView mListAppInfo;
     private MenuItem launcher, sysApps;
+    private int prevSelectedIndex = 0;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -56,12 +58,27 @@ public class MainActivity extends AppCompatActivity {
     {
         boolean sys = sysApps.isChecked();
         boolean l = launcher.isChecked();
+        List<ApplicationInfo> appInfo = Utilities.getInstalledApplication(this, l, sys); // Get available apps
 
         mListAppInfo = (ListView) findViewById(R.id.lvApps);
+
         // create new adapter
-        AppInfoAdapter adapter = new AppInfoAdapter(this, Utilities.getInstalledApplication(this, l, sys), getPackageManager());
+        AppInfoAdapter adapter = new AppInfoAdapter(this, appInfo, getPackageManager());
+
         // set adapter to list view
         mListAppInfo.setAdapter(adapter);
+
+        SharedPreferences settings = getSharedPreferences("LauncherHijack", MODE_WORLD_READABLE);
+        String selectedPackage = settings.getString("ChosenLauncher", "com.teslacoilsw.launcher");
+
+        for (int i = 0; i < appInfo.size(); i++) {
+            if (appInfo.get(i).packageName.equals(selectedPackage)) {
+                prevSelectedIndex = i;
+                mListAppInfo.setSelection(i);
+                mListAppInfo.setItemChecked(i, true);
+                break;
+            }
+        }
     }
 
     @Override
@@ -77,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         // implement event when an item on list view is selected
         mListAppInfo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int pos, long id) {
                 // get the list adapter
                 AppInfoAdapter appInfoAdapter = (AppInfoAdapter) parent.getAdapter();
                 // get selected item on the list
@@ -90,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
                 alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
+                                prevSelectedIndex = pos;
+
                                 // We need an Editor object to make preference changes.
                                 // All objects are from android.context.Context
                                 SharedPreferences settings = getSharedPreferences("LauncherHijack", MODE_WORLD_READABLE);
@@ -101,6 +120,8 @@ public class MainActivity extends AppCompatActivity {
                 alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
+                                mListAppInfo.setSelection(prevSelectedIndex);
+                                mListAppInfo.setItemChecked(prevSelectedIndex, true);
                                 dialog.dismiss();
                             }
                         });
