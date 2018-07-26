@@ -12,7 +12,7 @@ public class AccServ extends AccessibilityService {
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
         CharSequence packageName = event.getPackageName();
-        if(packageName.equals("com.amazon.firelauncher") || packageName.equals("com.amazon.tv.launcher"))
+        if(packageName.equals("com.amazon.firelauncher"))
             HomePress.Perform(getApplicationContext());
     }
 
@@ -32,7 +32,7 @@ public class AccServ extends AccessibilityService {
         info.flags = AccessibilityServiceInfo.DEFAULT;
         info.eventTypes = AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED;
         info.feedbackType = AccessibilityServiceInfo.FEEDBACK_GENERIC;
-        info.packageNames = new String[]{"com.amazon.firelauncher", "com.amazon.tv.launcher"};
+        info.packageNames = new String[]{"com.amazon.firelauncher"};
         setServiceInfo(info);
         HomePress.Perform(getApplicationContext());
     }
