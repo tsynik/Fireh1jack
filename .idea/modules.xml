@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LauncherHijack.iml" filepath="$PROJECT_DIR$/LauncherHijack.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LauncherHijack-Speeddymon.iml" filepath="$PROJECT_DIR$/LauncherHijack-Speeddymon.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

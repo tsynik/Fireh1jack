@@ -1,24 +1,36 @@
 package com.baronkiko.launcherhijack;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import java.util.List;
+import android.widget.TextView;
 
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private ListView mListAppInfo;
     private MenuItem launcher, sysApps;
     private int prevSelectedIndex = 0;
+
+    public final static int REQUEST_CODE = 5466;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -81,11 +93,83 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void showSecurityAlert() {
+        // Notify User
+        String welcomeMessage = "The FireTV devices running Nougat or higher do not provide a UI to the Application Permissions.";
+        String welcomeMessage2 = "In order to use this tool on your device, you must first run the below commands from your PC:";
+        String adbCommand1 = "# adb tcpip 5555";
+        String adbCommand2 = "# adb connect (yourfiretvip)";
+        String adbCommand3 = "# adb shell";
+        String adbCommand4 = "# pm grant com.baronkiko.launcherhijack android.permission.SYSTEM_ALERT";
+        String adbCommand4Part2 = "    _WINDOW";
+
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle("FireTV Permissions Notice");
+
+        LinearLayout alertContents = new LinearLayout(this);
+        LinearLayout.LayoutParams lllp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        TextView alertHeader = new TextView(this);
+        TextView alertMessage = new TextView(this);
+        TextView alertMessageExtraLine = new TextView(this);
+
+        alertHeader.setText(welcomeMessage + " " + welcomeMessage2 + "\n");
+        alertHeader.setGravity(Gravity.CENTER_HORIZONTAL);
+        alertHeader.setTextColor(Color.WHITE);
+
+        alertMessage.setText(adbCommand1 + "\n" + adbCommand2 + "\n" + adbCommand3 + "\n" + adbCommand4);
+        alertMessage.setGravity(Gravity.LEFT);
+        alertMessage.setTextColor(Color.WHITE);
+
+        alertMessageExtraLine.setText(adbCommand4Part2);
+        alertMessageExtraLine.setGravity(Gravity.LEFT);
+        alertMessageExtraLine.setTextColor(Color.WHITE);
+
+        alertContents.setLayoutParams(lllp);
+        alertContents.setOrientation(LinearLayout.VERTICAL);
+        alertContents.removeAllViews();
+        alertContents.addView(alertHeader);
+        alertContents.addView(alertMessage);
+        alertContents.addView(alertMessageExtraLine);
+
+        alertDialog.setView(alertContents);
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
+
+    public boolean checkDrawOverlayPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(this)) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
+                try {
+                    startActivityForResult(intent, REQUEST_CODE);
+                }
+                catch(SecurityException | ActivityNotFoundException e) {
+                    showSecurityAlert();
+                }
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        else {
+            return true;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ServiceMan.Start(this);
+        if (checkDrawOverlayPermission()) {
+            ServiceMan.Start(this);
+        }
 
         setContentView(com.baronkiko.launcherhijack.R.layout.activity_main);
 
@@ -128,5 +212,15 @@ public class MainActivity extends AppCompatActivity {
                 alertDialog.show();
             }
         });
+    }
+
+    @Override
+    @TargetApi(Build.VERSION_CODES.M)
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
+            if (Settings.canDrawOverlays(this)) {
+                ServiceMan.Start(this);
+            }
+        }
     }
 }
