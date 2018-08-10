@@ -28,12 +28,6 @@ public class AccServ extends AccessibilityService {
         ServiceMan.Start(getApplicationContext());
 
         Log.v(TAG, "onServiceConnected");
-        AccessibilityServiceInfo info = new AccessibilityServiceInfo();
-        info.flags = AccessibilityServiceInfo.DEFAULT;
-        info.eventTypes = AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED;
-        info.feedbackType = AccessibilityServiceInfo.FEEDBACK_GENERIC;
-        info.packageNames = new String[]{"com.amazon.firelauncher"};
-        setServiceInfo(info);
         HomePress.Perform(getApplicationContext());
     }
 
