@@ -26,15 +26,12 @@ public class Utilities {
         PackageManager pm = c.getPackageManager();
         Intent main=new Intent(Intent.ACTION_MAIN, null);
 
-        main.addCategory(Intent.CATEGORY_LAUNCHER);
         if (launchers)
             main.addCategory(Intent.CATEGORY_HOME);
         List<ResolveInfo> launchables= pm.queryIntentActivities(main, 0);
 
-        new ResolveInfo.DisplayNameComparator(pm);
 
-        Collections.sort(launchables,
-                new ResolveInfo.DisplayNameComparator(pm));
+        Collections.sort(launchables, new ResolveInfo.DisplayNameComparator(pm));
 
         if (!systemApps)
             return launchables;
