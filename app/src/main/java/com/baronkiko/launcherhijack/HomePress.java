@@ -2,6 +2,7 @@ package com.baronkiko.launcherhijack;
 
 import android.accessibilityservice.AccessibilityService;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,7 +19,16 @@ public class HomePress {
     {
         SharedPreferences settings = c.getSharedPreferences("LauncherHijack", MODE_PRIVATE);
         String s = settings.getString("ChosenLauncher", "com.teslacoilsw.launcher");
-        return new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME).setPackage(s).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS|Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        String name = settings.getString("ChosenLauncherName", "com.teslacoilsw.launcher");
+
+        ComponentName componentName = new ComponentName(s, name);
+        Intent i = new Intent(Intent.ACTION_MAIN);
+
+        i.addCategory(Intent.CATEGORY_LAUNCHER);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS|Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        i.setComponent(componentName);
+
+        return i;
     }
 
     public static void Perform(Context c)

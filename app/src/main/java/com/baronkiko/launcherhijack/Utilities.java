@@ -1,6 +1,7 @@
 package com.baronkiko.launcherhijack;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.content.ActivityNotFoundException;
@@ -9,7 +10,6 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
-import android.util.Log;
 import android.widget.Toast;
 
 public class Utilities {
@@ -19,30 +19,32 @@ public class Utilities {
 	 * @param	c	 Context of application
 	 * @return	list of installed applications
 	 */
-	public static List<ApplicationInfo> getInstalledApplication(Context c, boolean launchers, boolean systemApps) {
-		List<ApplicationInfo> list, results;
+	public static List<ResolveInfo> getInstalledApplication(Context c, boolean launchers, boolean systemApps) {
+        List<ResolveInfo> results;
 
-        if (!launchers) // Get all apps
-          list = c.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
-        else // Get launchers
-        {
-            list = new ArrayList<>();
-            PackageManager pm = c.getPackageManager();
-            Intent i = new Intent(Intent.ACTION_MAIN);
-            i.addCategory(Intent.CATEGORY_HOME);
-            List<ResolveInfo> lst = pm.queryIntentActivities(i, 0);
-            for (ResolveInfo resolveInfo : lst)
-                list.add(resolveInfo.activityInfo.applicationInfo);
-        }
+
+        PackageManager pm = c.getPackageManager();
+        Intent main=new Intent(Intent.ACTION_MAIN, null);
+
+        main.addCategory(Intent.CATEGORY_LAUNCHER);
+        if (launchers)
+            main.addCategory(Intent.CATEGORY_HOME);
+        List<ResolveInfo> launchables= pm.queryIntentActivities(main, 0);
+
+        new ResolveInfo.DisplayNameComparator(pm);
+
+        Collections.sort(launchables,
+                new ResolveInfo.DisplayNameComparator(pm));
 
         if (!systemApps)
-            return list;
+            return launchables;
 
-        // Filter system apps
-        results = new ArrayList<ApplicationInfo>();
-        for (int n = 0; n < list.size();n++)
-            if((list.get(n).flags & ApplicationInfo.FLAG_SYSTEM) !=1)
-                results.add(list.get(n));
+        results = new ArrayList<>();
+        for (int n = 0; n < launchables.size();n++)
+            if((launchables.get(n).activityInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) !=1)
+                results.add(launchables.get(n));
+
+
         return results;
 	}
 	

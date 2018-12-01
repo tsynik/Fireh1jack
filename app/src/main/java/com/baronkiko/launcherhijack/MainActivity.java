@@ -6,7 +6,7 @@ import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
+import android.content.pm.ResolveInfo;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -22,7 +22,6 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -70,12 +69,12 @@ public class MainActivity extends AppCompatActivity {
     {
         boolean sys = sysApps.isChecked();
         boolean l = launcher.isChecked();
-        List<ApplicationInfo> appInfo = Utilities.getInstalledApplication(this, l, sys); // Get available apps
+        List<ResolveInfo> appInfo = Utilities.getInstalledApplication(this, l, sys); // Get available apps
 
         mListAppInfo = (ListView) findViewById(R.id.lvApps);
 
         // create new adapter
-        AppInfoAdapter adapter = new AppInfoAdapter(this, appInfo, getPackageManager());
+        AppAdapter adapter = new AppAdapter(this, appInfo, getApplicationContext().getPackageManager());
 
         // set adapter to list view
         mListAppInfo.setAdapter(adapter);
@@ -84,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         String selectedPackage = settings.getString("ChosenLauncher", "com.teslacoilsw.launcher");
 
         for (int i = 0; i < appInfo.size(); i++) {
-            if (appInfo.get(i).packageName.equals(selectedPackage)) {
+            if (appInfo.get(i).activityInfo.packageName.equals(selectedPackage)) {
                 prevSelectedIndex = i;
                 mListAppInfo.setSelection(i);
                 mListAppInfo.setItemChecked(i, true);
@@ -180,14 +179,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int pos, long id) {
                 // get the list adapter
-                AppInfoAdapter appInfoAdapter = (AppInfoAdapter) parent.getAdapter();
+                AppAdapter appInfoAdapter = (AppAdapter) parent.getAdapter();
                 // get selected item on the list
-                final ApplicationInfo appInfo = (ApplicationInfo) appInfoAdapter.getItem(pos);
+                final ResolveInfo appInfo = (ResolveInfo) appInfoAdapter.getItem(pos);
 
                 // Notify User
                 AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
                 alertDialog.setTitle("Set Launcher");
-                alertDialog.setMessage("Set your launcher to " + appInfo.loadLabel(getPackageManager()) + " (" + appInfo.packageName + ")");
+                alertDialog.setMessage("Set your launcher to " + appInfo.loadLabel(getPackageManager()) + " (" + appInfo.activityInfo.packageName + ")");
                 alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
@@ -197,7 +196,8 @@ public class MainActivity extends AppCompatActivity {
                                 // All objects are from android.context.Context
                                 SharedPreferences settings = getSharedPreferences("LauncherHijack", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = settings.edit();
-                                editor.putString("ChosenLauncher", appInfo.packageName);
+                                editor.putString("ChosenLauncher", appInfo.activityInfo.applicationInfo.packageName);
+                                editor.putString("ChosenLauncherName", appInfo.activityInfo.name);
                                 editor.commit(); // Commit the edits!
                             }
                         });
