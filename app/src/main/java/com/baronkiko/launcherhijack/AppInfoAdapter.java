@@ -1,7 +1,5 @@
 package com.baronkiko.launcherhijack;
 
-import java.util.List;
-
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -11,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.List;
 
 public class AppInfoAdapter extends BaseAdapter {
 	private Context mContext;
@@ -53,9 +53,9 @@ public class AppInfoAdapter extends BaseAdapter {
 		}
 		
 		// load controls from layout resources
-		ImageView ivAppIcon = (ImageView)v.findViewById(com.baronkiko.launcherhijack.R.id.ivIcon);
-		TextView tvAppName = (TextView)v.findViewById(com.baronkiko.launcherhijack.R.id.tvName);
-		TextView tvPkgName = (TextView)v.findViewById(com.baronkiko.launcherhijack.R.id.tvPack);
+		ImageView ivAppIcon = v.findViewById(R.id.ivIcon);
+		TextView tvAppName = v.findViewById(R.id.tvName);
+		TextView tvPkgName = v.findViewById(R.id.tvPack);
 		
 		// set data to display
 		ivAppIcon.setImageDrawable(entry.loadIcon(mPackManager));
