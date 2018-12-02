@@ -17,7 +17,7 @@ public class AppInfoAdapter extends BaseAdapter {
 	private List<ApplicationInfo> mListAppInfo;
 	private PackageManager mPackManager;
 	
-	public AppInfoAdapter(Context c, List<ApplicationInfo> list, PackageManager pm) {
+	AppInfoAdapter(Context c, List<ApplicationInfo> list, PackageManager pm) {
 		mContext = c;
 		mListAppInfo = list;
 		mPackManager = pm;

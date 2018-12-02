@@ -1,13 +1,9 @@
 package com.baronkiko.launcherhijack;
 
 import android.app.ActivityManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by andy on 26/07/2017.
@@ -28,11 +24,11 @@ public class ServiceMan {
         return false;
     }
 
-    public static void StartSlow(final Context c) {
+    static void StartSlow(final Context c) {
         while (!Start(c)) {
             try {
                 Thread.sleep(50);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
             }
         }
     }
@@ -47,7 +43,7 @@ public class ServiceMan {
         return false;
     }
 
-    public static void Stop(Context c)
+    static void Stop(Context c)
     {
         c.stopService(mServiceIntent);
     }
