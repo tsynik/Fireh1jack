@@ -8,7 +8,7 @@ android {
         applicationId "com.baronkiko.launcherhijack"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 3
+        versionCode 4
         versionName "3.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
