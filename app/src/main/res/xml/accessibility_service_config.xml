@@ -5,6 +5,5 @@
     android:accessibilityFeedbackType="feedbackAllMask"
     android:canRetrieveWindowContent="true"
     android:canRequestFilterKeyEvents="true"
-    android:packageNames="com.amazon.firelauncher, com.amazon.tv.launcher"
     android:notificationTimeout="50"
     />

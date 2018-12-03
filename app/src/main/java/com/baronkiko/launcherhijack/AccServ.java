@@ -13,9 +13,13 @@ public class AccServ extends AccessibilityService {
     static final String TAG = "AccServ";
     static boolean HomePressCanceled = false;
     static boolean RunningOnTV = false;
+    static HomeWatcher homeWatcher;
+    static String lastApp, lastClass;
 
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
+        lastApp = (String) event.getPackageName();
+        lastClass = (String) event.getClassName();
         if (!RunningOnTV)
         {
             CharSequence packageName = event.getPackageName();
@@ -58,6 +62,9 @@ public class AccServ extends AccessibilityService {
     @Override
     protected void onServiceConnected() {
         super.onServiceConnected();
+
+        lastClass = "";
+        lastApp = "";
 
         UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
         RunningOnTV = (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION);
