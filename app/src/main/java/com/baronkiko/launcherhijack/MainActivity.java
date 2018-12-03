@@ -22,6 +22,8 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -169,6 +171,11 @@ public class MainActivity extends AppCompatActivity {
         if (checkDrawOverlayPermission()) {
             ServiceMan.Start(this);
         }
+
+
+        if (getApplicationContext().getSharedPreferences("LauncherHijack", MODE_PRIVATE).getString("ChosenLauncher", "").equals("com.baronkiko.launcherhijack"))
+            Toast.makeText(getApplicationContext(),"Please select a launcher", Toast.LENGTH_LONG).show();
+
 
         setContentView(com.baronkiko.launcherhijack.R.layout.activity_main);
 

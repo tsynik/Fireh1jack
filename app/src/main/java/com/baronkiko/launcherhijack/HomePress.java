@@ -18,8 +18,8 @@ public class HomePress {
     public static Intent GetDesiredIntent(Context c)
     {
         SharedPreferences settings = c.getSharedPreferences("LauncherHijack", MODE_PRIVATE);
-        String s = settings.getString("ChosenLauncher", "com.teslacoilsw.launcher");
-        String name = settings.getString("ChosenLauncherName", "com.teslacoilsw.launcher");
+        String s = settings.getString("ChosenLauncher", "com.baronkiko.launcherhijack");
+        String name = settings.getString("ChosenLauncherName", "com.baronkiko.launcherhijack.MainActivity");
 
         ComponentName componentName = new ComponentName(s, name);
         Intent i = new Intent(Intent.ACTION_MAIN);
