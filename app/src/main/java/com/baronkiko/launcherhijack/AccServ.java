@@ -3,6 +3,7 @@ package com.baronkiko.launcherhijack;
 import android.accessibilityservice.AccessibilityService;
 import android.app.UiModeManager;
 import android.content.res.Configuration;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityEvent;
@@ -67,6 +68,27 @@ public class AccServ extends AccessibilityService {
 
         lastClass = "";
         lastApp = "";
+
+        homeWatcher = new HomeWatcher(getApplicationContext());
+        homeWatcher.setOnHomePressedListener(new OnHomePressedListener()
+        {
+            @Override
+            public void onHomePressed()
+            {
+
+                if (!HomePressCanceled && !(lastApp.equals("com.android.systemui") && lastClass.equals("com.android.systemui.recents.RecentsActivity")))
+                {
+                    Log.d("New Home", "Home Press but new. LastApp: " + lastApp + "  LastClass: " + lastClass);
+                    HomePress.Perform(getApplicationContext());
+                }
+            }
+
+            @Override
+            public void onRecentAppPressed()
+            {
+            }
+        });
+        homeWatcher.startWatch();
 
         UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
         RunningOnTV = (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION);
