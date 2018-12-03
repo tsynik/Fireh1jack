@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityEvent;
 
+import com.jaredrummler.android.device.DeviceName;
+
 
 public class AccServ extends AccessibilityService {
 
@@ -69,7 +71,7 @@ public class AccServ extends AccessibilityService {
         UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
         RunningOnTV = (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION);
 
-        Log.v(TAG, "Launcher Hijack Service Started");
+        Log.v(TAG, "Launcher Hijack Service Started on " + DeviceName.getDeviceName());
         HomePress.Perform(getApplicationContext());
     }
 
