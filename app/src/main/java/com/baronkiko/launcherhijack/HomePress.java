@@ -15,6 +15,8 @@ import static android.content.Context.MODE_PRIVATE;
  */
 
 public class HomePress {
+    private static long LastActivate = 0;
+
     public static Intent GetDesiredIntent(Context c)
     {
         SharedPreferences settings = c.getSharedPreferences("LauncherHijack", MODE_PRIVATE);
@@ -33,6 +35,12 @@ public class HomePress {
 
     public static void Perform(Context c)
     {
+        // Simple debounce
+        long time = System.currentTimeMillis();
+        if (time - LastActivate < 200)
+            return;
+        LastActivate = time;
+
         Intent i = GetDesiredIntent(c);
         PendingIntent pendingIntent = PendingIntent.getActivity(c, 0, i, 0);
         try {
