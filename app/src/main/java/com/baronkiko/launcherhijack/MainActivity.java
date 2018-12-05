@@ -66,21 +66,33 @@ public class MainActivity extends AppCompatActivity
                 if (launcher.isChecked())
                     sysApps.setChecked(true);
                 UpdateList();
-                return true;
+                break;
 
             case R.id.sysApps:
                 sysApps.setChecked(!sysApps.isChecked());
                 UpdateList();
-                return true;
+                break;
+
+            case R.id.help:
+                Intent helpIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/BaronKiko/LauncherHijack/blob/master/HELP.md"));
+                startActivity(helpIntent);
+                break;
+
+            case R.id.donate:
+                Intent donateIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/BaronKiko/LauncherHijack/blob/master/README.md#donations"));
+                startActivity(donateIntent);
+                break;
 
             case  R.id.settings:
                 Intent myIntent = new Intent(getApplicationContext(), SettingsActivity.class);
                 startActivity(myIntent);
-                return true;
+                break;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+
+        return true;
     }
 
     private void UpdateList()
