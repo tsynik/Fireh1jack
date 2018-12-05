@@ -8,8 +8,8 @@ android {
         applicationId "com.baronkiko.launcherhijack"
         minSdkVersion 21
         targetSdkVersion 25
-        versionCode 32
-        versionName "3.2"
+        versionCode 4
+        versionName "4"
     }
     buildTypes {
         release {
