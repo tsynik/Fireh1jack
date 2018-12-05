@@ -1,5 +1,6 @@
 package com.baronkiko.launcherhijack;
 
+import android.accessibilityservice.AccessibilityServiceInfo;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -14,11 +15,14 @@ import android.os.Build;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.accessibility.AccessibilityEvent;
+import android.view.accessibility.AccessibilityManager;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -74,8 +78,7 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.help:
-                Intent helpIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/BaronKiko/LauncherHijack/blob/master/HELP.md"));
-                startActivity(helpIntent);
+                OpenHelp();
                 break;
 
             case R.id.donate:
@@ -93,6 +96,12 @@ public class MainActivity extends AppCompatActivity
         }
 
         return true;
+    }
+
+    private void OpenHelp()
+    {
+        Intent helpIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/BaronKiko/LauncherHijack/blob/master/HELP.md"));
+        startActivity(helpIntent);
     }
 
     private void UpdateList()
@@ -192,6 +201,22 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    public static boolean isAccessibilityEnabled(Context context, String id) {
+
+        AccessibilityManager am = (AccessibilityManager) context
+                .getSystemService(Context.ACCESSIBILITY_SERVICE);
+
+        List<AccessibilityServiceInfo> runningServices = am
+                .getEnabledAccessibilityServiceList(AccessibilityEvent.TYPES_ALL_MASK);
+        for (AccessibilityServiceInfo service : runningServices) {
+            if (id.equals(service.getId())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         context = getApplicationContext();
@@ -200,6 +225,32 @@ public class MainActivity extends AppCompatActivity
 
         if (checkDrawOverlayPermission()) {
             ServiceMan.Start(this);
+        }
+
+        if (!isAccessibilityEnabled(context, "com.baronkiko.launcherhijack/.AccServ"))
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                    .setTitle("Accessibility Service Disabled")
+                    .setMessage("Accessible Service is disabled. You must enable it to ensure Launcher Hijack's functionality")
+                    .setCancelable(true)
+                    .setNegativeButton("Close", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+
+                        }
+                    })
+                    .setPositiveButton("Help", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            OpenHelp();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
         }
 
 
