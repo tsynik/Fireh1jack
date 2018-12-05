@@ -13,34 +13,35 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.baronkiko.launcherhijack.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.LEANBACK_LAUNCHER"/>
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <service android:name="com.baronkiko.launcherhijack.AccServ"
+        <service
+            android:name=".AccServ"
             android:label="To detect home button press"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <meta-data
                 android:name="android.accessibilityservice"
-                android:resource="@xml/accessibility_service_config"/>
+                android:resource="@xml/accessibility_service_config" />
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
-
         </service>
+        <service
+            android:name=".HomeButtonService"
+            android:enabled="true" />
 
-        <service android:name="com.baronkiko.launcherhijack.HomeButtonService" android:enabled="true"></service>
-
-        <receiver android:name="com.baronkiko.launcherhijack.BroadcastReceiverOnBootComplete">
+        <receiver android:name=".BroadcastReceiverOnBootComplete">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />s
                 <data android:scheme="package" />
             </intent-filter>
             <intent-filter>
@@ -48,5 +49,8 @@
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
+
+        <activity android:name=".SettingsPrefs" />
+        <activity android:name=".SettingsActivity"></activity>
     </application>
 </manifest>

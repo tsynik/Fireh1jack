@@ -3,6 +3,7 @@ package com.baronkiko.launcherhijack;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,23 +27,33 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
+    private static Context context;
+
     private ListView mListAppInfo;
     private MenuItem launcher, sysApps;
     private int prevSelectedIndex = 0;
 
     public final static int REQUEST_CODE = 5466;
 
+    public static Context GetContext()
+    {
+        return context;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
         MenuInflater inflater = getMenuInflater();
+
         inflater.inflate(R.menu.mainmenu, menu);
         sysApps = menu.getItem(0);
         launcher = menu.getItem(1);
         launcher.setChecked(true);
         sysApps.setChecked(true);
         UpdateList();
+
         return true;
     }
 
@@ -60,6 +71,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.sysApps:
                 sysApps.setChecked(!sysApps.isChecked());
                 UpdateList();
+                return true;
+
+            case  R.id.settings:
+                Intent myIntent = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(myIntent);
                 return true;
 
             default:
@@ -166,6 +182,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        context = getApplicationContext();
+
         super.onCreate(savedInstanceState);
 
         if (checkDrawOverlayPermission()) {

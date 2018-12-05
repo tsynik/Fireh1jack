@@ -8,4 +8,6 @@
     <item android:title="Launchers Only"
         android:id="@+id/launcher"
         android:checkable="true" />
+    <item android:title="Settings"
+        android:id="@+id/settings" />
 </menu>

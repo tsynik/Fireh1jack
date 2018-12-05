@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SettingsActivity">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/settings_element_height"
+        android:orientation="vertical"
+        android:paddingLeft="14dip"
+        android:paddingRight="14dip"
+        android:paddingTop="8dip"
+        android:paddingBottom="8dip"
+        android:id="@+id/hardwareCBView">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:textSize="@dimen/settings_font_size"
+                android:gravity="center_vertical"
+                android:text="Hardware button detection" />
+            <CheckBox
+                android:id="@+id/hardwareCB"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/settings_element_height"
+        android:orientation="vertical"
+        android:paddingLeft="14dip"
+        android:paddingRight="14dip"
+        android:paddingTop="8dip"
+        android:paddingBottom="8dip"
+        android:id="@+id/openApplicationCBView">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:textSize="@dimen/settings_font_size"
+            android:gravity="center_vertical"
+            android:text="Launcher open detection" />
+        <CheckBox
+            android:id="@+id/openApplicationCB"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/settings_element_height"
+        android:orientation="vertical"
+        android:paddingLeft="14dip"
+        android:paddingRight="14dip"
+        android:paddingTop="8dip"
+        android:paddingBottom="8dip"
+        android:id="@+id/broadcastCBView">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:textSize="@dimen/settings_font_size"
+            android:gravity="center_vertical"
+            android:text="Broadcast reciever detection" />
+        <CheckBox
+            android:id="@+id/broadcastCB"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/settings_element_height"
+        android:orientation="vertical"
+        android:paddingLeft="14dip"
+        android:paddingRight="14dip"
+        android:paddingTop="8dip"
+        android:paddingBottom="8dip"
+        android:id="@+id/overlayCBView">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:textSize="@dimen/settings_font_size"
+            android:gravity="center_vertical"
+            android:text="Overlay detection (Requires reboot)" />
+        <CheckBox
+            android:id="@+id/overlayCB"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/settings_element_height"
+        android:orientation="vertical"
+        android:paddingLeft="14dip"
+        android:paddingRight="14dip"
+        android:paddingTop="8dip"
+        android:paddingBottom="8dip"
+        android:id="@+id/menuButtonOverrideCBView">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:textSize="@dimen/settings_font_size"
+            android:gravity="center_vertical"
+            android:text="Disable while menu is held (Hardware buttons only)" />
+        <CheckBox
+            android:id="@+id/menuButtonOverrideCB"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/settings_element_height"
+        android:orientation="vertical"
+        android:paddingLeft="14dip"
+        android:paddingRight="14dip"
+        android:paddingTop="8dip"
+        android:paddingBottom="8dip"
+        android:id="@+id/taskSwitchCBView">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:textSize="@dimen/settings_font_size"
+            android:gravity="center_vertical"
+            android:text="Disable In Task Switcher" />
+        <CheckBox
+            android:id="@+id/taskSwitchCB"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dip"
+        android:weightSum="2">
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="16dip"
+            android:layout_marginBottom="16dip"
+            android:layout_marginLeft="14dip"
+            android:layout_marginRight="14dip"
+            android:text="Cancel"/>
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="16dip"
+            android:layout_marginBottom="16dip"
+            android:layout_marginLeft="14dip"
+            android:layout_marginRight="14dip"
+            android:text="Save"/>
+    </LinearLayout>
+
+</LinearLayout>

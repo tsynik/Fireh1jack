@@ -15,20 +15,21 @@ public class AccServ extends AccessibilityService {
 
     static final String TAG = "AccServ";
     static boolean HomePressCanceled = false;
-    static boolean RunningOnTV = false;
     static HomeWatcher homeWatcher;
     static String lastApp, lastClass;
+    private static SettingsMan.SettingStore settings;
 
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
         lastApp = (String) event.getPackageName();
         lastClass = (String) event.getClassName();
-        if (!RunningOnTV)
-        {
-            CharSequence packageName = event.getPackageName();
-            if (packageName.equals("com.amazon.firelauncher"))
-                HomePress.Perform(getApplicationContext());
-        }
+
+        if (!settings.ApplicationOpenDetection)
+            return;
+
+        CharSequence packageName = event.getPackageName();
+        if (packageName.equals("com.amazon.firelauncher"))
+            HomePress.Perform(getApplicationContext());
     }
 
     @Override
@@ -39,6 +40,9 @@ public class AccServ extends AccessibilityService {
     @Override
     public boolean onKeyEvent(KeyEvent event)
     {
+        if (!settings.HardwareDetection)
+            return false;
+
         switch (event.getKeyCode())
         {
             case KeyEvent.KEYCODE_HOME:
@@ -55,7 +59,7 @@ public class AccServ extends AccessibilityService {
                 return false;
 
             case KeyEvent.KEYCODE_MENU:
-                if (RunningOnTV && event.getAction() == KeyEvent.ACTION_DOWN)
+                if (settings.MenuButtonOverride && event.getAction() == KeyEvent.ACTION_DOWN)
                     HomePressCanceled = true;
                 return false;
         }
@@ -66,6 +70,8 @@ public class AccServ extends AccessibilityService {
     protected void onServiceConnected() {
         super.onServiceConnected();
 
+        settings = SettingsMan.GetSettings();
+
         lastClass = "";
         lastApp = "";
 
@@ -75,8 +81,8 @@ public class AccServ extends AccessibilityService {
             @Override
             public void onHomePressed()
             {
-
-                if (!HomePressCanceled && !(lastApp.equals("com.android.systemui") && lastClass.equals("com.android.systemui.recents.RecentsActivity")))
+                if (settings.BroadcastRecieverDetection && !HomePressCanceled &&
+                   (!settings.RecentAppOverride | !(lastApp.equals("com.android.systemui") && lastClass.equals("com.android.systemui.recents.RecentsActivity"))))
                 {
                     Log.d("New Home", "Home Press but new. LastApp: " + lastApp + "  LastClass: " + lastClass);
                     HomePress.Perform(getApplicationContext());
@@ -89,9 +95,6 @@ public class AccServ extends AccessibilityService {
             }
         });
         homeWatcher.startWatch();
-
-        UiModeManager uiModeManager = (UiModeManager) getSystemService(UI_MODE_SERVICE);
-        RunningOnTV = (uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_TELEVISION);
 
         Log.v(TAG, "Launcher Hijack Service Started on " + DeviceName.getDeviceName());
         HomePress.Perform(getApplicationContext());

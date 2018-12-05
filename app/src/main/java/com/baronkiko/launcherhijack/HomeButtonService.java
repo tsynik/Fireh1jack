@@ -25,8 +25,7 @@ public class HomeButtonService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        // To be controlled with setting later
-        if (false)
+        if (SettingsMan.GetSettings().OverlayApplicationDetection)
         {
             layout = new LinearLayout(getApplicationContext())
             {
@@ -42,7 +41,6 @@ public class HomeButtonService extends Service {
                 public boolean dispatchKeyEvent(KeyEvent event)
                 {
                     Log.d("HomeButtonService", "Dispatch Key Event");
-
                     return false;
                 }
             };
