@@ -1,25 +1,17 @@
-# LauncherHijack V3
-A small Android application to circumvent the default Amazon Fire launcher.
-Thanks to ParrotGeek1 for the original code and the lax licence that I have modified lightly.<br/>
-View the official thread over at XDA: https://forum.xda-developers.com/amazon-fire/general/launcher-root-launcher-hijack-v2-t3561026
+# LauncherHijack V4
+A small Android application to circumvent the default Amazon Fire launcher. Works for Fire Tablets and Fire TV's.  
+Huge thanks to ParrotGeek1 and Speeddymon. ParrotGeek1 made V1 and without him I would have never started this project. Speeddymon donated a 2018 Fire TV allowing me to implement Fire TV support. If you have a Fire TV you should thank him :)  
+View the official thread over at [XDA](https://forum.xda-developers.com/amazon-fire/general/launcher-root-launcher-hijack-v2-t3561026), however I don't really check it: https://forum.xda-developers.com/amazon-fire/general/launcher-root-launcher-hijack-v2-t3561026 It's still a good place to discuss the app with other users.
 
 # Important
-<ul>
-<li>This application will only work for Amazon devices running the fire launcher.</li>
-<li>You must enable the Accessibility Service through "Settings -> Accessibility -> To detect home button press" or nothing is going to happen.</li>
-<li>There are further trouble shooting steps on the official XDA thread</li>
-</ul>
-
-# Fire OS update 5.6.2.0
-Please disable LauncherHijack in accessibility settings during Fire OS update 5.6.2.0. LauncherHijack causes issues during this update, you wont brick your device or anything with it left enabled but you wont be able to complete the update until disabled. There is nothing I can do without degrading the application during regular use.
-If you somehow end up mid update with LauncherHijack enabled the easiest solution, assuming you can't get to settings, is to uninstall LauncherHijack through ADB (plenty of guides online) and reinstall it after you complete the update.
-
-# License
-You can do whatever you want with this code but you have to credit us, Andy A (BaronKiko) and ParrotGeek, somewhere in your project, including a link to this repo. The modified version MUST be open source. You have to send us a link to the modified version if it is ever public.
-
-# Redistribution
-You must NOT redistribute this code in binary form unless you have modified and released the code adhering to the licence above.<br/>
-If you wish to distribute this code in binary form then you can get it from this GitHub's releases section through user instruction, script or program however automatic downloads MUST always get the latest version. You MUST also give credit to us, Andy A (BaronKiko) and ParrotGeek somewhere in the application and explain clearly how to enable the service to the end user.
+Please read the instructions for your device in [HELP.md](https://github.com/BaronKiko/LauncherHijack/blob/master/HELP.md)
 
 # Bugs
-If you find any issues please leave them in the issue tracker. I will have a look at them but don't expect bug fixes to be quick if ever fixed.
+If you find any issues please leave them in the issue tracker. I will try have a look at them as quickly as possible but there is no guarentee I will be able to fix them.
+
+# Donations
+This app will always be totally free and without ads. It's just the right thing to do. That being said development has consumed a lot of my time over the years so if you want to throw me a few quid, bucks or whatever currency you happen to use you can do so through [PayPal](http://paypal.me/AndyAdshead): http://paypal.me/AndyAdshead
+Please don't send anything you can't afford, it's your hard earned money after all.
+
+# Pull Requests
+While pull requests are appreciated I suggest you let me know before putting serious time in as I want to avoid working on the same area and wouldn't want you to waste your time. Also note that some parts of this code can break with seamingly inconsiquential changes due to the hacky methods employed to break Fire OS's strict security configuration. If you don't have to change something or don't know 100% how and why it works I suggest you leave it alone.
