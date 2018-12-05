@@ -8,6 +8,9 @@
 6. Reboot your device
 7. Congratulation, if all is working correctly your home button should now open your chosen launcher
 
+**Updates (Specifically 5.6.2.0)**  
+Please disable LauncherHijack in accessibility settings during Fire OS updates. LauncherHijack causes issues during update 5.6.2.0, you wont brick your device or anything with it left enabled but you wont be able to complete update 5.6.2.0 until disabled. There is nothing I can do without degrading the application during regular use. If you somehow end up mid update with LauncherHijack enabled the easiest solution, assuming you can't get to settings, is to uninstall LauncherHijack through ADB (plenty of guides online) and reinstall it after you complete the update.
+
 **Google Now Launcher**  
 The Google Now launcher is the only known launcher that supports widgets out of the box. It can however be a pain to set up so try following these instructions:
 1. Ensure Launcher Hijack works with another launcher
