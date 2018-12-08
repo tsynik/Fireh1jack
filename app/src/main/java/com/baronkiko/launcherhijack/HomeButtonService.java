@@ -73,7 +73,7 @@ public class HomeButtonService extends Service {
         super.onDestroy();
         Log.i("EXIT", "ondestroy!");
 
-        wm.removeView(layout);;
+        wm.removeView(layout);
 
         ServiceMan.Stop(getApplicationContext());
         ServiceMan.StartSlow(getApplicationContext());

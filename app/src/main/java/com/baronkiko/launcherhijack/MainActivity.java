@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity
         boolean l = launcher.isChecked();
         List<ResolveInfo> appInfo = Utilities.getInstalledApplication(this, l, sys); // Get available apps
 
-        mListAppInfo = (ListView) findViewById(R.id.lvApps);
+        mListAppInfo = findViewById(R.id.lvApps);
 
         // create new adapter
         AppAdapter adapter = new AppAdapter(this, appInfo, getApplicationContext().getPackageManager());
@@ -260,7 +260,7 @@ public class MainActivity extends AppCompatActivity
 
         setContentView(com.baronkiko.launcherhijack.R.layout.activity_main);
 
-        mListAppInfo = (ListView) findViewById(R.id.lvApps);
+        mListAppInfo = findViewById(R.id.lvApps);
 
         // implement event when an item on list view is selected
         mListAppInfo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
