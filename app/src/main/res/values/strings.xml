@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Launcher Hijack V4</string>
+    <string name="app_name">Launcher Hijack</string>
     <string name="launchers_only">Launchers Only</string>
     <string name="hide_system_apps">Hide System Apps</string>
     <string name="help">Help</string>
