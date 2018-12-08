@@ -223,10 +223,6 @@ public class MainActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
 
-        if (checkDrawOverlayPermission()) {
-            ServiceMan.Start(this);
-        }
-
         if (!isAccessibilityEnabled(context, "com.baronkiko.launcherhijack/.AccServ"))
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(this)
