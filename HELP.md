@@ -29,7 +29,7 @@ You can get the package name with Launcher Hijack, in the confirmation dialog wh
 Unfortunatly I have had reports of mixed success with this command but it's worth trying if you want widgets for launchers other than the Google Now launcher.
 
 
-**Deleting the Dafault Launcher**
+**Disable the Dafault Launcher**  
 If you are annoyed by the default launcher appearing while your chosen launcher is loading then you can corrupt the default launcher.  
 Fair **WARNING** if you do this without any 3rd party launchers installed you will have a very hard time fixing your device and once the Fire Launcher is broken it can never be fixed for that user account, you will have to make a new user account to ressurect it.
 1. Download the corrupted launcher found in the attached files of this [XDA post](https://forum.xda-developers.com/amazon-fire/general/tut-easily-remove-amazons-firelauncher-t3467758). You will need an XDA account to download the file.
