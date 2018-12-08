@@ -266,9 +266,7 @@ public class MainActivity extends AppCompatActivity
             AlertDialog alert = builder.create();
             alert.show();
         }
-
-
-        if (getApplicationContext().getSharedPreferences("LauncherHijack", MODE_PRIVATE).getString("ChosenLauncher", "").equals("com.baronkiko.launcherhijack"))
+        else if (getApplicationContext().getSharedPreferences("LauncherHijack", MODE_PRIVATE).getString("ChosenLauncher", "com.baronkiko.launcherhijack").equals("com.baronkiko.launcherhijack"))
             Toast.makeText(getApplicationContext(),"Please select a launcher", Toast.LENGTH_LONG).show();
 
 
