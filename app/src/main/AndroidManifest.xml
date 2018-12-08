@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.baronkiko.launcherhijack">
     <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <application
-        android:allowBackup="false"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        android:theme="@style/AppTheme">
         <activity android:name="com.baronkiko.launcherhijack.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,9 +26,7 @@
             </intent-filter>
         </service>
 
-        <service
-            android:name="com.baronkiko.launcherhijack.HomeButtonService"
-            android:enabled="true" />
+        <service android:name="com.baronkiko.launcherhijack.HomeButtonService" android:enabled="true"></service>
 
         <receiver android:name="com.baronkiko.launcherhijack.BroadcastReceiverOnBootComplete">
             <intent-filter>
