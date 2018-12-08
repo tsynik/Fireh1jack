@@ -22,7 +22,7 @@
                 android:layout_alignParentLeft="true"
                 android:textSize="@dimen/settings_font_size"
                 android:gravity="center_vertical"
-                android:text="Hardware button detection" />
+                android:text="@string/hardware_button_detection" />
             <CheckBox
                 android:id="@+id/hardwareCB"
                 android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
             android:layout_alignParentLeft="true"
             android:textSize="@dimen/settings_font_size"
             android:gravity="center_vertical"
-            android:text="Launcher open detection" />
+            android:text="@string/launcher_open_detection" />
         <CheckBox
             android:id="@+id/openApplicationCB"
             android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
             android:layout_alignParentLeft="true"
             android:textSize="@dimen/settings_font_size"
             android:gravity="center_vertical"
-            android:text="Broadcast reciever detection" />
+            android:text="@string/broadcast_reciever_detection" />
         <CheckBox
             android:id="@+id/broadcastCB"
             android:layout_width="wrap_content"
@@ -94,7 +94,7 @@
             android:layout_alignParentLeft="true"
             android:textSize="@dimen/settings_font_size"
             android:gravity="center_vertical"
-            android:text="Overlay detection (Requires reboot)" />
+            android:text="@string/overlay_detection_requires_reboot" />
         <CheckBox
             android:id="@+id/overlayCB"
             android:layout_width="wrap_content"
@@ -118,7 +118,7 @@
             android:layout_alignParentLeft="true"
             android:textSize="@dimen/settings_font_size"
             android:gravity="center_vertical"
-            android:text="Disable while menu is held (Hardware buttons only)" />
+            android:text="@string/disable_while_menu_is_held_hardware_buttons_only" />
         <CheckBox
             android:id="@+id/menuButtonOverrideCB"
             android:layout_width="wrap_content"
@@ -142,7 +142,7 @@
             android:layout_alignParentLeft="true"
             android:textSize="@dimen/settings_font_size"
             android:gravity="center_vertical"
-            android:text="Disable In Task Switcher" />
+            android:text="@string/disable_in_task_switcher" />
         <CheckBox
             android:id="@+id/taskSwitchCB"
             android:layout_width="wrap_content"
@@ -166,7 +166,7 @@
             android:layout_marginBottom="16dip"
             android:layout_marginLeft="14dip"
             android:layout_marginRight="14dip"
-            android:text="Cancel"/>
+            android:text="@string/cancel"/>
         <Button
             android:id="@+id/saveButton"
             android:layout_width="0dp"
@@ -177,7 +177,7 @@
             android:layout_marginBottom="16dip"
             android:layout_marginLeft="14dip"
             android:layout_marginRight="14dip"
-            android:text="Save"/>
+            android:text="@string/save"/>
     </LinearLayout>
 
 </LinearLayout>

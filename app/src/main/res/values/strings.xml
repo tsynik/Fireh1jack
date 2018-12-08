@@ -2,4 +2,16 @@
     <string name="app_name">Launcher Hijack V4</string>
     <string name="launchers_only">Launchers Only</string>
     <string name="hide_system_apps">Hide System Apps</string>
+    <string name="help">Help</string>
+    <string name="donate">Donate</string>
+    <string name="settings">Settings</string>
+    <string name="load_defaults">Load Defaults</string>
+    <string name="hardware_button_detection">Hardware button detection</string>
+    <string name="launcher_open_detection">Launcher open detection</string>
+    <string name="broadcast_reciever_detection">Broadcast reciever detection</string>
+    <string name="overlay_detection_requires_reboot">Overlay detection (Requires reboot)</string>
+    <string name="disable_while_menu_is_held_hardware_buttons_only">Disable while menu is held (Hardware buttons only)</string>
+    <string name="disable_in_task_switcher">Disable In Task Switcher</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
 </resources>
