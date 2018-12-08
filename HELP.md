@@ -40,6 +40,14 @@ Fair **WARNING** if you do this without any 3rd party launchers installed you wi
 If you are having issues then there are some common issues you can check here:
 - Ensure you are using an Amazon device running Fire OS, compatible with all versions as of release (6.3 = latest)
 - Ensure home button detection is enabled: "Settings -> Accessibility -> To detect home button press"
+- If Launcher Hijack keeps saying "Accessibilty Service Disabled" when opened despite "Settings -> Accessibility -> To detect home button press" being set to on:
+  1. Go to "Settings -> Apps & Games -> Manage All Applications -> Launcher Hijack"
+  2. Press menu
+  3. Select "Uninstall for all users" then OK
+  4. Power off your device
+  5. Wait 5 seconds
+  6. Boot
+  7. Start at instillation step 1
 - Ensure you can open your launcher directly i.e. Using any launcher, other than your chosen launcher, and open you chosen launcher like any other app, this should open your chosen launcher. CAVIAT: This does NOT work for the google now launcher and any launcher that requires default; When opening a launcher like this you will be redirected to the fire os system settings so that you can set your default launcher which is not possible, hence why this app was created
 - Ensure you have selected your chosen launcher in Launcher Hijack
 - Reboot your device after following all previous steps
@@ -53,14 +61,15 @@ If you are having issues then there are some common issues you can check here:
 2. Install ADB on your desktop/laptop (Google will help you) and ensure a connection to your Fire TV.
 3. Install Launcher Hijack with this command  
 `adb install <path to downloaded APK>`
-4. Enable the accessibility service using this command:  
+4. Ensure you have some Launchers installed
+5. Enable the accessibility service using this command:  
 `adb shell settings put secure enabled_accessibility_services com.baronkiko.launcherhijack/com.baronkiko.launcherhijack.AccServ`  
-5. If Launcher Hijack didn't open, find and open it
-6. Select your desired Launcher from the list provided
-6. Reboot your device
-7. Congratulation, if all is working correctly your home button should now open your chosen launcher
+6. If Launcher Hijack didn't open, find and open it
+7. Select your desired Launcher from the list provided
+8. Reboot your device
+9. Congratulation, if all is working correctly your home button should now open your chosen launcher
 
-**Important**  
+**Important, Accessing Settings and the Long Press Menu**  
 Unfortunatly for FireTV devices a comprimise had to be made. To access the long press menu and with it settings you have to hold menu and home together. You can also get to the default launcher by simply pressing them together.
 
 **Troubleshooting**  
