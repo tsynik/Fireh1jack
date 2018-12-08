@@ -3,6 +3,7 @@ package com.baronkiko.launcherhijack;
 import android.app.UiModeManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.widget.Toast;
@@ -19,7 +20,7 @@ public class SettingsMan
     protected static class SettingStore
     {
         public static final String TAG = "DeviceTypeRuntimeCheck";
-        static boolean HardwareDetection, ApplicationOpenDetection, BroadcastRecieverDetection, OverlayApplicationDetection, MenuButtonOverride, RecentAppOverride;
+        static boolean HardwareDetection, ApplicationOpenDetection, BroadcastRecieverDetection, OverlayApplicationDetection, MenuButtonOverride, RecentAppOverride, RunningOnTV;
 
         private static Context c;
         private static SharedPreferences settings;
@@ -29,6 +30,8 @@ public class SettingsMan
         {
             c = MainActivity.GetContext();
             settings = c.getSharedPreferences("LauncherHijack", MODE_PRIVATE);
+
+            RunningOnTV = c.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK);
 
 
             if (!settings.getBoolean("defaultsLoaded", false))

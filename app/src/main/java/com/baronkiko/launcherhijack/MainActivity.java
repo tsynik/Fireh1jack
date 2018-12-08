@@ -245,6 +245,18 @@ public class MainActivity extends AppCompatActivity
                             OpenHelp();
                         }
                     });
+            if (!SettingsMan.GetSettings().RunningOnTV)
+            {
+                builder.setNeutralButton("Open Settings", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id)
+                    {
+                        Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+                        startActivity(intent);
+                    }
+                });
+            }
             AlertDialog alert = builder.create();
             alert.show();
         }
