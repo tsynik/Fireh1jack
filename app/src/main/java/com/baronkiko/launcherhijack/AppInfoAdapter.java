@@ -1,5 +1,7 @@
 package com.baronkiko.launcherhijack;
 
+import java.util.List;
+
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
@@ -9,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.List;
 
 public class AppInfoAdapter extends BaseAdapter {
 	private Context mContext;
