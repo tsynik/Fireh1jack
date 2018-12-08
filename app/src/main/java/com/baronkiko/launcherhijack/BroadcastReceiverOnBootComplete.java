@@ -8,7 +8,9 @@ import android.util.Log;
 public class BroadcastReceiverOnBootComplete extends BroadcastReceiver {
 
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(Context context, Intent intent)
+    {
+        MainActivity.SetContext(context);
         ServiceMan.Start(context);
     }
 

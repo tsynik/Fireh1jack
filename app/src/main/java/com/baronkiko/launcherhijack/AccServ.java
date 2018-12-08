@@ -70,6 +70,8 @@ public class AccServ extends AccessibilityService {
     protected void onServiceConnected() {
         super.onServiceConnected();
 
+        MainActivity.SetContext(getApplicationContext());
+
         settings = SettingsMan.GetSettings();
 
         lastClass = "";

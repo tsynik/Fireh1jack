@@ -41,6 +41,11 @@ public class MainActivity extends AppCompatActivity
 
     public final static int REQUEST_CODE = 5466;
 
+    public static void SetContext(Context c)
+    {
+        if (context == null)
+            context = c;
+    }
     public static Context GetContext()
     {
         return context;
@@ -218,8 +223,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        context = getApplicationContext();
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        SetContext(getApplicationContext());
 
         super.onCreate(savedInstanceState);
 
