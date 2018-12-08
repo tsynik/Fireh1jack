@@ -4,8 +4,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -91,10 +92,10 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 // We need an Editor object to make preference changes.
                                 // All objects are from android.context.Context
-                                SharedPreferences settings = getSharedPreferences("LauncherHijack", MODE_PRIVATE);
+                                SharedPreferences settings = getSharedPreferences("LauncherHijack", MODE_WORLD_READABLE);
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putString("ChosenLauncher", appInfo.packageName);
-                                editor.apply(); // Commit the edits!
+                                editor.commit(); // Commit the edits!
                             }
                         });
                 alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",

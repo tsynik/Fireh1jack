@@ -1,15 +1,16 @@
 package com.baronkiko.launcherhijack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.util.Log;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Utilities {
 	
@@ -18,7 +19,7 @@ public class Utilities {
 	 * @param	c	 Context of application
 	 * @return	list of installed applications
 	 */
-	static List<ApplicationInfo> getInstalledApplication(Context c, boolean launchers, boolean systemApps) {
+	public static List<ApplicationInfo> getInstalledApplication(Context c, boolean launchers, boolean systemApps) {
 		List<ApplicationInfo> list, results;
 
         if (!launchers) // Get all apps
