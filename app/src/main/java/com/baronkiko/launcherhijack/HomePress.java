@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
-import android.widget.Toast;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -42,20 +41,11 @@ public class HomePress {
             return;
         LastActivate = time;
 
+        Intent i = GetDesiredIntent(c);
+        PendingIntent pendingIntent = PendingIntent.getActivity(c, 0, i, 0);
         try {
-            Intent i = GetDesiredIntent(c);
-            c.startActivity(i);
-        } catch (Exception e) {
-            ComponentName componentName = new ComponentName("com.baronkiko.launcherhijack", "com.baronkiko.launcherhijack.MainActivity");
-            Intent intent = new Intent(Intent.ACTION_MAIN);
-
-            intent.addCategory(Intent.CATEGORY_LAUNCHER);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS|Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            intent.setComponent(componentName);
-            c.startActivity(intent);
-
-            Toast.makeText(c,"Launcher missing", Toast.LENGTH_LONG).show();
-
+            pendingIntent.send();
+        } catch (PendingIntent.CanceledException e) {
             e.printStackTrace();
         }
     }
