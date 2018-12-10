@@ -1,7 +1,9 @@
 # LauncherHijack V4
 A small Android application to circumvent the default Amazon Fire launcher. Works for Fire Tablets and Fire TV's.  
 Huge thanks to ParrotGeek1 and Speeddymon. ParrotGeek1 made V1 and without him I would have never started this project. Speeddymon donated a 2018 Fire TV allowing me to implement Fire TV support. If you have a Fire TV you should thank him :)  
-View the official thread over at [XDA](https://forum.xda-developers.com/amazon-fire/general/launcher-root-launcher-hijack-v2-t3561026), however I don't really check it: https://forum.xda-developers.com/amazon-fire/general/launcher-root-launcher-hijack-v2-t3561026 It's still a good place to discuss the app with other users.
+I don't really check XDA but you can talk to other users there at the official threads:
+ - [Fire Tablets](https://forum.xda-developers.com/amazon-fire/general/launcher-root-launcher-hijack-v2-t3561026)
+ - [Fire TV's](https://forum.xda-developers.com/fire-tv/general/launcher-root-launcher-hijack-v4-t3877467)
 
 # Important
 Please read the instructions for your device in [HELP.md](https://github.com/BaronKiko/LauncherHijack/blob/master/HELP.md)
