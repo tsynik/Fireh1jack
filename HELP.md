@@ -62,8 +62,9 @@ If you are having issues then there are some common issues you can check here:
 3. Install Launcher Hijack with this command  
 `adb install <path to downloaded APK>`
 4. Ensure you have some Launchers installed
-5. Enable the accessibility service using this command:  
+5. Enable the accessibility service using these commands:  
 `adb shell settings put secure enabled_accessibility_services com.baronkiko.launcherhijack/com.baronkiko.launcherhijack.AccServ`  
+`adb shell settings put secure accessibility_enabled 1`
 6. If Launcher Hijack didn't open, find and open it
 7. Select your desired Launcher from the list provided
 8. Reboot your device
