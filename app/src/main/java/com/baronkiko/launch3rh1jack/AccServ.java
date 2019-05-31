@@ -1,9 +1,6 @@
-package com.baronkiko.launcherhijack;
+package com.baronkiko.launch3rh1jack;
 
 import android.accessibilityservice.AccessibilityService;
-import android.app.UiModeManager;
-import android.content.res.Configuration;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.accessibility.AccessibilityEvent;

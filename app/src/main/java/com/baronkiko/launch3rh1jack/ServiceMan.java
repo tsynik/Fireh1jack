@@ -1,13 +1,9 @@
-package com.baronkiko.launcherhijack;
+package com.baronkiko.launch3rh1jack;
 
 import android.app.ActivityManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by andy on 26/07/2017.

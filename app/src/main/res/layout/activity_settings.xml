@@ -70,7 +70,7 @@
             android:layout_alignParentLeft="true"
             android:textSize="@dimen/settings_font_size"
             android:gravity="center_vertical"
-            android:text="@string/broadcast_reciever_detection" />
+            android:text="@string/broadcast_receiver_detection" />
         <CheckBox
             android:id="@+id/broadcastCB"
             android:layout_width="wrap_content"

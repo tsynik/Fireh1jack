@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.baronkiko.launcherhijack">
+    package="com.baronkiko.launch3rh1jack">
 
     <uses-permission android:name="android.permission.BIND_ACCESSIBILITY_SERVICE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         tools:ignore="GoogleAppIndexingWarning"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.baronkiko.launch3rh1jack.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,7 +24,7 @@
         </activity>
 
         <service
-            android:name=".AccServ"
+            android:name="com.baronkiko.launch3rh1jack.AccServ"
             android:label="To detect home button press"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <meta-data
@@ -35,10 +35,10 @@
             </intent-filter>
         </service>
         <service
-            android:name=".HomeButtonService"
+            android:name="com.baronkiko.launch3rh1jack.HomeButtonService"
             android:enabled="true" />
 
-        <receiver android:name=".BroadcastReceiverOnBootComplete">
+        <receiver android:name="com.baronkiko.launch3rh1jack.BroadcastReceiverOnBootComplete">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="android.intent.action.PACKAGE_REMOVED" />
@@ -47,6 +47,6 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name="com.baronkiko.launch3rh1jack.SettingsActivity"></activity>
     </application>
 </manifest>

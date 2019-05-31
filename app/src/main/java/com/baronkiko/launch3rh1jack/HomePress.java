@@ -1,12 +1,10 @@
-package com.baronkiko.launcherhijack;
+package com.baronkiko.launch3rh1jack;
 
-import android.accessibilityservice.AccessibilityService;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import static android.content.Context.MODE_PRIVATE;
 

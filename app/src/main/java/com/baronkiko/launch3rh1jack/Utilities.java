@@ -1,4 +1,4 @@
-package com.baronkiko.launcherhijack;
+package com.baronkiko.launch3rh1jack;
 
 import java.util.ArrayList;
 import java.util.Collections;

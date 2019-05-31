@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Launcher Hijack</string>
+    <string name="app_name">Launch3r H1jack</string>
     <string name="launchers_only">Launchers Only</string>
     <string name="hide_system_apps">Hide System Apps</string>
     <string name="help">Help</string>
@@ -8,7 +8,7 @@
     <string name="load_defaults">Load Defaults</string>
     <string name="hardware_button_detection">Hardware button detection</string>
     <string name="launcher_open_detection">Launcher open detection</string>
-    <string name="broadcast_reciever_detection">Broadcast reciever detection</string>
+    <string name="broadcast_receiver_detection">Broadcast receiver detection</string>
     <string name="overlay_detection_requires_reboot">Overlay detection (Requires reboot)</string>
     <string name="disable_while_menu_is_held_hardware_buttons_only">Disable while menu is held (Hardware buttons only)</string>
     <string name="disable_in_task_switcher">Disable In Task Switcher</string>

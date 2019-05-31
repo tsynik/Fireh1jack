@@ -1,6 +1,5 @@
-package com.baronkiko.launcherhijack;
+package com.baronkiko.launch3rh1jack;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

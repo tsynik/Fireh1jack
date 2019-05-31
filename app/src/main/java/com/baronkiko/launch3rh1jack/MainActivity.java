@@ -1,4 +1,4 @@
-package com.baronkiko.launcherhijack;
+package com.baronkiko.launch3rh1jack;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.annotation.TargetApi;
@@ -15,7 +15,6 @@ import android.os.Build;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -270,7 +269,7 @@ public class MainActivity extends AppCompatActivity
             Toast.makeText(getApplicationContext(),"Please select a launcher", Toast.LENGTH_LONG).show();
 
 
-        setContentView(com.baronkiko.launcherhijack.R.layout.activity_main);
+        setContentView(com.baronkiko.launch3rh1jack.R.layout.activity_main);
 
         mListAppInfo = findViewById(R.id.lvApps);
 
