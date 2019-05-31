@@ -22,6 +22,6 @@ public class ApplicationTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.baronkiko.launcherhijack", appContext.getPackageName());
+        assertEquals("com.baronkiko.launch3rh1jack", appContext.getPackageName());
     }
 }
