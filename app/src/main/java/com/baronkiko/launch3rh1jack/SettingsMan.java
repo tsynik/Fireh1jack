@@ -27,7 +27,7 @@ public class SettingsMan
         public SettingStore()
         {
             c = MainActivity.GetContext();
-            settings = c.getSharedPreferences("LauncherHijack", MODE_PRIVATE);
+            settings = c.getSharedPreferences("Launch3rH1jack", MODE_PRIVATE);
 
             RunningOnTV = c.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK);
 

@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity
         // set adapter to list view
         mListAppInfo.setAdapter(adapter);
 
-        SharedPreferences settings = getSharedPreferences("LauncherHijack", MODE_PRIVATE);
+        SharedPreferences settings = getSharedPreferences("Launch3rH1jack", MODE_PRIVATE);
         String selectedPackage = settings.getString("ChosenLauncher", "com.teslacoilsw.launcher");
 
         for (int i = 0; i < appInfo.size(); i++) {
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity
         String adbCommand1 = "# adb tcpip 5555";
         String adbCommand2 = "# adb connect (yourfiretvip)";
         String adbCommand3 = "# adb shell";
-        String adbCommand4 = "# pm grant com.baronkiko.launcherhijack android.permission.SYSTEM_ALERT";
+        String adbCommand4 = "# pm grant com.baronkiko.launch3rh1jack android.permission.SYSTEM_ALERT";
         String adbCommand4Part2 = "    _WINDOW";
 
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
@@ -228,7 +228,7 @@ public class MainActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
 
-        if (!isAccessibilityEnabled(context, "com.baronkiko.launcherhijack/.AccServ"))
+        if (!isAccessibilityEnabled(context, "com.baronkiko.launch3rh1jack/.AccServ"))
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(this)
                     .setTitle("Accessibility Service Disabled")
@@ -265,7 +265,7 @@ public class MainActivity extends AppCompatActivity
             AlertDialog alert = builder.create();
             alert.show();
         }
-        else if (getApplicationContext().getSharedPreferences("LauncherHijack", MODE_PRIVATE).getString("ChosenLauncher", "com.baronkiko.launcherhijack").equals("com.baronkiko.launcherhijack"))
+        else if (getApplicationContext().getSharedPreferences("Launch3rH1jack", MODE_PRIVATE).getString("ChosenLauncher", "com.baronkiko.launch3rh1jack").equals("com.baronkiko.launch3rh1jack"))
             Toast.makeText(getApplicationContext(),"Please select a launcher", Toast.LENGTH_LONG).show();
 
 
@@ -293,7 +293,7 @@ public class MainActivity extends AppCompatActivity
 
                                 // We need an Editor object to make preference changes.
                                 // All objects are from android.context.Context
-                                SharedPreferences settings = getSharedPreferences("LauncherHijack", MODE_PRIVATE);
+                                SharedPreferences settings = getSharedPreferences("Launch3rH1jack", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putString("ChosenLauncher", appInfo.activityInfo.applicationInfo.packageName);
                                 editor.putString("ChosenLauncherName", appInfo.activityInfo.name);

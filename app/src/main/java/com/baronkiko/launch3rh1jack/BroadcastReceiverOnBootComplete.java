@@ -15,14 +15,14 @@ public class BroadcastReceiverOnBootComplete extends BroadcastReceiver {
         switch (intent.getAction())
         {
             case Intent.ACTION_PACKAGE_REMOVED:
-                SharedPreferences settings = context.getSharedPreferences("LauncherHijack", MODE_PRIVATE);
+                SharedPreferences settings = context.getSharedPreferences("Launch3rH1jack", MODE_PRIVATE);
                 String s = settings.getString("ChosenLauncher", "");
 
                 if (intent.getData().getSchemeSpecificPart().equals(s))
                 {
                     SharedPreferences.Editor editor = settings.edit();
-                    editor.putString("ChosenLauncher", "com.baronkiko.launcherhijack");
-                    editor.putString("ChosenLauncherName", "com.baronkiko.launcherhijack.MainActivity");
+                    editor.putString("ChosenLauncher", "com.baronkiko.launch3rh1jack");
+                    editor.putString("ChosenLauncherName", "com.baronkiko.launch3rh1jack.MainActivity");
                     editor.commit(); // Commit the edits!
                 }
                 break;
