@@ -1,4 +1,4 @@
-package com.baronkiko.launch3rh1jack;
+package com.amazon.fireh1jack;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -52,13 +52,13 @@ public class AppAdapter extends BaseAdapter
         // inflate new layout if null
         if(v == null) {
             LayoutInflater inflater = LayoutInflater.from(mContext);
-            v = inflater.inflate(com.baronkiko.launch3rh1jack.R.layout.layout_appinfo, null);
+            v = inflater.inflate(com.amazon.fireh1jack.R.layout.layout_appinfo, null);
         }
 
         // load controls from layout resources
-        ImageView ivAppIcon = (ImageView)v.findViewById(com.baronkiko.launch3rh1jack.R.id.ivIcon);
-        TextView tvAppName = (TextView)v.findViewById(com.baronkiko.launch3rh1jack.R.id.tvName);
-        TextView tvPkgName = (TextView)v.findViewById(com.baronkiko.launch3rh1jack.R.id.tvPack);
+        ImageView ivAppIcon = (ImageView)v.findViewById(com.amazon.fireh1jack.R.id.ivIcon);
+        TextView tvAppName = (TextView)v.findViewById(com.amazon.fireh1jack.R.id.tvName);
+        TextView tvPkgName = (TextView)v.findViewById(com.amazon.fireh1jack.R.id.tvPack);
 
         Log.v("Test", entry.activityInfo.processName) ;
 

@@ -1,4 +1,4 @@
-package com.baronkiko.launch3rh1jack;
+package com.amazon.fireh1jack;
 
 import android.accessibilityservice.AccessibilityService;
 import android.util.Log;
@@ -10,7 +10,7 @@ import com.jaredrummler.android.device.DeviceName;
 
 public class AccServ extends AccessibilityService {
 
-    static final String TAG = "AccServ";
+    static final String TAG = "*** AccServ";
     static boolean HomePressCanceled = false;
     static HomeWatcher homeWatcher;
     static String lastApp, lastClass;
@@ -25,7 +25,9 @@ public class AccServ extends AccessibilityService {
             return;
 
         CharSequence packageName = event.getPackageName();
-        if (packageName.equals("com.amazon.firelauncher"))
+        if (packageName.equals("com.amazon.firelauncher") ||
+            packageName.equals("com.google.android.leanbacklauncher") // ### ATV
+        )
             HomePress.Perform(getApplicationContext());
     }
 
@@ -83,7 +85,7 @@ public class AccServ extends AccessibilityService {
                 if (settings.BroadcastRecieverDetection && !HomePressCanceled &&
                    (!settings.RecentAppOverride | !(lastApp.equals("com.android.systemui") && lastClass.equals("com.android.systemui.recents.RecentsActivity"))))
                 {
-                    Log.d("New Home", "Home Press but new. LastApp: " + lastApp + "  LastClass: " + lastClass);
+                    Log.d(TAG, "HOME Press (BC). LastApp: " + lastApp + "  LastClass: " + lastClass);
                     HomePress.Perform(getApplicationContext());
                 }
             }
@@ -91,12 +93,19 @@ public class AccServ extends AccessibilityService {
             @Override
             public void onRecentAppPressed()
             {
+                    Log.d(TAG, "RECENTS Press");
+            }
+            
+            @Override
+            public void onSearchPressed()
+            {
+                    Log.d(TAG, "SEARCH Press");
+                    SearchPress.Perform(getApplicationContext());
             }
         });
         homeWatcher.startWatch();
 
-        Log.v(TAG, "Launcher Hijack Service Started on " + DeviceName.getDeviceName());
+        Log.v(TAG, "FireHijack Service Started on " + DeviceName.getDeviceName());
         HomePress.Perform(getApplicationContext());
     }
-
 }

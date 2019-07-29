@@ -1,4 +1,4 @@
-package com.baronkiko.launch3rh1jack;
+package com.amazon.fireh1jack;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -11,16 +11,18 @@ import android.util.Log;
 
 public class ServiceMan {
     private static Intent mServiceIntent;
+    static final String TAG = "*** ServiceMan";
+
 
     private static boolean isMyServiceRunning(Class<?> serviceClass, Context c) {
         ActivityManager manager = (ActivityManager) c.getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
-                Log.i ("isMyServiceRunning?", true+"");
+                Log.i (TAG, "isMyServiceRunning? " + true+"");
                 return true;
             }
         }
-        Log.i ("isMyServiceRunning?", false+"");
+        Log.i (TAG, "isMyServiceRunning? " + false+"");
         return false;
     }
 

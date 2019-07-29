@@ -1,4 +1,4 @@
-package com.baronkiko.launch3rh1jack;
+package com.amazon.fireh1jack;
 
 import android.app.UiModeManager;
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.widget.Toast;
+import com.amazon.fireh1jack.R;
 
 import static android.content.Context.MODE_PRIVATE;
 import static android.content.Context.UI_MODE_SERVICE;
@@ -17,8 +18,8 @@ public class SettingsMan
 
     protected static class SettingStore
     {
-        public static final String TAG = "DeviceTypeRuntimeCheck";
-        static boolean HardwareDetection, ApplicationOpenDetection, BroadcastRecieverDetection, OverlayApplicationDetection, MenuButtonOverride, RecentAppOverride, RunningOnTV;
+        public static final String TAG = "*** SettingsMan";
+        static boolean HardwareDetection, ApplicationOpenDetection, BroadcastRecieverDetection, OverlayApplicationDetection, MenuButtonOverride, RecentAppOverride, SetLanguage, RunningOnTV;
 
         private static Context c;
         private static SharedPreferences settings;
@@ -27,7 +28,7 @@ public class SettingsMan
         public SettingStore()
         {
             c = MainActivity.GetContext();
-            settings = c.getSharedPreferences("Launch3rH1jack", MODE_PRIVATE);
+            settings = c.getSharedPreferences("FireH1jack", MODE_PRIVATE);
 
             RunningOnTV = c.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK);
 
@@ -44,6 +45,7 @@ public class SettingsMan
             OverlayApplicationDetection = settings.getBoolean("OverlayApplicationDetection", false);
             MenuButtonOverride = settings.getBoolean("MenuButtonOverride", false);
             RecentAppOverride = settings.getBoolean("RecentAppOverride", false);
+            SetLanguage = settings.getBoolean("SetLanguage", false);
         }
 
         public static void LoadDefaults()
@@ -57,6 +59,7 @@ public class SettingsMan
             RecentAppOverride = android7 & !tv; // Enable for new fire tablets
             BroadcastRecieverDetection = true;
             ApplicationOpenDetection = !tv; // Fall back enabled by default for non tv users
+            SetLanguage = false; // Override Language (RU)
 
             SharedPreferences.Editor editor = settings.edit();
             editor.putBoolean("defaultsLoaded", true);
@@ -73,9 +76,10 @@ public class SettingsMan
             editor.putBoolean("OverlayApplicationDetection", OverlayApplicationDetection);
             editor.putBoolean("MenuButtonOverride", MenuButtonOverride);
             editor.putBoolean("RecentAppOverride", RecentAppOverride);
+            editor.putBoolean("SetLanguage", SetLanguage);
             editor.commit(); // Commit the edits!
 
-            Toast.makeText(MainActivity.GetContext(),"Settings Saved", Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivity.GetContext(), R.string.settings_saved, Toast.LENGTH_LONG).show();
         }
     }
 

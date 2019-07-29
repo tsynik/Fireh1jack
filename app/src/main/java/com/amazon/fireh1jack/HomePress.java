@@ -1,4 +1,4 @@
-package com.baronkiko.launch3rh1jack;
+package com.amazon.fireh1jack;
 
 import android.app.PendingIntent;
 import android.content.ComponentName;
@@ -17,9 +17,9 @@ public class HomePress {
 
     public static Intent GetDesiredIntent(Context c)
     {
-        SharedPreferences settings = c.getSharedPreferences("Launch3rH1jack", MODE_PRIVATE);
-        String s = settings.getString("ChosenLauncher", "com.baronkiko.launch3rh1jack");
-        String name = settings.getString("ChosenLauncherName", "com.baronkiko.launch3rh1jack.MainActivity");
+        SharedPreferences settings = c.getSharedPreferences("FireH1jack", MODE_PRIVATE);
+        String s = settings.getString("ChosenLauncher", "com.amazon.fireh1jack");
+        String name = settings.getString("ChosenLauncherName", "com.amazon.fireh1jack.MainActivity");
 
         ComponentName componentName = new ComponentName(s, name);
         Intent i = new Intent(Intent.ACTION_MAIN);

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.baronkiko.launch3rh1jack.MainActivity">
+    tools:context="com.amazon.fireh1jack.MainActivity">
 
     <ListView
         android:id="@+id/lvApps"

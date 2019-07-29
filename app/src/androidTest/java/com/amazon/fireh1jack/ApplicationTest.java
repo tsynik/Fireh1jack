@@ -1,4 +1,4 @@
-package com.baronkiko.launch3rh1jack;
+package com.amazon.fireh1jack;
 
 
 import android.content.Context;
@@ -21,7 +21,6 @@ public class ApplicationTest {
     public void useAppContext() throws Exception {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
-
-        assertEquals("com.baronkiko.launch3rh1jack", appContext.getPackageName());
+        assertEquals("com.amazon.fireh1jack", appContext.getPackageName());
     }
 }

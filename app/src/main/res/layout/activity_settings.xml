@@ -151,6 +151,29 @@
             android:layout_alignParentRight="true" />
     </RelativeLayout>
 
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/settings_element_height"
+        android:orientation="vertical"
+        android:paddingLeft="14dip"
+        android:paddingRight="14dip"
+        android:paddingTop="8dip"
+        android:paddingBottom="8dip"
+        android:id="@+id/setLangCBView">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:textSize="@dimen/settings_font_size"
+            android:gravity="center_vertical"
+            android:text="@string/override_language" />
+        <CheckBox
+            android:id="@+id/setLangCB"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

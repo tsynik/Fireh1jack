@@ -1,34 +1,42 @@
-package com.baronkiko.launch3rh1jack;
+package com.amazon.fireh1jack;
 
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.annotation.TargetApi;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.backup.BackupManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.ResolveInfo;
+import android.content.res.Configuration;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.Settings;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.provider.Settings.Secure;
+import android.support.v7.app.AppCompatActivity;
+import android.view.accessibility.AccessibilityEvent;
+import android.view.accessibility.AccessibilityManager;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.accessibility.AccessibilityEvent;
-import android.view.accessibility.AccessibilityManager;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.amazon.fireh1jack.R;
 
+
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -122,7 +130,7 @@ public class MainActivity extends AppCompatActivity
         // set adapter to list view
         mListAppInfo.setAdapter(adapter);
 
-        SharedPreferences settings = getSharedPreferences("Launch3rH1jack", MODE_PRIVATE);
+        SharedPreferences settings = getSharedPreferences("FireH1jack", MODE_PRIVATE);
         String selectedPackage = settings.getString("ChosenLauncher", "com.teslacoilsw.launcher");
 
         for (int i = 0; i < appInfo.size(); i++) {
@@ -137,16 +145,18 @@ public class MainActivity extends AppCompatActivity
 
     private void showSecurityAlert() {
         // Notify User
-        String welcomeMessage = "The FireTV devices running Nougat or higher do not provide a UI to the Application Permissions.";
-        String welcomeMessage2 = "In order to use this tool on your device, you must first run the below commands from your PC:";
+        CharSequence welcomeMessage = getResources().getText(R.string.welcome);
+        CharSequence welcomeMessage2 = getResources().getText(R.string.welcome2);
         String adbCommand1 = "# adb tcpip 5555";
-        String adbCommand2 = "# adb connect (yourfiretvip)";
+        String adbCommand2 = "# adb connect (FireTV IP)";
         String adbCommand3 = "# adb shell";
-        String adbCommand4 = "# pm grant com.baronkiko.launch3rh1jack android.permission.SYSTEM_ALERT";
-        String adbCommand4Part2 = "    _WINDOW";
+        String adbCommand4 = "# pm grant com.amazon.fireh1jack android.permission.WRITE_SECURE_SETTINGS";
+        String adbCommand5 = "# pm grant com.amazon.fireh1jack android.permission.CHANGE_CONFIGURATION";
+        String adbCommand6 = "# pm grant com.amazon.fireh1jack android.permission.SYSTEM_ALERT_WINDOW";
+        String alertExtra = " ";
 
         AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-        alertDialog.setTitle("FireTV Permissions Notice");
+        alertDialog.setTitle(R.string.perm_notice);
 
         LinearLayout alertContents = new LinearLayout(this);
         LinearLayout.LayoutParams lllp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -156,14 +166,16 @@ public class MainActivity extends AppCompatActivity
         TextView alertMessageExtraLine = new TextView(this);
 
         alertHeader.setText(welcomeMessage + " " + welcomeMessage2 + "\n");
-        alertHeader.setGravity(Gravity.CENTER_HORIZONTAL);
+        alertHeader.setGravity(Gravity.LEFT);
         alertHeader.setTextColor(Color.WHITE);
+        alertHeader.setPaddingRelative(20, 20, 10, 10);
 
-        alertMessage.setText(adbCommand1 + "\n" + adbCommand2 + "\n" + adbCommand3 + "\n" + adbCommand4);
+        alertMessage.setText(adbCommand1 + "\n" + adbCommand2 + "\n" + adbCommand3 + "\n" + adbCommand4 + "\n" + adbCommand5  + "\n" + adbCommand6);
         alertMessage.setGravity(Gravity.LEFT);
         alertMessage.setTextColor(Color.WHITE);
+        alertMessage.setPaddingRelative(20, 10, 10, 10);
 
-        alertMessageExtraLine.setText(adbCommand4Part2);
+        alertMessageExtraLine.setText(alertExtra);
         alertMessageExtraLine.setGravity(Gravity.LEFT);
         alertMessageExtraLine.setTextColor(Color.WHITE);
 
@@ -220,6 +232,64 @@ public class MainActivity extends AppCompatActivity
 
         return false;
     }
+    
+	// LOCALE
+    public boolean setLocale(Locale loc) {
+        try {
+            Class<?> activityManagerNative = Class.forName("android.app.ActivityManagerNative");
+            Object am = activityManagerNative.getMethod("getDefault").invoke(activityManagerNative);
+            Configuration config = (Configuration) am.getClass().getMethod("getConfiguration").invoke(am);
+            config.locale = loc; /*Locale.RU*/
+            config.getClass().getDeclaredField("userSetLocale").setBoolean(config, true);
+            am.getClass().getMethod("updateConfiguration", new Class[]{Configuration.class}).invoke(am, new Object[]{config});
+            BackupManager.dataChanged("com.android.providers.settings");
+            return true;
+//        } catch (SecurityException e) {        
+//            showSecurityAlert();
+//            e.printStackTrace();
+//            return false;
+//        } catch (ClassNotFoundException | IllegalAccessException | NoSuchMethodException | NoSuchFieldException | InvocationTargetException e1) {
+//            e1.printStackTrace();
+//            return false;
+        } catch(Exception e2) { 
+            e2.printStackTrace();
+            return false;
+        }
+    }
+
+//    public void changeLanguageSettings(Context con, Locale language) {
+//        try {
+//
+//        Class<?> activityManagerNative = Class.forName("android.app.ActivityManager");
+//        Object am = activityManagerNative.getMethod("getService").invoke(activityManagerNative);
+//        Configuration config = (Configuration) am.getClass().getMethod("getConfiguration").invoke(am);
+//
+//        config.setLocale(language);
+//        config.getClass().getDeclaredField("userSetLocale").setBoolean(config, true);
+//        am.getClass().getMethod("updatePersistentConfiguration", android.content.res.Configuration.class).invoke(am, config);
+//        BackupManager.dataChanged("com.android.providers.settings");
+//
+//        Log.d("changelanguage", "success!");
+//
+//        } catch (Exception e) {
+//            Log.d("changelanguage", "error-->", e);
+//        }
+//    }
+    
+//    public void changeLanguage() {
+//        IActivityManager am = ActivityManagerNative.getDefault();
+//        Configuration config;
+//        try {
+//            config = am.getConfiguration();
+//            config.locale = Locale.RU; // Change it to your locale
+//            config.userSetLocale = true;
+//
+//            am.updateConfiguration(config);
+//            BackupManager.dataChanged("com.android.providers.settings");
+//        } catch (RemoteException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -228,13 +298,34 @@ public class MainActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
 
-        if (!isAccessibilityEnabled(context, "com.baronkiko.launch3rh1jack/.AccServ"))
+        // LOCALE
+        if (getApplicationContext().getSharedPreferences("FireH1jack", MODE_PRIVATE).getBoolean("SetLanguage", false))
+        {
+            Locale newLocale = new Locale("RU");
+            if (setLocale(newLocale)) {
+                Toast.makeText(getApplicationContext(), R.string.lang_set_ok, Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getApplicationContext(), R.string.lang_not_ok, Toast.LENGTH_LONG).show();
+                showSecurityAlert();
+            }
+        }
+        // PERMS
+        if (!isAccessibilityEnabled(context, "com.amazon.fireh1jack/.AccServ"))
+        {
+            try {        
+                Secure.putString(getContentResolver(), "enabled_accessibility_services", "com.amazon.fireh1jack/com.amazon.fireh1jack.AccServ");
+                Secure.putString(getContentResolver(), "accessibility_enabled", "1");
+            } catch(SecurityException e) {
+                showSecurityAlert();
+            }
+        }
+        if (!isAccessibilityEnabled(context, "com.amazon.fireh1jack/.AccServ"))
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                    .setTitle("Accessibility Service Disabled")
-                    .setMessage("Accessible Service is disabled. You must enable it to ensure Launcher Hijack's functionality")
+                    .setTitle(R.string.acc_disabled)
+                    .setMessage(R.string.acc_disabled_message)
                     .setCancelable(true)
-                    .setNegativeButton("Close", new DialogInterface.OnClickListener()
+                    .setNegativeButton(getResources().getText(R.string.close), new DialogInterface.OnClickListener()
                     {
                         @Override
                         public void onClick(DialogInterface dialog, int which)
@@ -242,7 +333,7 @@ public class MainActivity extends AppCompatActivity
 
                         }
                     })
-                    .setPositiveButton("Help", new DialogInterface.OnClickListener()
+                    .setPositiveButton(getResources().getText(R.string.help), new DialogInterface.OnClickListener()
                     {
                         @Override
                         public void onClick(DialogInterface dialog, int which)
@@ -252,7 +343,7 @@ public class MainActivity extends AppCompatActivity
                     });
             if (!SettingsMan.GetSettings().RunningOnTV)
             {
-                builder.setNeutralButton("Open Settings", new DialogInterface.OnClickListener()
+                builder.setNeutralButton(getResources().getText(R.string.open_settings), new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int id)
@@ -265,11 +356,11 @@ public class MainActivity extends AppCompatActivity
             AlertDialog alert = builder.create();
             alert.show();
         }
-        else if (getApplicationContext().getSharedPreferences("Launch3rH1jack", MODE_PRIVATE).getString("ChosenLauncher", "com.baronkiko.launch3rh1jack").equals("com.baronkiko.launch3rh1jack"))
-            Toast.makeText(getApplicationContext(),"Please select a launcher", Toast.LENGTH_LONG).show();
+        else if (getApplicationContext().getSharedPreferences("FireH1jack", MODE_PRIVATE).getString("ChosenLauncher", "com.amazon.fireh1jack").equals("com.amazon.fireh1jack"))
+            Toast.makeText(getApplicationContext(), R.string.choose_launcher, Toast.LENGTH_LONG).show();
 
 
-        setContentView(com.baronkiko.launch3rh1jack.R.layout.activity_main);
+        setContentView(com.amazon.fireh1jack.R.layout.activity_main);
 
         mListAppInfo = findViewById(R.id.lvApps);
 
@@ -284,23 +375,23 @@ public class MainActivity extends AppCompatActivity
 
                 // Notify User
                 AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-                alertDialog.setTitle("Set Launcher");
-                alertDialog.setMessage("Set your launcher to " + appInfo.loadLabel(getPackageManager()) + " (" + appInfo.activityInfo.packageName + ")");
-                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "OK",
+                alertDialog.setTitle(R.string.set_launcher);
+                alertDialog.setMessage(getResources().getText(R.string.set_launcher_to) + " " + appInfo.loadLabel(getPackageManager()) + " (" + appInfo.activityInfo.packageName + ")");
+                alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, getResources().getText(R.string.apply),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 prevSelectedIndex = pos;
 
                                 // We need an Editor object to make preference changes.
                                 // All objects are from android.context.Context
-                                SharedPreferences settings = getSharedPreferences("Launch3rH1jack", MODE_PRIVATE);
+                                SharedPreferences settings = getSharedPreferences("FireH1jack", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = settings.edit();
                                 editor.putString("ChosenLauncher", appInfo.activityInfo.applicationInfo.packageName);
                                 editor.putString("ChosenLauncherName", appInfo.activityInfo.name);
                                 editor.commit(); // Commit the edits!
                             }
                         });
-                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancel",
+                alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, getResources().getText(R.string.cancel),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 mListAppInfo.setSelection(prevSelectedIndex);
@@ -321,5 +412,5 @@ public class MainActivity extends AppCompatActivity
                 ServiceMan.Start(this);
             }
         }
-    }
+    }    
 }

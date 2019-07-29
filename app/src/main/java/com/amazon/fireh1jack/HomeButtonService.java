@@ -1,4 +1,4 @@
-package com.baronkiko.launch3rh1jack;
+package com.amazon.fireh1jack;
 
 import android.app.Service;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 public class HomeButtonService extends Service {
     private LinearLayout layout;
     private WindowManager wm;
+    static final String TAG = "*** HomeButtonService [OD]";
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -30,7 +31,7 @@ public class HomeButtonService extends Service {
                 //home or recent button
                 public void onCloseSystemDialogs(String reason)
                 {
-                    Log.d("HomeButtonService", "Close System Dialog: " + reason);
+                    Log.d(TAG, "Close System Dialog: " + reason);
                     if (reason.contains("homekey"))
                         HomePress.Perform(getApplicationContext());
                 }
@@ -38,7 +39,7 @@ public class HomeButtonService extends Service {
                 @Override
                 public boolean dispatchKeyEvent(KeyEvent event)
                 {
-                    Log.d("HomeButtonService", "Dispatch Key Event");
+                    Log.d(TAG, "Dispatch Key Event");
                     return false;
                 }
             };
@@ -69,7 +70,7 @@ public class HomeButtonService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.i("EXIT", "ondestroy!");
+        Log.i(TAG, "EXIT ondestroy!");
 
         wm.removeView(layout);
 

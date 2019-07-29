@@ -1,4 +1,4 @@
-package com.baronkiko.launch3rh1jack;
+package com.amazon.fireh1jack;
 
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -9,10 +9,11 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
+import com.amazon.fireh1jack.R;
 
 public class SettingsActivity extends AppCompatActivity
 {
-    private CheckBox hwButtonDetection, launncherOpen, broadcastReciever, overlayDetection, disableWhileMenuHeld, disableInTaskSwitcher;
+    private CheckBox hwButtonDetection, launncherOpen, broadcastReciever, overlayDetection, disableWhileMenuHeld, disableInTaskSwitcher, setLang;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -36,6 +37,7 @@ public class SettingsActivity extends AppCompatActivity
                 overlayDetection.setChecked(settings.OverlayApplicationDetection);
                 disableWhileMenuHeld.setChecked(settings.MenuButtonOverride);
                 disableInTaskSwitcher.setChecked(settings.RecentAppOverride);
+                setLang.setChecked(settings.SetLanguage);
 
                 settings.SaveSettings();
 
@@ -76,8 +78,8 @@ public class SettingsActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        setTitle("Settings");
-
+        // setTitle(getResources().getText(R.string.settings));
+        setTitle(R.string.settings); // R.string.settings
         SettingsMan.SettingStore settings = SettingsMan.GetSettings();
 
         // Hardware button detection
@@ -85,7 +87,6 @@ public class SettingsActivity extends AppCompatActivity
         hwButtonDetection = (CheckBox)findViewById(R.id.hardwareCB);
         hwButtonDetection.setChecked(settings.HardwareDetection);
         AddListeners(cbv, hwButtonDetection);
-
 
         // Launcher open detection
         cbv = findViewById(R.id.openApplicationCBView);
@@ -117,6 +118,11 @@ public class SettingsActivity extends AppCompatActivity
         disableInTaskSwitcher.setChecked(settings.RecentAppOverride);
         AddListeners(cbv, disableInTaskSwitcher);
 
+        // Set Lang (RU)
+        cbv = findViewById(R.id.setLangCBView);
+        setLang = (CheckBox)findViewById(R.id.setLangCB);
+        setLang.setChecked(settings.SetLanguage);
+        AddListeners(cbv, setLang);
 
 
         // Save Button
@@ -133,6 +139,7 @@ public class SettingsActivity extends AppCompatActivity
                 settings.OverlayApplicationDetection = overlayDetection.isChecked();
                 settings.MenuButtonOverride = disableWhileMenuHeld.isChecked();
                 settings.RecentAppOverride = disableInTaskSwitcher.isChecked();
+                settings.SetLanguage = setLang.isChecked();
 
                 settings.SaveSettings();
                 onBackPressed();

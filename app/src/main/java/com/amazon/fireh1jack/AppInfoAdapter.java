@@ -1,4 +1,4 @@
-package com.baronkiko.launch3rh1jack;
+package com.amazon.fireh1jack;
 
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class AppInfoAdapter extends BaseAdapter {
 		// inflate new layout if null
 		if(v == null) {
 			LayoutInflater inflater = LayoutInflater.from(mContext);
-			v = inflater.inflate(com.baronkiko.launch3rh1jack.R.layout.layout_appinfo, null);
+			v = inflater.inflate(com.amazon.fireh1jack.R.layout.layout_appinfo, null);
 		}
 		
 		// load controls from layout resources

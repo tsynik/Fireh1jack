@@ -1,4 +1,4 @@
-package com.baronkiko.launch3rh1jack;
+package com.amazon.fireh1jack;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -15,14 +15,14 @@ public class BroadcastReceiverOnBootComplete extends BroadcastReceiver {
         switch (intent.getAction())
         {
             case Intent.ACTION_PACKAGE_REMOVED:
-                SharedPreferences settings = context.getSharedPreferences("Launch3rH1jack", MODE_PRIVATE);
+                SharedPreferences settings = context.getSharedPreferences("FireH1jack", MODE_PRIVATE);
                 String s = settings.getString("ChosenLauncher", "");
 
                 if (intent.getData().getSchemeSpecificPart().equals(s))
                 {
                     SharedPreferences.Editor editor = settings.edit();
-                    editor.putString("ChosenLauncher", "com.baronkiko.launch3rh1jack");
-                    editor.putString("ChosenLauncherName", "com.baronkiko.launch3rh1jack.MainActivity");
+                    editor.putString("ChosenLauncher", "com.amazon.fireh1jack");
+                    editor.putString("ChosenLauncherName", "com.amazon.fireh1jack.MainActivity");
                     editor.commit(); // Commit the edits!
                 }
                 break;
