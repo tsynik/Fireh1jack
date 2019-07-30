@@ -28,6 +28,7 @@
     <string name="set_launcher">Установка рабочего стола</string>
     <string name="settings_saved">Настройки изменены</string>
     <string name="settings">Настройки</string>
+    <string name="use_google">Использовать Поиск Google вместо Alexa</string>
     <string name="welcome">В интерфейсе Fire OS нет управления разрешениями приложений.</string>
     <string name="welcome2">Для функционирования программы, необходимо выполнить следующие действия в коммандной строке на ПК:</string>
 </resources>

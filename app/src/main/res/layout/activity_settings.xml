@@ -39,6 +39,30 @@
         android:paddingRight="14dip"
         android:paddingTop="8dip"
         android:paddingBottom="8dip"
+        android:id="@+id/menuButtonOverrideCBView">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:textSize="@dimen/settings_font_size"
+            android:gravity="center_vertical"
+            android:text="@string/disable_while_menu_is_held_hardware_buttons_only" />
+        <CheckBox
+            android:id="@+id/menuButtonOverrideCB"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/settings_element_height"
+        android:orientation="vertical"
+        android:paddingLeft="14dip"
+        android:paddingRight="14dip"
+        android:paddingTop="8dip"
+        android:paddingBottom="8dip"
         android:id="@+id/openApplicationCBView">
         <TextView
             android:layout_width="wrap_content"
@@ -83,6 +107,7 @@
         android:layout_width="fill_parent"
         android:layout_height="@dimen/settings_element_height"
         android:orientation="vertical"
+        android:visibility="gone"
         android:paddingLeft="14dip"
         android:paddingRight="14dip"
         android:paddingTop="8dip"
@@ -97,30 +122,6 @@
             android:text="@string/overlay_detection_requires_reboot" />
         <CheckBox
             android:id="@+id/overlayCB"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_alignParentRight="true" />
-    </RelativeLayout>
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/settings_element_height"
-        android:orientation="vertical"
-        android:paddingLeft="14dip"
-        android:paddingRight="14dip"
-        android:paddingTop="8dip"
-        android:paddingBottom="8dip"
-        android:id="@+id/menuButtonOverrideCBView">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:textSize="@dimen/settings_font_size"
-            android:gravity="center_vertical"
-            android:text="@string/disable_while_menu_is_held_hardware_buttons_only" />
-        <CheckBox
-            android:id="@+id/menuButtonOverrideCB"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
@@ -169,6 +170,30 @@
             android:text="@string/override_language" />
         <CheckBox
             android:id="@+id/setLangCB"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/settings_element_height"
+        android:orientation="vertical"
+        android:paddingLeft="14dip"
+        android:paddingRight="14dip"
+        android:paddingTop="8dip"
+        android:paddingBottom="8dip"
+        android:id="@+id/useGSCBView">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:textSize="@dimen/settings_font_size"
+            android:gravity="center_vertical"
+            android:text="@string/use_google" />
+        <CheckBox
+            android:id="@+id/useGSCB"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"

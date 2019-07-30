@@ -22,7 +22,7 @@ public class SearchPress {
 
     public static Intent GetDesiredIntent(Context c)
     {
-        PackageManager packageManager = c.getApplicationContext().getPackageManager();
+        PackageManager packageManager = c.getPackageManager();
 //        SharedPreferences settings = c.getSharedPreferences("FireH1jack", MODE_PRIVATE);
 //        String s = settings.getString("ChosenSearch", "com.google.android.katniss");
 //        String name = settings.getString("ChosenSearchName", "com.amazon.fireh1jack.MainActivity");

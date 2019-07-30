@@ -13,7 +13,7 @@ import com.amazon.fireh1jack.R;
 
 public class SettingsActivity extends AppCompatActivity
 {
-    private CheckBox hwButtonDetection, launncherOpen, broadcastReciever, overlayDetection, disableWhileMenuHeld, disableInTaskSwitcher, setLang;
+    private CheckBox hwButtonDetection, launncherOpen, broadcastReciever, overlayDetection, disableWhileMenuHeld, disableInTaskSwitcher, setLang, useGS;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -38,6 +38,7 @@ public class SettingsActivity extends AppCompatActivity
                 disableWhileMenuHeld.setChecked(settings.MenuButtonOverride);
                 disableInTaskSwitcher.setChecked(settings.RecentAppOverride);
                 setLang.setChecked(settings.SetLanguage);
+                useGS.setChecked(settings.UseGSearch);
 
                 settings.SaveSettings();
 
@@ -124,6 +125,12 @@ public class SettingsActivity extends AppCompatActivity
         setLang.setChecked(settings.SetLanguage);
         AddListeners(cbv, setLang);
 
+        // Use GSearch
+        cbv = findViewById(R.id.useGSCBView);
+        useGS = (CheckBox)findViewById(R.id.useGSCB);
+        useGS.setChecked(settings.UseGSearch);
+        AddListeners(cbv, useGS);
+
 
         // Save Button
         findViewById(R.id.saveButton).setOnClickListener(new View.OnClickListener()
@@ -140,6 +147,7 @@ public class SettingsActivity extends AppCompatActivity
                 settings.MenuButtonOverride = disableWhileMenuHeld.isChecked();
                 settings.RecentAppOverride = disableInTaskSwitcher.isChecked();
                 settings.SetLanguage = setLang.isChecked();
+                settings.UseGSearch = useGS.isChecked();
 
                 settings.SaveSettings();
                 onBackPressed();

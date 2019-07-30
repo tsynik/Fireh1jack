@@ -9,6 +9,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.content.SharedPreferences;
@@ -168,12 +169,12 @@ public class MainActivity extends AppCompatActivity
         alertHeader.setText(welcomeMessage + " " + welcomeMessage2 + "\n");
         alertHeader.setGravity(Gravity.LEFT);
         alertHeader.setTextColor(Color.WHITE);
-        alertHeader.setPaddingRelative(20, 20, 10, 10);
+        alertHeader.setPaddingRelative(40, 20, 10, 10);
 
         alertMessage.setText(adbCommand1 + "\n" + adbCommand2 + "\n" + adbCommand3 + "\n" + adbCommand4 + "\n" + adbCommand5  + "\n" + adbCommand6);
         alertMessage.setGravity(Gravity.LEFT);
         alertMessage.setTextColor(Color.WHITE);
-        alertMessage.setPaddingRelative(20, 10, 10, 10);
+        alertMessage.setPaddingRelative(40, 10, 10, 10);
 
         alertMessageExtraLine.setText(alertExtra);
         alertMessageExtraLine.setGravity(Gravity.LEFT);
@@ -229,10 +230,18 @@ public class MainActivity extends AppCompatActivity
                 return true;
             }
         }
-
         return false;
     }
     
+    // AVAIL
+    public static boolean isPackageEnabled(String str, PackageManager packageManager) {
+        try {
+            return packageManager.getApplicationInfo(str, 0).enabled;
+        } catch (Exception unused) {
+            return false;
+        }
+    }
+
 	// LOCALE
     public boolean setLocale(Locale loc) {
         try {
@@ -299,7 +308,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         // LOCALE
-        if (getApplicationContext().getSharedPreferences("FireH1jack", MODE_PRIVATE).getBoolean("SetLanguage", false))
+        // if (getApplicationContext().getSharedPreferences("FireH1jack", MODE_PRIVATE).getBoolean("SetLanguage", false))
+        if (SettingsMan.GetSettings().SetLanguage)
         {
             Locale newLocale = new Locale("RU");
             if (setLocale(newLocale)) {
@@ -307,6 +317,38 @@ public class MainActivity extends AppCompatActivity
             } else {
                 Toast.makeText(getApplicationContext(), R.string.lang_not_ok, Toast.LENGTH_LONG).show();
                 showSecurityAlert();
+            }
+        }
+        // GOOGLE  UseGSearch
+        // if (getApplicationContext().getSharedPreferences("FireH1jack", MODE_PRIVATE).getBoolean("UseGSearch", false))
+        if (SettingsMan.GetSettings().UseGSearch)
+        {
+            try
+            {
+                // disable Alexa
+                // https://www.xda-developers.com/replace-alexa-google-assistant-amazon-fire-7-hd-8-hd-10/
+                // getApplicationContext().getPackageManager().setApplicationEnabledSetting("com.amazon.alexa" ,COMPONENT_ENABLED_STATE_DISABLED, 0)
+                Secure.putString(getContentResolver(), "alexa_enabled", "0");
+                
+                if (isPackageEnabled("com.google.android.katniss", getApplicationContext().getPackageManager())) {
+                    // Secure.putString(getContentResolver(), "assistant", "com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService");
+                    // Secure.putString(getContentResolver(), "voice_interaction_service", "com.google.android.katniss/.search.serviceapi.KatnissVoiceInteractionService");
+                    // Secure.putString(getContentResolver(), "voice_recognition_service", "com.google.android.katniss/.search.serviceapi.KatnissRecognitionService");
+                }
+
+            } catch(SecurityException e) {
+                showSecurityAlert();
+                } catch(Exception e1) {
+                    e1.printStackTrace();
+            }
+
+        } else {
+            try {
+                Secure.putString(getContentResolver(), "alexa_enabled", "1");
+            } catch(SecurityException e) {
+                showSecurityAlert();
+                } catch(Exception e1) {
+                     e1.printStackTrace();
             }
         }
         // PERMS
@@ -317,6 +359,8 @@ public class MainActivity extends AppCompatActivity
                 Secure.putString(getContentResolver(), "accessibility_enabled", "1");
             } catch(SecurityException e) {
                 showSecurityAlert();
+                } catch(Exception e1) {
+                    e1.printStackTrace();
             }
         }
         if (!isAccessibilityEnabled(context, "com.amazon.fireh1jack/.AccServ"))

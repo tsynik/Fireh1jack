@@ -19,7 +19,7 @@ public class SettingsMan
     protected static class SettingStore
     {
         public static final String TAG = "*** SettingsMan";
-        static boolean HardwareDetection, ApplicationOpenDetection, BroadcastRecieverDetection, OverlayApplicationDetection, MenuButtonOverride, RecentAppOverride, SetLanguage, RunningOnTV;
+        static boolean HardwareDetection, ApplicationOpenDetection, BroadcastRecieverDetection, OverlayApplicationDetection, MenuButtonOverride, RecentAppOverride, SetLanguage, UseGSearch, RunningOnTV;
 
         private static Context c;
         private static SharedPreferences settings;
@@ -46,6 +46,7 @@ public class SettingsMan
             MenuButtonOverride = settings.getBoolean("MenuButtonOverride", false);
             RecentAppOverride = settings.getBoolean("RecentAppOverride", false);
             SetLanguage = settings.getBoolean("SetLanguage", false);
+            UseGSearch = settings.getBoolean("UseGSearch", false);
         }
 
         public static void LoadDefaults()
@@ -60,6 +61,7 @@ public class SettingsMan
             BroadcastRecieverDetection = true;
             ApplicationOpenDetection = !tv; // Fall back enabled by default for non tv users
             SetLanguage = false; // Override Language (RU)
+            UseGSearch = false; // Swap Alexa with Google
 
             SharedPreferences.Editor editor = settings.edit();
             editor.putBoolean("defaultsLoaded", true);
@@ -77,6 +79,7 @@ public class SettingsMan
             editor.putBoolean("MenuButtonOverride", MenuButtonOverride);
             editor.putBoolean("RecentAppOverride", RecentAppOverride);
             editor.putBoolean("SetLanguage", SetLanguage);
+            editor.putBoolean("UseGSearch", SetLanguage);
             editor.commit(); // Commit the edits!
 
             Toast.makeText(MainActivity.GetContext(), R.string.settings_saved, Toast.LENGTH_LONG).show();
