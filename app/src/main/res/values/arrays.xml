@@ -1,0 +1,14 @@
+<resources>
+    <string-array name="pref_locale">
+        <item>English</item>
+        <item>Deutsch</item>
+        <item>Russian</item>
+        <item>Ukrainian</item>
+    </string-array>
+    <string-array name="pref_locale_values">
+        <item>EN</item>
+        <item>DE</item>
+        <item>RU</item>
+        <item>UK</item>
+    </string-array>
+</resources>

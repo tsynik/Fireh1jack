@@ -169,12 +169,12 @@ public class MainActivity extends AppCompatActivity
         alertHeader.setText(welcomeMessage + " " + welcomeMessage2 + "\n");
         alertHeader.setGravity(Gravity.LEFT);
         alertHeader.setTextColor(Color.WHITE);
-        alertHeader.setPaddingRelative(40, 20, 10, 10);
+        alertHeader.setPaddingRelative(20, 20, 10, 10);
 
         alertMessage.setText(adbCommand1 + "\n" + adbCommand2 + "\n" + adbCommand3 + "\n" + adbCommand4 + "\n" + adbCommand5  + "\n" + adbCommand6);
         alertMessage.setGravity(Gravity.LEFT);
         alertMessage.setTextColor(Color.WHITE);
-        alertMessage.setPaddingRelative(40, 10, 10, 10);
+        alertMessage.setPaddingRelative(20, 10, 10, 10);
 
         alertMessageExtraLine.setText(alertExtra);
         alertMessageExtraLine.setGravity(Gravity.LEFT);
@@ -234,13 +234,21 @@ public class MainActivity extends AppCompatActivity
     }
     
     // AVAIL
-    public static boolean isPackageEnabled(String str, PackageManager packageManager) {
+    public boolean isPackageEnabled(String str) {
+        PackageManager packageManager = getApplicationContext().getPackageManager();
         try {
             return packageManager.getApplicationInfo(str, 0).enabled;
         } catch (Exception unused) {
             return false;
         }
     }
+    public static boolean isPackageEnabled(String str, PackageManager packageManager) {
+        try {
+            return packageManager.getApplicationInfo(str, 0).enabled;
+        } catch (Exception unused) {
+            return false;
+        }
+    }    
 
 	// LOCALE
     public boolean setLocale(Locale loc) {
@@ -248,57 +256,17 @@ public class MainActivity extends AppCompatActivity
             Class<?> activityManagerNative = Class.forName("android.app.ActivityManagerNative");
             Object am = activityManagerNative.getMethod("getDefault").invoke(activityManagerNative);
             Configuration config = (Configuration) am.getClass().getMethod("getConfiguration").invoke(am);
-            config.locale = loc; /*Locale.RU*/
+            config.locale = loc;
             config.getClass().getDeclaredField("userSetLocale").setBoolean(config, true);
             am.getClass().getMethod("updateConfiguration", new Class[]{Configuration.class}).invoke(am, new Object[]{config});
+            am.getClass().getMethod("updatePersistentConfiguration", new Class[]{Configuration.class}).invoke(am, new Object[]{config});
             BackupManager.dataChanged("com.android.providers.settings");
             return true;
-//        } catch (SecurityException e) {        
-//            showSecurityAlert();
-//            e.printStackTrace();
-//            return false;
-//        } catch (ClassNotFoundException | IllegalAccessException | NoSuchMethodException | NoSuchFieldException | InvocationTargetException e1) {
-//            e1.printStackTrace();
-//            return false;
         } catch(Exception e2) { 
             e2.printStackTrace();
             return false;
         }
     }
-
-//    public void changeLanguageSettings(Context con, Locale language) {
-//        try {
-//
-//        Class<?> activityManagerNative = Class.forName("android.app.ActivityManager");
-//        Object am = activityManagerNative.getMethod("getService").invoke(activityManagerNative);
-//        Configuration config = (Configuration) am.getClass().getMethod("getConfiguration").invoke(am);
-//
-//        config.setLocale(language);
-//        config.getClass().getDeclaredField("userSetLocale").setBoolean(config, true);
-//        am.getClass().getMethod("updatePersistentConfiguration", android.content.res.Configuration.class).invoke(am, config);
-//        BackupManager.dataChanged("com.android.providers.settings");
-//
-//        Log.d("changelanguage", "success!");
-//
-//        } catch (Exception e) {
-//            Log.d("changelanguage", "error-->", e);
-//        }
-//    }
-    
-//    public void changeLanguage() {
-//        IActivityManager am = ActivityManagerNative.getDefault();
-//        Configuration config;
-//        try {
-//            config = am.getConfiguration();
-//            config.locale = Locale.RU; // Change it to your locale
-//            config.userSetLocale = true;
-//
-//            am.updateConfiguration(config);
-//            BackupManager.dataChanged("com.android.providers.settings");
-//        } catch (RemoteException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -308,10 +276,11 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         // LOCALE
-        // if (getApplicationContext().getSharedPreferences("FireH1jack", MODE_PRIVATE).getBoolean("SetLanguage", false))
         if (SettingsMan.GetSettings().SetLanguage)
         {
-            Locale newLocale = new Locale("RU");
+            // Locale newLocale = new Locale("RU");
+            // Locale newLocale = new Locale(SettingsMan.GetSettings().uLocale);
+            Locale newLocale = new Locale(getApplicationContext().getSharedPreferences("FireH1jack", MODE_PRIVATE).getString("uLocale", "EN"));
             if (setLocale(newLocale)) {
                 Toast.makeText(getApplicationContext(), R.string.lang_set_ok, Toast.LENGTH_LONG).show();
             } else {
@@ -319,19 +288,21 @@ public class MainActivity extends AppCompatActivity
                 showSecurityAlert();
             }
         }
-        // GOOGLE  UseGSearch
-        // if (getApplicationContext().getSharedPreferences("FireH1jack", MODE_PRIVATE).getBoolean("UseGSearch", false))
+        // GOOGLE
+        PackageManager pm = getApplicationContext().getPackageManager();
         if (SettingsMan.GetSettings().UseGSearch)
         {
             try
             {
                 // disable Alexa
                 // https://www.xda-developers.com/replace-alexa-google-assistant-amazon-fire-7-hd-8-hd-10/
-                // getApplicationContext().getPackageManager().setApplicationEnabledSetting("com.amazon.alexa" ,COMPONENT_ENABLED_STATE_DISABLED, 0)
+                // getApplicationContext().getPackageManager().setApplicationEnabledSetting("com.amazon.vizzini", PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0)
                 Secure.putString(getContentResolver(), "alexa_enabled", "0");
+
+                // if (isPackageEnabled("com.amazon.vizzini", pm))
+                //    pm.setApplicationEnabledSetting("com.amazon.vizzini", PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0);
                 
-                if (isPackageEnabled("com.google.android.katniss", getApplicationContext().getPackageManager())) {
-                    // Secure.putString(getContentResolver(), "assistant", "com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService");
+                if (isPackageEnabled("com.google.android.katniss", pm)) {
                     // Secure.putString(getContentResolver(), "voice_interaction_service", "com.google.android.katniss/.search.serviceapi.KatnissVoiceInteractionService");
                     // Secure.putString(getContentResolver(), "voice_recognition_service", "com.google.android.katniss/.search.serviceapi.KatnissRecognitionService");
                 }
@@ -340,11 +311,19 @@ public class MainActivity extends AppCompatActivity
                 showSecurityAlert();
                 } catch(Exception e1) {
                     e1.printStackTrace();
-            }
+                }
 
         } else {
             try {
+                // alexa setting on
                 Secure.putString(getContentResolver(), "alexa_enabled", "1");
+                // alexa package on
+                // if (!isPackageEnabled("com.amazon.vizzini", pm))
+                //    pm.setApplicationEnabledSetting("com.amazon.vizzini", PackageManager.COMPONENT_ENABLED_STATE_ENABLED, 0);
+                // Google OFF
+                // if (isPackageEnabled("com.google.android.katniss", pm))
+                //    pm.setApplicationEnabledSetting("com.google.android.katniss", PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0);
+                
             } catch(SecurityException e) {
                 showSecurityAlert();
                 } catch(Exception e1) {
@@ -400,9 +379,9 @@ public class MainActivity extends AppCompatActivity
             AlertDialog alert = builder.create();
             alert.show();
         }
+        // No launcher selected - TOAST
         else if (getApplicationContext().getSharedPreferences("FireH1jack", MODE_PRIVATE).getString("ChosenLauncher", "com.amazon.fireh1jack").equals("com.amazon.fireh1jack"))
             Toast.makeText(getApplicationContext(), R.string.choose_launcher, Toast.LENGTH_LONG).show();
-
 
         setContentView(com.amazon.fireh1jack.R.layout.activity_main);
 

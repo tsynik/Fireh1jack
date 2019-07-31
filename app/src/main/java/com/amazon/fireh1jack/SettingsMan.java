@@ -20,10 +20,10 @@ public class SettingsMan
     {
         public static final String TAG = "*** SettingsMan";
         static boolean HardwareDetection, ApplicationOpenDetection, BroadcastRecieverDetection, OverlayApplicationDetection, MenuButtonOverride, RecentAppOverride, SetLanguage, UseGSearch, RunningOnTV;
+        static String uLocale;
 
         private static Context c;
         private static SharedPreferences settings;
-
 
         public SettingStore()
         {
@@ -31,7 +31,6 @@ public class SettingsMan
             settings = c.getSharedPreferences("FireH1jack", MODE_PRIVATE);
 
             RunningOnTV = c.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK);
-
 
             if (!settings.getBoolean("defaultsLoaded", false))
             {
@@ -46,6 +45,7 @@ public class SettingsMan
             MenuButtonOverride = settings.getBoolean("MenuButtonOverride", false);
             RecentAppOverride = settings.getBoolean("RecentAppOverride", false);
             SetLanguage = settings.getBoolean("SetLanguage", false);
+            uLocale = settings.getString("uLocale", "RU");
             UseGSearch = settings.getBoolean("UseGSearch", false);
         }
 
@@ -60,7 +60,8 @@ public class SettingsMan
             RecentAppOverride = android7 & !tv; // Enable for new fire tablets
             BroadcastRecieverDetection = true;
             ApplicationOpenDetection = !tv; // Fall back enabled by default for non tv users
-            SetLanguage = false; // Override Language (RU)
+            SetLanguage = false; // Override Language
+            uLocale = "RU"; // User Locale
             UseGSearch = false; // Swap Alexa with Google
 
             SharedPreferences.Editor editor = settings.edit();
@@ -79,7 +80,8 @@ public class SettingsMan
             editor.putBoolean("MenuButtonOverride", MenuButtonOverride);
             editor.putBoolean("RecentAppOverride", RecentAppOverride);
             editor.putBoolean("SetLanguage", SetLanguage);
-            editor.putBoolean("UseGSearch", SetLanguage);
+            editor.putBoolean("UseGSearch", UseGSearch);
+            editor.putString("uLocale", uLocale);
             editor.commit(); // Commit the edits!
 
             Toast.makeText(MainActivity.GetContext(), R.string.settings_saved, Toast.LENGTH_LONG).show();

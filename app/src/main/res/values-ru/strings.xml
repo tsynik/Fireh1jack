@@ -14,14 +14,14 @@
     <string name="hardware_button_detection">Обрабатывать кнопки пульта</string>
     <string name="help">Помощь</string>
     <string name="hide_system_apps">Скрыть системные</string>
-    <string name="lang_set_ok">Установлен русский язык</string>
+    <string name="lang_set_ok">Установлен язык системы</string>
     <string name="lang_not_ok">Не удалось установить язык</string>    
     <string name="launcher_open_detection">Всегда заменять системный лончер</string>
     <string name="launchers_only">Только лончеры</string>
     <string name="load_defaults">Сброс настроек</string>
     <string name="open_settings">Открыть настройки</string>
     <string name="overlay_detection_requires_reboot">Определять оверлеи (требуется перезагрузка)</string>
-    <string name="override_language">Устанавливать язык системы (RU) при запуске приложения</string>
+    <string name="override_language">Устанавливать язык системы при запуске приложения</string>
     <string name="perm_notice">Ограничения Fire OS</string>
     <string name="save">Сохранить</string>
     <string name="set_launcher_to">Заменить рабочий стол на</string>

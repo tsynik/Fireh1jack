@@ -1,19 +1,27 @@
 package com.amazon.fireh1jack;
 
+import android.app.Activity;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.Spinner;
+import android.widget.Toast;
 import com.amazon.fireh1jack.R;
 
 public class SettingsActivity extends AppCompatActivity
 {
     private CheckBox hwButtonDetection, launncherOpen, broadcastReciever, overlayDetection, disableWhileMenuHeld, disableInTaskSwitcher, setLang, useGS;
+    private String uLoc;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -83,6 +91,50 @@ public class SettingsActivity extends AppCompatActivity
         setTitle(R.string.settings); // R.string.settings
         SettingsMan.SettingStore settings = SettingsMan.GetSettings();
 
+        // Spinner localeSpinner = (Spinner) findViewById(R.id.locale_sspinner);
+        // Create an ArrayAdapter using the string array and a default spinner
+        // ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter
+        //        .createFromResource(this, R.array.pref_locale,
+        //                android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        // localeSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        // localeSpinner.setAdapter(staticAdapter);
+
+        Spinner dynamicSpinner = (Spinner) findViewById(R.id.locale_spinner);
+        String[] items = new String[] { "RU", "UK", "DE", "EN" };
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, items);
+        dynamicSpinner.setAdapter(adapter);
+        // set title
+        // dynamicSpinner.setPrompt("Choose Language:");
+        uLoc = settings.uLocale;
+	    // Toast.makeText(SettingsActivity.this, "uLoc : " +  uLoc, Toast.LENGTH_SHORT).show();
+        // set selection
+        if (uLoc == "EN")
+          dynamicSpinner.setSelection(3);
+        else if (uLoc == "DE")
+          dynamicSpinner.setSelection(2);
+        else if (uLoc == "UK")
+          dynamicSpinner.setSelection(1);
+        else if (uLoc == "RU")
+          dynamicSpinner.setSelection(0);
+        dynamicSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.v("item", (String) parent.getItemAtPosition(position));
+                uLoc = (String) parent.getItemAtPosition(position);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Another interface callback
+                // uLoc = (String) dynamicSpinner.getSelectedItem();
+            }
+        });
+        // override uLoc var on select
+        uLoc = (String) dynamicSpinner.getSelectedItem(); // .toString()
+	    // Toast.makeText(SettingsActivity.this, "selected : " +  uLoc, Toast.LENGTH_SHORT).show();
+
         // Hardware button detection
         View cbv = findViewById(R.id.hardwareCBView);
         hwButtonDetection = (CheckBox)findViewById(R.id.hardwareCB);
@@ -148,6 +200,7 @@ public class SettingsActivity extends AppCompatActivity
                 settings.RecentAppOverride = disableInTaskSwitcher.isChecked();
                 settings.SetLanguage = setLang.isChecked();
                 settings.UseGSearch = useGS.isChecked();
+                settings.uLocale = uLoc;
 
                 settings.SaveSettings();
                 onBackPressed();
