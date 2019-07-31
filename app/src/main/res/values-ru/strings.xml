@@ -4,14 +4,14 @@
     <string name="acc_disabled_message">Сервис кнопки Домой отключен. Необходимо включить его для работоспособности приложения!</string>
     <string name="app_name">FireH1jack</string>
     <string name="apply">Да</string>
-    <string name="broadcast_receiver_detection">Перехват броадкастов</string>
+    <string name="broadcast_receiver_detection">Обработка броадкастов системы</string>
     <string name="cancel">Отмена</string>
     <string name="close">Закрыть</string>
     <string name="choose_launcher">Выберите рабочий стол из списка</string>
     <string name="disable_in_task_switcher">Откл. в диспетчере приложений</string>
     <string name="disable_while_menu_is_held_hardware_buttons_only">Откл. при нажатой «Меню» (только для физических кнопок)</string>
     <string name="donate">Поддержать</string>
-    <string name="hardware_button_detection">Обрабатывать кнопки пульта</string>
+    <string name="hardware_button_detection">Обрабатывать кнопки</string>
     <string name="help">Помощь</string>
     <string name="hide_system_apps">Скрыть системные</string>
     <string name="lang_set_ok">Установлен язык системы</string>

@@ -63,16 +63,16 @@
         android:paddingRight="14dip"
         android:paddingTop="8dip"
         android:paddingBottom="8dip"
-        android:id="@+id/openApplicationCBView">
+        android:id="@+id/broadcastCBView">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:textSize="@dimen/settings_font_size"
             android:gravity="center_vertical"
-            android:text="@string/launcher_open_detection" />
+            android:text="@string/broadcast_receiver_detection" />
         <CheckBox
-            android:id="@+id/openApplicationCB"
+            android:id="@+id/broadcastCB"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
@@ -87,16 +87,16 @@
         android:paddingRight="14dip"
         android:paddingTop="8dip"
         android:paddingBottom="8dip"
-        android:id="@+id/broadcastCBView">
+        android:id="@+id/openApplicationCBView">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:textSize="@dimen/settings_font_size"
             android:gravity="center_vertical"
-            android:text="@string/broadcast_receiver_detection" />
+            android:text="@string/launcher_open_detection" />
         <CheckBox
-            android:id="@+id/broadcastCB"
+            android:id="@+id/openApplicationCB"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
