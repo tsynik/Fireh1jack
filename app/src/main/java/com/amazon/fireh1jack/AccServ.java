@@ -29,8 +29,10 @@ public class AccServ extends AccessibilityService {
             packageName.equals("com.amazon.firelauncher") || // ### TAB
             packageName.equals("com.amazon.tv.launcher") || // ### FTV
             packageName.equals("com.google.android.leanbacklauncher") // ### ATV
-        )
+        ) {
+            Log.v(TAG, "Do HOME Press. onAccessibilityEvent:" + event + ", package: " + packageName);
             HomePress.Perform(getApplicationContext());
+        }
     }
 
     @Override
@@ -53,6 +55,7 @@ public class AccServ extends AccessibilityService {
                     HomePressCanceled = false;
                 else if (action == KeyEvent.ACTION_DOWN && !HomePressCanceled)
                 {
+                    Log.v(TAG, "Do HOME Press. onKeyEvent:" + event);
                     HomePress.Perform(getApplicationContext());
                     return true;
                 }
@@ -63,6 +66,14 @@ public class AccServ extends AccessibilityService {
                 if (settings.MenuButtonOverride && event.getAction() == KeyEvent.ACTION_DOWN)
                     HomePressCanceled = true;
                 return false;
+
+            case KeyEvent.KEYCODE_SEARCH:
+                if (event.getAction() == KeyEvent.ACTION_DOWN)
+                {
+                    Log.v(TAG, "Do SEARCH Press. onKeyEvent:" + event);
+                    SearchPress.Perform(getApplicationContext());
+                    return true;
+                }
         }
         return false;
     }
@@ -87,7 +98,7 @@ public class AccServ extends AccessibilityService {
                 if (settings.BroadcastRecieverDetection && !HomePressCanceled &&
                    (!settings.RecentAppOverride | !(lastApp.equals("com.android.systemui") && lastClass.equals("com.android.systemui.recents.RecentsActivity"))))
                 {
-                    Log.d(TAG, "HOME Press (BC). LastApp: " + lastApp + "  LastClass: " + lastClass);
+                    Log.d(TAG, "Do HOME Press. LastApp: " + lastApp + "  LastClass: " + lastClass);
                     HomePress.Perform(getApplicationContext());
                 }
             }
@@ -107,7 +118,7 @@ public class AccServ extends AccessibilityService {
         });
         homeWatcher.startWatch();
 
-        Log.v(TAG, "FireHijack Service Started on " + DeviceName.getDeviceName());
+        Log.v(TAG, "FireTVjACK Service Started on " + DeviceName.getDeviceName());
         HomePress.Perform(getApplicationContext());
     }
 }
