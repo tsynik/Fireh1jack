@@ -90,14 +90,13 @@ public class MainActivity extends AppCompatActivity
                 UpdateList();
                 break;
 
-            case R.id.help:
-                OpenHelp();
-                break;
-
-            case R.id.donate:
-                Intent donateIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/BaronKiko/LauncherHijack/blob/master/README.md#donations"));
-                startActivity(donateIntent);
-                break;
+//            case R.id.help:
+//                OpenHelp();
+//                break;
+//
+//            case R.id.donate:
+//                OpenDonate();
+//                break;
 
             case  R.id.settings:
                 Intent myIntent = new Intent(getApplicationContext(), SettingsActivity.class);
@@ -115,6 +114,12 @@ public class MainActivity extends AppCompatActivity
     {
         Intent helpIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/BaronKiko/LauncherHijack/blob/master/HELP.md"));
         startActivity(helpIntent);
+    }
+
+    private void OpenDonate()
+    {
+        Intent donateIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/BaronKiko/LauncherHijack/blob/master/README.md#donations"));
+        startActivity(donateIntent);
     }
 
     private void UpdateList()
