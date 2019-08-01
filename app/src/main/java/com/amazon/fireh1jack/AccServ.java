@@ -25,7 +25,9 @@ public class AccServ extends AccessibilityService {
             return;
 
         CharSequence packageName = event.getPackageName();
-        if (packageName.equals("com.amazon.firelauncher") ||
+        if (
+            packageName.equals("com.amazon.firelauncher") || // ### TAB
+            packageName.equals("com.amazon.tv.launcher") || // ### FTV
             packageName.equals("com.google.android.leanbacklauncher") // ### ATV
         )
             HomePress.Perform(getApplicationContext());
