@@ -1,8 +1,8 @@
 <resources>
     <string name="acc_serv">Detect Home button</string>
     <string name="acc_disabled">Accessibility Service Disabled</string>
-    <string name="acc_disabled_message">Accessible Service is disabled. You must enable it to ensure FireTV4Kj functionality</string>
-    <string name="app_name">FireH1jack</string>
+    <string name="acc_disabled_message">Accessible Service is disabled. You must enable it to ensure FireTVjACK functionality</string>
+    <string name="app_name">FireTVjACK</string>
     <string name="apply">OK</string>
     <string name="broadcast_receiver_detection">Broadcast receiver detection</string>
     <string name="cancel">Cancel</string>

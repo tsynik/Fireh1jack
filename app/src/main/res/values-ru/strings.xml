@@ -1,10 +1,10 @@
 <resources>
     <string name="acc_serv">Сервис кнопки Домой</string>
     <string name="acc_disabled">Сервис отключен</string>
-    <string name="acc_disabled_message">Сервис кнопки Домой отключен. Необходимо включить его для работоспособности приложения!</string>
-    <string name="app_name">FireH1jack</string>
+    <string name="acc_disabled_message">Сервис кнопки «Домой» отключен. Необходимо включить его для работоспособности приложения!</string>
+    <string name="app_name">FireTVjACK</string>
     <string name="apply">Да</string>
-    <string name="broadcast_receiver_detection">Обработка броадкастов системы</string>
+    <string name="broadcast_receiver_detection">Обрабатывать броадкасты системы</string>
     <string name="cancel">Отмена</string>
     <string name="close">Закрыть</string>
     <string name="choose_launcher">Выберите рабочий стол из списка</string>
