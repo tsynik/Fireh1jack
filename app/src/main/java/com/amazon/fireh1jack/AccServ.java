@@ -118,7 +118,7 @@ public class AccServ extends AccessibilityService {
         });
         homeWatcher.startWatch();
 
-        Log.v(TAG, "FireTVjACK Service Started on " + DeviceName.getDeviceName());
+        Log.v(TAG, "FireTVjack Service Started on " + DeviceName.getDeviceName());
         HomePress.Perform(getApplicationContext());
     }
 }

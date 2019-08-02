@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
 import android.view.Gravity;
@@ -253,10 +254,9 @@ public class MainActivity extends AppCompatActivity
         } catch (Exception unused) {
             return false;
         }
-    }    
-
+    }
 	// LOCALE
-    public boolean setLocale(Locale loc) {
+    public static boolean setLocale(Locale loc) {
         try {
             Class<?> activityManagerNative = Class.forName("android.app.ActivityManagerNative");
             Object am = activityManagerNative.getMethod("getDefault").invoke(activityManagerNative);
@@ -264,13 +264,30 @@ public class MainActivity extends AppCompatActivity
             config.locale = loc;
             config.getClass().getDeclaredField("userSetLocale").setBoolean(config, true);
             am.getClass().getMethod("updateConfiguration", new Class[]{Configuration.class}).invoke(am, new Object[]{config});
-            am.getClass().getMethod("updatePersistentConfiguration", new Class[]{Configuration.class}).invoke(am, new Object[]{config});
+            // am.getClass().getMethod("updatePersistentConfiguration", new Class[]{Configuration.class}).invoke(am, new Object[]{config});
             BackupManager.dataChanged("com.android.providers.settings");
             return true;
         } catch(Exception e2) { 
             e2.printStackTrace();
             return false;
         }
+    }
+    // LANGUAGE
+    public static boolean SetLanguage() {
+        if (SettingsMan.GetSettings().SetLanguage)
+        {
+            // Locale newLocale = new Locale("RU");
+            // Locale newLocale = new Locale(SettingsMan.GetSettings().uLocale);
+            Locale newLocale = new Locale(context.getSharedPreferences("FireH1jack", MODE_PRIVATE).getString("uLocale", "EN"));
+            if (setLocale(newLocale)) {
+                Toast.makeText(context, R.string.lang_set_ok, Toast.LENGTH_LONG).show();
+                return true;
+            } else {
+                Toast.makeText(context, R.string.lang_not_ok, Toast.LENGTH_LONG).show();
+            //  showSecurityAlert();
+            }
+        }
+        return false;
     }
 
     @Override
@@ -281,18 +298,8 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
 
         // LOCALE
-        if (SettingsMan.GetSettings().SetLanguage)
-        {
-            // Locale newLocale = new Locale("RU");
-            // Locale newLocale = new Locale(SettingsMan.GetSettings().uLocale);
-            Locale newLocale = new Locale(getApplicationContext().getSharedPreferences("FireH1jack", MODE_PRIVATE).getString("uLocale", "EN"));
-            if (setLocale(newLocale)) {
-                Toast.makeText(getApplicationContext(), R.string.lang_set_ok, Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(getApplicationContext(), R.string.lang_not_ok, Toast.LENGTH_LONG).show();
-                showSecurityAlert();
-            }
-        }
+        // SetLanguage();
+        
         // GOOGLE
         PackageManager pm = getApplicationContext().getPackageManager();
         if (SettingsMan.GetSettings().UseGSearch)
@@ -307,10 +314,10 @@ public class MainActivity extends AppCompatActivity
                 // if (isPackageEnabled("com.amazon.vizzini", pm))
                 //    pm.setApplicationEnabledSetting("com.amazon.vizzini", PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0);
                 
-                if (isPackageEnabled("com.google.android.katniss", pm)) {
+                // if (isPackageEnabled("com.google.android.katniss", pm)) {
                     // Secure.putString(getContentResolver(), "voice_interaction_service", "com.google.android.katniss/.search.serviceapi.KatnissVoiceInteractionService");
                     // Secure.putString(getContentResolver(), "voice_recognition_service", "com.google.android.katniss/.search.serviceapi.KatnissRecognitionService");
-                }
+                // }
 
             } catch(SecurityException e) {
                 showSecurityAlert();

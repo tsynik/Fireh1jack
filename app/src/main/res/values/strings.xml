@@ -1,15 +1,16 @@
 <resources>
     <string name="acc_serv">Detect Home button</string>
     <string name="acc_disabled">Accessibility Service Disabled</string>
-    <string name="acc_disabled_message">Accessible Service is disabled. You must enable it to ensure FireTVjACK functionality</string>
-    <string name="app_name">FireTVjACK</string>
+    <string name="acc_disabled_message">Accessible Service is disabled. You must enable it to ensure FireTVjack functionality</string>
+    <string name="app_name">FireTVjack</string>
+    <string name="app_not_found">Application Not Found</string>
     <string name="apply">OK</string>
     <string name="broadcast_receiver_detection">Broadcast receiver detection</string>
     <string name="cancel">Cancel</string>
     <string name="close">Close</string>
     <string name="choose_launcher">Please select a launcher</string>
     <string name="disable_in_task_switcher">Disable In Task Switcher</string>
-    <string name="disable_while_menu_is_held_hardware_buttons_only">Disable while menu is held (Hardware buttons only)</string>
+    <string name="disable_while_menu_is_held_hardware_buttons_only">Disable while Menu is held (hardware buttons only)</string>
     <string name="donate">Donate</string>
     <string name="hardware_button_detection">Hardware button detection</string>
     <string name="help">Help</string>
@@ -21,7 +22,7 @@
     <string name="load_defaults">Load Defaults</string>
     <string name="open_settings">Open Settings</string>
     <string name="overlay_detection_requires_reboot">Overlay detection (Requires reboot)</string>
-    <string name="override_language">Set system language on App start</string>
+    <string name="override_language">Set system language to</string>
     <string name="perm_notice">FireTV Permissions Notice</string>
     <string name="save">Save</string>
     <string name="set_launcher_to">Set your launcher to</string>

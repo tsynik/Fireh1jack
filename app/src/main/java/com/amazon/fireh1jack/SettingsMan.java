@@ -83,8 +83,9 @@ public class SettingsMan
             editor.putBoolean("UseGSearch", UseGSearch);
             editor.putString("uLocale", uLocale);
             editor.commit(); // Commit the edits!
-
             Toast.makeText(MainActivity.GetContext(), R.string.settings_saved, Toast.LENGTH_LONG).show();
+            // Apply Language
+            MainActivity.SetLanguage();
         }
     }
 

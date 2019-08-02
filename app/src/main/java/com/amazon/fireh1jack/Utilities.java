@@ -12,6 +12,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.widget.Toast;
 
+import com.amazon.fireh1jack.R;
+
 public class Utilities {
 	
 	/*
@@ -65,7 +67,7 @@ public class Utilities {
 			// if fail
 			} catch(ActivityNotFoundException ex) {
 				// quick message notification
-				Toast toast = Toast.makeText(c, "Application Not Found", Toast.LENGTH_LONG);
+				Toast toast = Toast.makeText(c, R.string.app_not_found, Toast.LENGTH_LONG);
 				// display message
 				toast.show();
 			}
