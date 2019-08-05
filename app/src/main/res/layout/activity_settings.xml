@@ -7,6 +7,14 @@
     android:orientation="vertical"
     tools:context=".SettingsActivity">
 
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/settings_element_height"
@@ -49,6 +57,30 @@
             android:text="@string/disable_while_menu_is_held_hardware_buttons_only" />
         <CheckBox
             android:id="@+id/menuButtonOverrideCB"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/settings_element_height"
+        android:orientation="vertical"
+        android:paddingLeft="14dip"
+        android:paddingRight="14dip"
+        android:paddingTop="8dip"
+        android:paddingBottom="8dip"
+        android:id="@+id/taskSwitchCBView">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:textSize="@dimen/settings_font_size"
+            android:gravity="center_vertical"
+            android:text="@string/disable_in_task_switcher" />
+        <CheckBox
+            android:id="@+id/taskSwitchCB"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
@@ -107,7 +139,7 @@
         android:layout_width="fill_parent"
         android:layout_height="@dimen/settings_element_height"
         android:orientation="vertical"
-        android:visibility="gone"
+        android:visibility="visible"
         android:paddingLeft="14dip"
         android:paddingRight="14dip"
         android:paddingTop="8dip"
@@ -122,30 +154,6 @@
             android:text="@string/overlay_detection_requires_reboot" />
         <CheckBox
             android:id="@+id/overlayCB"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_alignParentRight="true" />
-    </RelativeLayout>
-
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/settings_element_height"
-        android:orientation="vertical"
-        android:paddingLeft="14dip"
-        android:paddingRight="14dip"
-        android:paddingTop="8dip"
-        android:paddingBottom="8dip"
-        android:id="@+id/taskSwitchCBView">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:textSize="@dimen/settings_font_size"
-            android:gravity="center_vertical"
-            android:text="@string/disable_in_task_switcher" />
-        <CheckBox
-            android:id="@+id/taskSwitchCB"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
@@ -243,5 +251,8 @@
             android:layout_marginRight="14dip"
             android:text="@string/save"/>
     </LinearLayout>
+
+    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
