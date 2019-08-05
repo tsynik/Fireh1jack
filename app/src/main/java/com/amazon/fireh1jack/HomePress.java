@@ -35,10 +35,10 @@ public class HomePress {
     {
         // Simple debounce
         long time = System.currentTimeMillis();
-        if (time - LastActivate < 200)
+        if (time - LastActivate < 100)
             return;
-        LastActivate = time;
 
+        LastActivate = time;
         Intent i = GetDesiredIntent(c);
         PendingIntent pendingIntent = PendingIntent.getActivity(c, 0, i, 0);
         try {
