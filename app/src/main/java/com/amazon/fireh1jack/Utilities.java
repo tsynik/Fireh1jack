@@ -75,4 +75,18 @@ public class Utilities {
 		// by default, fail to launch
 		return false;
 	}
+	
+	/*
+	 * Check an application available
+	 * @param	c	Context of application
+	 * @param	pkgName	Name of the package
+	 */
+    public static boolean isPackageEnabled(Context c, String pkgName) {
+        PackageManager packageManager = c.getPackageManager();
+        try {
+            return packageManager.getApplicationInfo(pkgName, 0).enabled;
+        } catch (Exception unused) {
+            return false;
+        }
+    }
 }
