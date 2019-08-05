@@ -60,7 +60,7 @@ public class AppAdapter extends BaseAdapter
         TextView tvAppName = (TextView)v.findViewById(com.amazon.fireh1jack.R.id.tvName);
         TextView tvPkgName = (TextView)v.findViewById(com.amazon.fireh1jack.R.id.tvPack);
 
-        Log.v("Test", entry.activityInfo.processName) ;
+        Log.v("*** AppAdapter", entry.activityInfo.processName) ;
 
         // set data to display
         ivAppIcon.setImageDrawable(entry.loadIcon(mPackManager));

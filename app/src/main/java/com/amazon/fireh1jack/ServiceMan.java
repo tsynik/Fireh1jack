@@ -18,11 +18,11 @@ public class ServiceMan {
         ActivityManager manager = (ActivityManager) c.getSystemService(Context.ACTIVITY_SERVICE);
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
-                Log.i (TAG, "isMyServiceRunning? " + true+"");
+                Log.i (TAG, "[OVERLAY] isMyServiceRunning? " + true+"");
                 return true;
             }
         }
-        Log.i (TAG, "isMyServiceRunning? " + false+"");
+        Log.i (TAG, "[OVERLAY] isMyServiceRunning? " + false+"");
         return false;
     }
 

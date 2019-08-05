@@ -122,7 +122,7 @@ public class SettingsActivity extends AppCompatActivity
         dynamicSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Log.v("item", (String) parent.getItemAtPosition(position));
+                // Log.v("item", (String) parent.getItemAtPosition(position));
                 uLoc = (String) parent.getItemAtPosition(position);
             }
             @Override

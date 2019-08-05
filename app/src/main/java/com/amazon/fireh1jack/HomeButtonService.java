@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 public class HomeButtonService extends Service {
     private LinearLayout layout;
     private WindowManager wm;
-    static final String TAG = "*** HomeButtonService [OD]";
+    static final String TAG = "*** [OVERLAY]";
 
     @Override
     public IBinder onBind(Intent intent) {

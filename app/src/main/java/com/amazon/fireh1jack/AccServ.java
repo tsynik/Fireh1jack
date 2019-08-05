@@ -53,27 +53,32 @@ public class AccServ extends AccessibilityService {
         {
             case KeyEvent.KEYCODE_HOME:
                 int action = event.getAction();
+                // Log.v(TAG, "KEYCODE_HOME HomePressCanceled = " + HomePressCanceled);
 
-                if (action == KeyEvent.ACTION_UP)
+                if (action == KeyEvent.ACTION_UP) {
+                    // Log.v(TAG, "ACTION_UP HomePressCanceled = " + HomePressCanceled);
                     HomePressCanceled = false;
+                }
                 else if (action == KeyEvent.ACTION_DOWN && !HomePressCanceled)
                 {
-                    Log.v(TAG, "Do HOME Press. onKeyEvent:" + event);
+                    // Log.v(TAG, "ACTION_DN HomePressCanceled = false, onKeyEvent:" + event);
                     HomePress.Perform(getApplicationContext());
                     return true;
                 }
-
-                return false;
+                return false; // false
 
             case KeyEvent.KEYCODE_MENU:
                 if (settings.MenuButtonOverride && event.getAction() == KeyEvent.ACTION_DOWN)
+                {
+                    // Log.v(TAG, "KEYCODE_MENU set HomePressCanceled = " + HomePressCanceled);
                     HomePressCanceled = true;
-                return false;
+                	return false;
+                }
 
             case KeyEvent.KEYCODE_SEARCH:
                 if (event.getAction() == KeyEvent.ACTION_DOWN)
                 {
-                    Log.v(TAG, "Do SEARCH Press. onKeyEvent:" + event);
+                    // Log.v(TAG, "KEYCODE_SEARCH Press (HardwareDetection). onKeyEvent:" + event);
                     SearchPress.Perform(getApplicationContext());
                     return true;
                 }
@@ -101,21 +106,27 @@ public class AccServ extends AccessibilityService {
                 if (settings.BroadcastRecieverDetection && !HomePressCanceled &&
                    (!settings.RecentAppOverride | !(lastApp.equals("com.android.systemui") && lastClass.equals("com.android.systemui.recents.RecentsActivity"))))
                 {
-                    Log.d(TAG, "Do HOME Press. LastApp: " + lastApp + "  LastClass: " + lastClass);
+                    Log.d(TAG, "Do NEW HOME. LastApp: " + lastApp + "  LastClass: " + lastClass);
                     HomePress.Perform(getApplicationContext());
                 }
             }
 
             @Override
+            public void onHomeLongPressed()
+            {
+                    Log.d(TAG, "Do LONG HOME");
+            }
+
+            @Override
             public void onRecentAppPressed()
             {
-                    Log.d(TAG, "RECENTS Press");
+                    Log.d(TAG, "Do RECENTS");
             }
             
             @Override
             public void onSearchPressed()
             {
-                    Log.d(TAG, "SEARCH Press");
+                    Log.d(TAG, "Do SEARCH");
                     SearchPress.Perform(getApplicationContext());
             }
         });
