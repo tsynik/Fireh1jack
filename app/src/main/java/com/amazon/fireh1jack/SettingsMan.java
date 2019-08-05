@@ -19,8 +19,8 @@ public class SettingsMan
     protected static class SettingStore
     {
         public static final String TAG = "*** SettingsMan";
-        static boolean HardwareDetection, ApplicationOpenDetection, BroadcastRecieverDetection, OverlayApplicationDetection, MenuButtonOverride, RecentAppOverride, SetLanguage, UseGSearch, RunningOnTV;
-        static String uLocale;
+        static boolean HardwareDetection, ApplicationOpenDetection, BroadcastRecieverDetection, OverlayApplicationDetection, MenuButtonOverride, RecentAppOverride, SetLanguage, UseGSearch, RunningOnTV, isFireTV;
+        static String uLocale, cLaunch;
 
         private static Context c;
         private static SharedPreferences settings;
@@ -31,6 +31,7 @@ public class SettingsMan
             settings = c.getSharedPreferences("FireH1jack", MODE_PRIVATE);
 
             RunningOnTV = c.getPackageManager().hasSystemFeature(PackageManager.FEATURE_LEANBACK);
+            isFireTV = c.getPackageManager().hasSystemFeature("amazon.hardware.fire_tv");
 
             if (!settings.getBoolean("defaultsLoaded", false))
             {
@@ -45,8 +46,9 @@ public class SettingsMan
             MenuButtonOverride = settings.getBoolean("MenuButtonOverride", false);
             RecentAppOverride = settings.getBoolean("RecentAppOverride", false);
             SetLanguage = settings.getBoolean("SetLanguage", false);
-            uLocale = settings.getString("uLocale", "RU");
             UseGSearch = settings.getBoolean("UseGSearch", false);
+            uLocale = settings.getString("uLocale", "RU");
+            cLaunch = settings.getString("ChosenLauncher", "com.amazon.fireh1jack");
         }
 
         public static void LoadDefaults()

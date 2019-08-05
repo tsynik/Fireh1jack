@@ -18,6 +18,8 @@ public class AccServ extends AccessibilityService {
 
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
+    
+        settings = SettingsMan.GetSettings(); // for cLaunch
         lastApp = (String) event.getPackageName();
         lastClass = (String) event.getClassName();
 
@@ -28,9 +30,10 @@ public class AccServ extends AccessibilityService {
         if (
             packageName.equals("com.amazon.firelauncher") || // ### TAB
             packageName.equals("com.amazon.tv.launcher") || // ### FTV
-            packageName.equals("com.google.android.leanbacklauncher") // ### ATV
+            packageName.equals("com.google.android.leanbacklauncher") && // ### ATV
+            !packageName.equals(settings.cLaunch)
         ) {
-            Log.v(TAG, "Do HOME Press. onAccessibilityEvent:" + event + ", package: " + packageName);
+            Log.v(TAG, "Do HOME (ApplicationOpenDetection). onAccessibilityEvent: " + event + ", package: " + packageName + ", cLaunch: " + settings.cLaunch);
             HomePress.Perform(getApplicationContext());
         }
     }
