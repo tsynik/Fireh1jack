@@ -2,19 +2,17 @@
   Code pulled from Evan Gillogley's GitHub project: https://github.com/evanjmg/react-native-home-pressed
  */
 
-
-
 package com.amazon.fireh1jack;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.util.Log;
+//import android.util.Log;
 
 public class HomeWatcher {
 
-    static final String TAG = "*** HomeWatcher [BC]";
+    static final String TAG = "*** HomeWatcher";
     private Context mContext;
     private IntentFilter mFilter;
     private OnHomePressedListener mListener;
@@ -47,6 +45,7 @@ public class HomeWatcher {
         final String SYSTEM_DIALOG_REASON_GLOBAL_ACTIONS = "globalactions";
         final String SYSTEM_DIALOG_REASON_RECENT_APPS = "recentapps";
         final String SYSTEM_DIALOG_REASON_HOME_KEY = "homekey";
+        final String SYSTEM_DIALOG_REASON_LONG_PRESS = "assist";
         final String SYSTEM_DIALOG_REASON_SEARCH = "search";
 
         @Override
@@ -55,10 +54,12 @@ public class HomeWatcher {
             if (action.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)) {
                 String reason = intent.getStringExtra(SYSTEM_DIALOG_REASON_KEY);
                 if (reason != null) {
-                    Log.e(TAG, "action:" + action + ", reason:" + reason);
+                    // Log.d(TAG, "action:" + action + ", reason:" + reason);
                     if (mListener != null) {
                         if (reason.equals(SYSTEM_DIALOG_REASON_HOME_KEY)) {
                             mListener.onHomePressed();
+                        } else if (reason.equals(SYSTEM_DIALOG_REASON_LONG_PRESS)) {
+                            mListener.onHomeLongPressed();
                         } else if (reason.equals(SYSTEM_DIALOG_REASON_RECENT_APPS)) {
                             mListener.onRecentAppPressed();
                         } else if (reason.equals(SYSTEM_DIALOG_REASON_SEARCH)) {
