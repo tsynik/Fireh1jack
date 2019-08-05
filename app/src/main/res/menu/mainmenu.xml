@@ -14,4 +14,6 @@
         android:id="@+id/donate" /-->
     <item android:title="@string/settings"
         android:id="@+id/settings" />
+    <item android:title="@string/sys_settings"
+        android:id="@+id/sys_settings" />
 </menu>
