@@ -1,18 +1,18 @@
 <resources>
-    <string name="acc_serv">Сервис кнопки Домой</string>
+    <string name="acc_serv">Сервис кнопки «Домой»</string>
     <string name="acc_disabled">Сервис отключен</string>
     <string name="acc_disabled_message">Сервис кнопки «Домой» отключен. Необходимо включить его для работоспособности приложения!</string>
     <string name="app_name">FireTVjack</string>
     <string name="app_not_found">Приложение не найдено</string>
     <string name="apply">Да</string>
-    <string name="broadcast_receiver_detection">Обрабатывать броадкасты системы</string>
+    <string name="broadcast_receiver_detection">Обрабатывать диалоги системы</string>
     <string name="cancel">Отмена</string>
     <string name="close">Закрыть</string>
     <string name="choose_launcher">Выберите рабочий стол из списка</string>
-    <string name="disable_in_task_switcher">Откл. в диспетчере приложений</string>
-    <string name="disable_while_menu_is_held_hardware_buttons_only">Откл. при нажатой «Меню» (только для физических кнопок)</string>
+    <string name="disable_in_task_switcher">Откл. «Домой» в диспетчере приложений</string>
+    <string name="disable_while_menu_is_held_hardware_buttons_only">Откл. «Домой» при нажатой «Меню» (только для физических кнопок)</string>
     <string name="donate">Поддержать</string>
-    <string name="hardware_button_detection">Обрабатывать кнопки</string>
+    <string name="hardware_button_detection">Обрабатывать кнопки пульта</string>
     <string name="help">Помощь</string>
     <string name="hide_system_apps">Скрыть системные</string>
     <string name="lang_set_ok">Установлен язык системы</string>
@@ -21,7 +21,7 @@
     <string name="launchers_only">Только лончеры</string>
     <string name="load_defaults">Настройки по умолчанию</string>
     <string name="open_settings">Открыть настройки</string>
-    <string name="overlay_detection_requires_reboot">Определять оверлеи (требуется перезагрузка)</string>
+    <string name="overlay_detection_requires_reboot">Использовать оверлеи (требуется перезагрузка)</string>
     <string name="override_language">Устанавливать язык системы</string>
     <string name="perm_notice">Ограничения Fire OS</string>
     <string name="save">Сохранить</string>
