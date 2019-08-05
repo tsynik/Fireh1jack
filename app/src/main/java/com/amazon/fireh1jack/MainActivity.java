@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity
         sysApps = menu.getItem(0);
         launcher = menu.getItem(1);
         launcher.setChecked(true);
-        sysApps.setChecked(true);
+        sysApps.setChecked(false);
         UpdateList();
 
         return true;
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity
         switch (item.getItemId()) {
             case R.id.launcher:
                 launcher.setChecked(!launcher.isChecked());
-                if (launcher.isChecked())
+                if (!launcher.isChecked())
                     sysApps.setChecked(true);
                 UpdateList();
                 break;
