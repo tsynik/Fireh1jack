@@ -106,6 +106,11 @@ public class MainActivity extends AppCompatActivity
                 startActivity(myIntent);
                 break;
 
+            case  R.id.sys_settings:
+                    // https://ourcodeworld.com/articles/read/318/how-to-open-android-settings-programmatically-with-java
+                    startActivityForResult(new Intent(Settings.ACTION_SETTINGS), 0);
+                break;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

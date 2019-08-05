@@ -184,19 +184,18 @@
             android:layout_gravity="center_vertical"
             android:layout_alignParentRight="true" />
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/settings_element_height"
-        android:layout_toEndOf="@id/setLangTV"
-        android:orientation="vertical"
-        android:paddingTop="12dip"
-        android:paddingBottom="12dip"
-        android:id="@+id/uLocaleCBView">
-        <Spinner
-            android:id="@+id/locale_spinner"
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </RelativeLayout>
+            android:layout_height="@dimen/settings_element_height"
+            android:layout_toEndOf="@id/setLangTV"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:id="@+id/uLocaleCBView">
+            <Spinner
+                android:id="@+id/locale_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
 
     </RelativeLayout>
 
