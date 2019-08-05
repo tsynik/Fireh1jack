@@ -31,6 +31,7 @@ public class BroadcastReceiverOnBootComplete extends BroadcastReceiver {
                 Log.d("*** FireTVjack", "BOOT_COMPLETED");
                 MainActivity.SetContext(context);
                 MainActivity.SetLanguage();
+                MainActivity.SetKeyBoard();
                 ServiceMan.Start(context);
                 break;
         }

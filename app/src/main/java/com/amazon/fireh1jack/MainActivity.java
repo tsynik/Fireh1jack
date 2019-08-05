@@ -6,6 +6,7 @@ import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.backup.BackupManager;
 import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,6 +21,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityManager;
@@ -285,6 +287,49 @@ public class MainActivity extends AppCompatActivity
             } else {
                 Toast.makeText(context, R.string.lang_not_ok, Toast.LENGTH_LONG).show();
             //  showSecurityAlert();
+            }
+        }
+        return false;
+    }
+    // KB: https://stackoverflow.com/questions/18486130/detect-if-input-method-has-been-selected
+    public static boolean isThisKeyboardSetAsDefaultIME(Context context) {
+        final String defaultIME = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ENABLED_INPUT_METHODS);
+        if (TextUtils.isEmpty(defaultIME))
+            return false;
+        ComponentName defaultInputMethod = ComponentName.unflattenFromString(defaultIME);
+        // return defaultInputMethod.getPackageName().equals(myPackageName);
+        return defaultIME.contains("org.liskovsoft.leankeykeyboard.pro");
+    }
+    public static boolean isThisKeyboardSelected(Context context) {
+        final String defaultIME = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
+        if (TextUtils.isEmpty(defaultIME))
+            return false;
+        ComponentName defaultInputMethod = ComponentName.unflattenFromString(defaultIME);
+        // return defaultInputMethod.getPackageName().equals(myPackageName);
+        return defaultIME.contains("org.liskovsoft.leankeykeyboard.pro");
+    }
+    public static boolean SetKeyBoard() {
+        if (Utilities.isPackageEnabled(context, "org.liskovsoft.leankeykeyboard.pro"))
+        {
+            try {        
+                String im = Settings.Secure.getString(context.getContentResolver(), Secure.ENABLED_INPUT_METHODS);
+                if (!isThisKeyboardSetAsDefaultIME(context)) {
+                    Toast.makeText(context, "Enable LeanKey Keyboard", Toast.LENGTH_LONG).show();
+                    if (!TextUtils.isEmpty(im))
+                        im = im + ":org.liskovsoft.leankeykeyboard.pro/com.google.leanback.ime.LeanbackImeService";
+                    else
+                        im = "org.liskovsoft.leankeykeyboard.pro/com.google.leanback.ime.LeanbackImeService";
+                    Settings.Secure.putString(context.getContentResolver(), Settings.Secure.ENABLED_INPUT_METHODS, im);
+                }
+                if (!isThisKeyboardSelected(context)) {
+                    Toast.makeText(context, "Set LeanKey Keyboard as default", Toast.LENGTH_LONG).show();
+                    im = "org.liskovsoft.leankeykeyboard.pro/com.google.leanback.ime.LeanbackImeService";
+                    Settings.Secure.putString(context.getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD, im);
+                }
+                return true;
+            } catch(Exception e) {
+                Toast.makeText(context, "Keyboard not set", Toast.LENGTH_LONG).show();
+                e.printStackTrace();
             }
         }
         return false;
