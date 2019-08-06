@@ -398,9 +398,14 @@ public class MainActivity extends AppCompatActivity
         // PERMS
         if (!isAccessibilityEnabled(context, "com.amazon.fireh1jack/.AccServ"))
         {
-            try {        
-                Secure.putString(getContentResolver(), "enabled_accessibility_services", "com.amazon.fireh1jack/com.amazon.fireh1jack.AccServ");
-                Secure.putString(getContentResolver(), "accessibility_enabled", "1");
+            try {
+                String as = Settings.Secure.getString(context.getContentResolver(), Secure.ENABLED_ACCESSIBILITY_SERVICES);
+                if (!TextUtils.isEmpty(as))
+                    as = as + ":" + "com.amazon.fireh1jack/.AccServ";
+                else
+                    as = "com.amazon.fireh1jack/.AccServ";
+                Settings.Secure.putString(getContentResolver(), Secure.ENABLED_ACCESSIBILITY_SERVICES, as);
+                Settings.Secure.putString(getContentResolver(), Secure.ACCESSIBILITY_ENABLED, "1");
             } catch(SecurityException e) {
                 showSecurityAlert();
                 } catch(Exception e1) {
