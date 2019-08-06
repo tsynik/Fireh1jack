@@ -298,62 +298,39 @@ public class MainActivity extends AppCompatActivity
     }
     // KB: https://stackoverflow.com/questions/18486130/detect-if-input-method-has-been-selected
     public static boolean isThisKeyboardEnabled(Context context, String pkg) {
-        final String defaultIME = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ENABLED_INPUT_METHODS);
-        if (TextUtils.isEmpty(defaultIME))
+        final String enabledIME = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ENABLED_INPUT_METHODS);
+        if (TextUtils.isEmpty(enabledIME))
             return false;
-        ComponentName defaultInputMethod = ComponentName.unflattenFromString(defaultIME);
-        // return defaultInputMethod.getPackageName().equals(myPackageName);
-        return defaultIME.contains(pkg);
+        //ComponentName defaultInputMethod = ComponentName.unflattenFromString(enabledIME);
+        // Log.d(TAG, "enabledIME: " + enabledIME + ", ComponentName: " + defaultInputMethod.toString());
+        // return defaultInputMethod.getPackageName().equals(pkg);
+        return enabledIME.contains(pkg);
     }
     public static boolean isThisKeyboardSelected(Context context, String pkg) {
         final String defaultIME = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD);
         if (TextUtils.isEmpty(defaultIME))
             return false;
-        ComponentName defaultInputMethod = ComponentName.unflattenFromString(defaultIME);
-        // return defaultInputMethod.getPackageName().equals(myPackageName);
+        // ComponentName defaultInputMethod = ComponentName.unflattenFromString(defaultIME);
+        // Log.d(TAG, "defaultIME: " + defaultIME + ", ComponentName: " + defaultInputMethod.toString());
+        // return defaultInputMethod.getPackageName().equals(pkg);
         return defaultIME.contains(pkg);
     }
-    public static boolean SetKeyBoard() {
-        String pkg = "org.liskovsoft.leankeykeyboard.pro";
+    public static boolean SetKeyBoard(String pkg, String cmp) {
         if (Utilities.isPackageEnabled(context, pkg))
         {
             try {        
                 String im = Settings.Secure.getString(context.getContentResolver(), Secure.ENABLED_INPUT_METHODS);
                 if (!isThisKeyboardEnabled(context, pkg)) {
-                    Toast.makeText(context, "Enable LeanKey Keyboard", Toast.LENGTH_LONG).show();
+                    // Toast.makeText(context, "Enable " + pkg, Toast.LENGTH_LONG).show();
                     if (!TextUtils.isEmpty(im))
-                        im = im + ":org.liskovsoft.leankeykeyboard.pro/com.google.leanback.ime.LeanbackImeService";
+                        im = im + ":" + pkg + "/" + cmp;
                     else
-                        im = "org.liskovsoft.leankeykeyboard.pro/com.google.leanback.ime.LeanbackImeService";
+                        im = pkg + "/" + cmp;
                     Settings.Secure.putString(context.getContentResolver(), Settings.Secure.ENABLED_INPUT_METHODS, im);
                 }
                 if (!isThisKeyboardSelected(context, pkg)) {
-                    Toast.makeText(context, "Set LeanKey Keyboard as default", Toast.LENGTH_LONG).show();
-                    im = "org.liskovsoft.leankeykeyboard.pro/com.google.leanback.ime.LeanbackImeService";
-                    Settings.Secure.putString(context.getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD, im);
-                }
-                return true;
-            } catch(Exception e) {
-                Toast.makeText(context, "Keyboard not set", Toast.LENGTH_LONG).show();
-                e.printStackTrace();
-            }
-        }
-        pkg = "com.example.semitop7.FireTVStyle";
-        if (Utilities.isPackageEnabled(context, pkg))
-        {
-            try {        
-                String im = Settings.Secure.getString(context.getContentResolver(), Secure.ENABLED_INPUT_METHODS);
-                if (!isThisKeyboardEnabled(context, pkg)) {
-                    Toast.makeText(context, "Enable FireTVStyle Keyboard", Toast.LENGTH_LONG).show();
-                    if (!TextUtils.isEmpty(im))
-                        im = im + ":com.example.semitop7.FireTVStyle/com.example.semitop7.FireTVStyle.FireTVStyleIME";
-                    else
-                        im = "com.example.semitop7.FireTVStyle/com.example.semitop7.FireTVStyle.FireTVStyleIME";
-                    Settings.Secure.putString(context.getContentResolver(), Settings.Secure.ENABLED_INPUT_METHODS, im);
-                }
-                if (!isThisKeyboardSelected(context, pkg)) {
-                    Toast.makeText(context, "Set FireTVStyle Keyboard as default", Toast.LENGTH_LONG).show();
-                    im = "com.example.semitop7.FireTVStyle/com.example.semitop7.FireTVStyle.FireTVStyleIME";
+                    // Toast.makeText(context, "Set " + pkg + " as default", Toast.LENGTH_LONG).show();
+                    im = pkg + "/" + cmp;
                     Settings.Secure.putString(context.getContentResolver(), Settings.Secure.DEFAULT_INPUT_METHOD, im);
                 }
                 return true;
