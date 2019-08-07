@@ -450,15 +450,16 @@ public class MainActivity extends AppCompatActivity
                             OpenHelp();
                         }
                     });
-            if (!SettingsMan.GetSettings().RunningOnTV)
+            if (!SettingsMan.GetSettings().isFireTV) // ex. RunningOnTV
             {
                 builder.setNeutralButton(getResources().getText(R.string.open_settings), new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int id)
                     {
-                        Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
-                        startActivity(intent);
+                        // Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+                        // startActivity(intent);
+                        startActivityForResult(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS), 0);
                     }
                 });
             }
