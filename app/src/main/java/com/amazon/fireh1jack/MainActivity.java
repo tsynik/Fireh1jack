@@ -283,9 +283,25 @@ public class MainActivity extends AppCompatActivity
     public static boolean SetLanguage() {
         if (SettingsMan.GetSettings().SetLanguage)
         {
-            // Locale newLocale = new Locale("RU");
+            // Locale newLocale = new Locale("ru");
             // Locale newLocale = new Locale(SettingsMan.GetSettings().uLocale);
-            Locale newLocale = new Locale(context.getSharedPreferences("FireH1jack", MODE_PRIVATE).getString("uLocale", "EN"));
+            String lang = context.getSharedPreferences("FireH1jack", MODE_PRIVATE).getString("uLocale", "EN").toLowerCase();
+            String ccode = "US";
+            switch(lang) 
+            { 
+                case "ru":
+                    ccode = "RU";
+                    break; 
+                case "uk": 
+                    ccode = "UA";
+                    break; 
+                case "de": 
+                    ccode = "DE";
+                    break; 
+                default: 
+                    ccode = "US";
+            } 
+            Locale newLocale = new Locale(lang, ccode);
             if (setLocale(newLocale)) {
                 Toast.makeText(context, R.string.lang_set_ok, Toast.LENGTH_LONG).show();
                 return true;
