@@ -17,11 +17,11 @@
     <string name="hide_system_apps">Hide System Apps</string>
     <string name="lang_set_ok">Language is set</string>    
     <string name="lang_not_ok">"Can't set Language"</string>    
-    <string name="launcher_open_detection">Launcher open detection</string>
+    <string name="launcher_open_detection">Launcher open detection (risky)</string>
     <string name="launchers_only">Launchers Only</string>
     <string name="load_defaults">Load Defaults</string>
     <string name="open_settings">Open Settings</string>
-    <string name="overlay_detection_requires_reboot">Overlay detection (Requires reboot)</string>
+    <string name="overlay_detection_requires_reboot">Overlay detection (requires reboot)</string>
     <string name="override_language">Set system language to</string>
     <string name="perm_notice">FireTV Permissions Notice</string>
     <string name="save">Save</string>
