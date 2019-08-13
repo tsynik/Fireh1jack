@@ -66,9 +66,11 @@ public class AccServ extends AccessibilityService {
                 }
                 // Log.v(TAG, "HOME lastDuration = " + lastDuration);
                 if (action == KeyEvent.ACTION_UP && lastDuration > 500) { // long press
-                    Log.v(TAG, "### ASSIST ###");
-                    SearchPress.Perform(getApplicationContext());
-                    return true; // Override default handling
+        		    if (settings.UseGSearch) {
+                        Log.v(TAG, "### ASSIST ###");
+                        SearchPress.Perform(getApplicationContext());
+                        return true; // Override default handling
+                    }
                 }
                 else if (action == KeyEvent.ACTION_DOWN && !HomePressCanceled) {
                     Log.v(TAG, "### HOME ###");
@@ -85,6 +87,8 @@ public class AccServ extends AccessibilityService {
                 return false;
 
             case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE: // 84
+        		if (!settings.UseGSearch)
+            		return false;
                 if (action == KeyEvent.ACTION_DOWN)
                     lastDown = System.currentTimeMillis();
                 else if (action == KeyEvent.ACTION_UP) {

@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity
         sysApps = menu.getItem(0);
         launcher = menu.getItem(1);
         launcher.setChecked(true);
-        sysApps.setChecked(false);
+        sysApps.setChecked(true);
         UpdateList();
 
         return true;
