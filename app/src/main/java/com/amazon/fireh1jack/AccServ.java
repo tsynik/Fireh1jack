@@ -54,7 +54,7 @@ public class AccServ extends AccessibilityService {
         if (!settings.HardwareDetection)
             return false;
 
-        Log.v(TAG, "### KeyEvent ### " + event.toString());
+        // Log.v(TAG, "### KeyEvent ### " + event.toString());
 
         int action = event.getAction();
         switch (event.getKeyCode())
@@ -68,7 +68,7 @@ public class AccServ extends AccessibilityService {
                     HomePressCanceled = false;
                     ActivateSearch = false;
                 }
-                Log.v(TAG, "HOME lastDuration = " + lastHomeDuration);
+                // Log.v(TAG, "HOME lastDuration = " + lastHomeDuration);
                 if (action == KeyEvent.ACTION_UP && lastHomeDuration > 500) { // long press
         		    // if (settings.UseGSearch) {
                         // Log.v(TAG, "### ASSIST ###");
@@ -80,7 +80,7 @@ public class AccServ extends AccessibilityService {
                     return true; // Override default handling
                 }
                 else if (action == KeyEvent.ACTION_DOWN && !HomePressCanceled) {
-                    Log.v(TAG, "### HOME ###");
+                    // Log.v(TAG, "### HOME ###");
                     HomePress.Perform(getApplicationContext());
                     return true; // Override default handling
                 }
@@ -103,9 +103,9 @@ public class AccServ extends AccessibilityService {
                     ActivateSearch = false;
                     return true; // Override default handling
                 }
-                Log.v(TAG, "MEDIA_PLAY_PAUSE lastPlayDown = " + lastPlayDuration + " ActivateSearch = " + ActivateSearch);
+                // Log.v(TAG, "MEDIA_PLAY_PAUSE lastPlayDown = " + lastPlayDuration + " ActivateSearch = " + ActivateSearch);
                 if ((action == KeyEvent.ACTION_DOWN && lastPlayDuration > 500) || ActivateSearch) {
-                    Log.v(TAG, "### ASSIST ###");
+                    // Log.v(TAG, "### ASSIST ###");
                     SearchPress.Perform(getApplicationContext());
                     HomePressCanceled = false;
                     return true; // Override default handling
