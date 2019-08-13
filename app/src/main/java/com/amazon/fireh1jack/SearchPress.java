@@ -40,7 +40,7 @@ public class SearchPress {
         if (resolveActivity != null) {
             Log.d(TAG, "Search Intent: " + resolveActivity.activityInfo.packageName + "/" + resolveActivity.activityInfo.name);
             i.setComponent(new ComponentName(resolveActivity.activityInfo.packageName, resolveActivity.activityInfo.name));
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED|Intent.FLAG_ACTIVITY_NO_HISTORY|Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED|Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
 		}
         return i;
     }
