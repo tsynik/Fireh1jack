@@ -12,6 +12,8 @@ public class AccServ extends AccessibilityService {
 
     static final String TAG = "*** AccServ";
     static boolean HomePressCanceled = false;
+    static long lastDown;
+    static long lastDuration;
     static HomeWatcher homeWatcher;
     static String lastApp, lastClass;
     private static SettingsMan.SettingStore settings;
@@ -19,7 +21,7 @@ public class AccServ extends AccessibilityService {
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
     
-        settings = SettingsMan.GetSettings(); // for cLaunch
+        settings = SettingsMan.GetSettings(); // for cLauncher
         lastApp = (String) event.getPackageName();
         lastClass = (String) event.getClassName();
 
@@ -31,9 +33,9 @@ public class AccServ extends AccessibilityService {
             packageName.equals("com.amazon.firelauncher") || // ### TAB
             packageName.equals("com.amazon.tv.launcher") || // ### FTV
             packageName.equals("com.google.android.leanbacklauncher") && // ### ATV
-            !packageName.equals(settings.cLaunch)
+            !packageName.equals(settings.cLauncher)
         ) {
-            Log.v(TAG, "Do HOME (ApplicationOpenDetection). onAccessibilityEvent: " + event + ", package: " + packageName + ", cLaunch: " + settings.cLaunch);
+            Log.v(TAG, "Do HOME (ApplicationOpenDetection). onAccessibilityEvent: " + event + ", package: " + packageName + ", cLauncher: " + settings.cLauncher);
             HomePress.Perform(getApplicationContext());
         }
     }
@@ -49,43 +51,55 @@ public class AccServ extends AccessibilityService {
         if (!settings.HardwareDetection)
             return false;
 
+        // Log.v(TAG, "### KeyEvent ### " + event.toString());
+
+        int action = event.getAction();
         switch (event.getKeyCode())
         {
             case KeyEvent.KEYCODE_HOME:
-                int action = event.getAction();
-                // Log.v(TAG, "KEYCODE_HOME HomePressCanceled = " + HomePressCanceled);
 
-                if (action == KeyEvent.ACTION_UP) {
-                    // Log.v(TAG, "ACTION_UP HomePressCanceled = " + HomePressCanceled);
+                if (action == KeyEvent.ACTION_DOWN)
+                    lastDown = System.currentTimeMillis();
+                else if (action == KeyEvent.ACTION_UP) {
                     HomePressCanceled = false;
+                    lastDuration = System.currentTimeMillis() - lastDown;
                 }
-                else if (action == KeyEvent.ACTION_DOWN && !HomePressCanceled)
-                {
-                    // Log.v(TAG, "ACTION_DN HomePressCanceled = false, onKeyEvent:" + event);
+                // Log.v(TAG, "HOME lastDuration = " + lastDuration);
+                if (action == KeyEvent.ACTION_UP && lastDuration > 500) { // long press
+                    Log.v(TAG, "### ASSIST ###");
+                    SearchPress.Perform(getApplicationContext());
+                    return true; // Override default handling
+                }
+                else if (action == KeyEvent.ACTION_DOWN && !HomePressCanceled) {
+                    Log.v(TAG, "### HOME ###");
                     HomePress.Perform(getApplicationContext());
-                    return true;
+                    return true; // Override default handling
                 }
-                return false; // false
+                return false;
 
-            case KeyEvent.KEYCODE_MENU:
+            case KeyEvent.KEYCODE_MENU: // 82
                 if (settings.MenuButtonOverride && event.getAction() == KeyEvent.ACTION_DOWN)
                 {
-                    // Log.v(TAG, "KEYCODE_MENU set HomePressCanceled = " + HomePressCanceled);
                     HomePressCanceled = true;
-                	return false;
                 }
+                return false;
 
-            case KeyEvent.KEYCODE_SEARCH:
-                if (event.getAction() == KeyEvent.ACTION_DOWN)
-                {
-                    // Log.v(TAG, "KEYCODE_SEARCH Press (HardwareDetection). onKeyEvent:" + event);
-                    SearchPress.Perform(getApplicationContext());
-                    return true;
+            case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE: // 84
+                if (action == KeyEvent.ACTION_DOWN)
+                    lastDown = System.currentTimeMillis();
+                else if (action == KeyEvent.ACTION_UP) {
+                    lastDuration = System.currentTimeMillis() - lastDown;
                 }
+                // Log.v(TAG, "MEDIA_PLAY_PAUSE lastDuration = " + lastDuration);
+                if (lastDuration > 500) {
+                    SearchPress.Perform(getApplicationContext());
+                    return true; // Override default handling
+                }
+                return false;
         }
         return false;
     }
-
+    
     @Override
     protected void onServiceConnected() {
         super.onServiceConnected();
@@ -104,7 +118,8 @@ public class AccServ extends AccessibilityService {
             public void onHomePressed()
             {
                 if (settings.BroadcastRecieverDetection && !HomePressCanceled &&
-                   (!settings.RecentAppOverride | !(lastApp.equals("com.android.systemui") && lastClass.equals("com.android.systemui.recents.RecentsActivity"))))
+                   (!settings.RecentAppOverride | !(lastApp.equals("com.android.systemui") &&
+                   lastClass.equals("com.android.systemui.recents.RecentsActivity"))))
                 {
                     Log.d(TAG, "Do NEW HOME. LastApp: " + lastApp + "  LastClass: " + lastClass);
                     HomePress.Perform(getApplicationContext());
@@ -115,12 +130,14 @@ public class AccServ extends AccessibilityService {
             public void onHomeLongPressed()
             {
                     Log.d(TAG, "Do LONG HOME");
+                    // performGlobalAction(AccessibilityService.GLOBAL_ACTION_NOTIFICATIONS);
             }
 
             @Override
             public void onRecentAppPressed()
             {
                     Log.d(TAG, "Do RECENTS");
+                    // performGlobalAction(AccessibilityService.GLOBAL_ACTION_RECENTS);
             }
             
             @Override

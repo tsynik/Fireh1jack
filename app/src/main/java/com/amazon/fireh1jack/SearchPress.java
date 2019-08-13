@@ -49,7 +49,7 @@ public class SearchPress {
     {
         // Simple debounce
         long time = System.currentTimeMillis();
-        if (time - LastActivate < 200)
+        if (time - LastActivate < 100)
             return;
         LastActivate = time;
 
