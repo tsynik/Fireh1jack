@@ -88,6 +88,8 @@ public class SettingsMan
             Toast.makeText(MainActivity.GetContext(), R.string.settings_saved, Toast.LENGTH_LONG).show();
             // Apply Language
             MainActivity.SetLanguage();
+            // Apply KFTM Mode
+            MainActivity.FreezeLauncher(ApplicationOpenDetection);
         }
     }
 

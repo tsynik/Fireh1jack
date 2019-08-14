@@ -28,19 +28,19 @@ public class AccServ extends AccessibilityService {
         lastApp = (String) event.getPackageName();
         lastClass = (String) event.getClassName();
 
-        if (!settings.ApplicationOpenDetection)
-            return;
-
-        CharSequence packageName = event.getPackageName();
-        if (
-            packageName.equals("com.amazon.firelauncher") || // ### TAB
-            packageName.equals("com.amazon.tv.launcher") || // ### FTV
-            packageName.equals("com.google.android.leanbacklauncher") && // ### ATV
-            !packageName.equals(settings.cLauncher)
-        ) {
-            Log.v(TAG, "Do HOME (ApplicationOpenDetection). onAccessibilityEvent: " + event + ", package: " + packageName + ", cLauncher: " + settings.cLauncher);
-            HomePress.Perform(getApplicationContext());
-        }
+//        if (!settings.ApplicationOpenDetection)
+//            return;
+//
+//        CharSequence packageName = event.getPackageName();
+//        if (
+//            packageName.equals("com.amazon.firelauncher") || // ### TAB
+//            packageName.equals("com.amazon.tv.launcher") || // ### FTV
+//            packageName.equals("com.google.android.leanbacklauncher") && // ### ATV
+//            !packageName.equals(settings.cLauncher) // com.amazon.tv.launcher settings workaround
+//        ) {
+//            Log.v(TAG, "Do HOME (ApplicationOpenDetection). onAccessibilityEvent: " + event + ", package: " + packageName + ", cLauncher: " + settings.cLauncher);
+//            HomePress.Perform(getApplicationContext());
+//        }
     }
 
     @Override

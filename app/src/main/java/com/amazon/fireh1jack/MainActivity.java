@@ -358,6 +358,27 @@ public class MainActivity extends AppCompatActivity
 
         return false;
     }
+    // Freeze KFTV Launcher
+    public static boolean FreezeLauncher(boolean mode) {
+        try {
+            Settings.Global.putString(context.getContentResolver(), "frozenMode", mode ? "enabled" : "disabled");
+            return true;
+//            String state = Settings.Global.getString(context.getContentResolver(), "frozenMode");
+//            if (mode) { // freeze
+//                if (!state.equals("enabled")) 
+//                    Settings.Global.putString(context.getContentResolver(), "frozenMode", "enabled");
+//                return true;
+//            } else { // unfreeze
+//                if (state.equals("enabled"))
+//                    Settings.Global.putString(context.getContentResolver(), "frozenMode", "disabled");
+//                return true;
+//            }
+        } catch(Exception e) {
+//            Toast.makeText(context, "Can't change launcher mode!", Toast.LENGTH_LONG).show();
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -369,8 +390,11 @@ public class MainActivity extends AppCompatActivity
         // LOCALE
         // SetLanguage();
         
+        // KFTM Mode
+        // FreezeLauncher(SettingsMan.GetSettings().ApplicationOpenDetection);
+
         // GOOGLE
-        PackageManager pm = getApplicationContext().getPackageManager();
+        // PackageManager pm = getApplicationContext().getPackageManager();
         if (SettingsMan.GetSettings().UseGSearch)
         {
             try

@@ -17,7 +17,7 @@
     <string name="hide_system_apps">Hide System Apps</string>
     <string name="lang_set_ok">Language is set</string>    
     <string name="lang_not_ok">"Can't set Language"</string>    
-    <string name="launcher_open_detection">Launcher open detection (risky)</string>
+    <string name="launcher_open_detection">Freeze KFTV Launcher (risky)</string>
     <string name="launchers_only">Launchers Only</string>
     <string name="load_defaults">Load Defaults</string>
     <string name="open_settings">Open Settings</string>

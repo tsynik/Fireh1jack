@@ -17,7 +17,7 @@
     <string name="hide_system_apps">Скрыть системные</string>
     <string name="lang_set_ok">Установлен язык системы</string>
     <string name="lang_not_ok">Не удалось установить язык</string>    
-    <string name="launcher_open_detection">Всегда заменять системный лончер (небезопасно)</string>
+    <string name="launcher_open_detection">Заморозить системный лончер (небезопасно)</string>
     <string name="launchers_only">Только лончеры</string>
     <string name="load_defaults">Настройки по умолчанию</string>
     <string name="open_settings">Открыть настройки</string>
