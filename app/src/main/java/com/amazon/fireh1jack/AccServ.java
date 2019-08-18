@@ -61,24 +61,21 @@ public class AccServ extends AccessibilityService {
         {
             case KeyEvent.KEYCODE_HOME:
 
-                if (action == KeyEvent.ACTION_DOWN)
-                    lastHomeDown = System.currentTimeMillis();
-                else if (action == KeyEvent.ACTION_UP) {
-                    lastHomeDuration = System.currentTimeMillis() - lastHomeDown;
+//                if (action == KeyEvent.ACTION_DOWN)
+//                    lastHomeDown = System.currentTimeMillis();
+//                else if (action == KeyEvent.ACTION_UP) {
+//                    lastHomeDuration = System.currentTimeMillis() - lastHomeDown;
+//                    HomePressCanceled = false;
+//                    ActivateSearch = false;
+//                }
+//                // Log.v(TAG, "HOME lastDuration = " + lastHomeDuration);
+//                if (action == KeyEvent.ACTION_UP && lastHomeDuration > 500) { // long press
+//                    HomePressCanceled = true; // LONG PRESS for HUD
+//                    ActivateSearch = true; // LONG PRESS for SEARCH
+//                    return true; // Override default handling
+//                }
+                if (action == KeyEvent.ACTION_UP)
                     HomePressCanceled = false;
-                    ActivateSearch = false;
-                }
-                // Log.v(TAG, "HOME lastDuration = " + lastHomeDuration);
-                if (action == KeyEvent.ACTION_UP && lastHomeDuration > 500) { // long press
-        		    // if (settings.UseGSearch) {
-                        // Log.v(TAG, "### ASSIST ###");
-                        // SearchPress.Perform(getApplicationContext());
-                        // return true; // Override default handling
-                    //}
-                    HomePressCanceled = true; // LONG PRESS for HUD
-                    ActivateSearch = true; // LONG PRESS for SEARCH
-                    return true; // Override default handling
-                }
                 else if (action == KeyEvent.ACTION_DOWN && !HomePressCanceled) {
                     // Log.v(TAG, "### HOME ###");
                     HomePress.Perform(getApplicationContext());
@@ -93,24 +90,24 @@ public class AccServ extends AccessibilityService {
                 }
                 return false;
 
-            case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE: // 84
-        		if (!settings.UseGSearch)
-            		return false;
-                if (action == KeyEvent.ACTION_DOWN)
-                    lastPlayDown = System.currentTimeMillis();
-                else if (action == KeyEvent.ACTION_UP) {
-                    lastPlayDuration = System.currentTimeMillis() - lastPlayDown;
-                    ActivateSearch = false;
-                    return true; // Override default handling
-                }
-                // Log.v(TAG, "MEDIA_PLAY_PAUSE lastPlayDown = " + lastPlayDuration + " ActivateSearch = " + ActivateSearch);
-                if ((action == KeyEvent.ACTION_DOWN && lastPlayDuration > 500) || ActivateSearch) {
-                    // Log.v(TAG, "### ASSIST ###");
-                    SearchPress.Perform(getApplicationContext());
-                    HomePressCanceled = false;
-                    return true; // Override default handling
-                }
-                return false;
+//            case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE: // 84
+//        		if (!settings.UseGSearch)
+//            		return false;
+//                if (action == KeyEvent.ACTION_DOWN)
+//                    lastPlayDown = System.currentTimeMillis();
+//                else if (action == KeyEvent.ACTION_UP) {
+//                    lastPlayDuration = System.currentTimeMillis() - lastPlayDown;
+//                    ActivateSearch = false;
+//                    return true; // Override default handling
+//                }
+//                // Log.v(TAG, "MEDIA_PLAY_PAUSE lastPlayDown = " + lastPlayDuration + " ActivateSearch = " + ActivateSearch);
+//                if ((action == KeyEvent.ACTION_DOWN && lastPlayDuration > 500) || ActivateSearch) {
+//                    // Log.v(TAG, "### ASSIST ###");
+//                    SearchPress.Perform(getApplicationContext());
+//                    HomePressCanceled = false;
+//                    return true; // Override default handling
+//                }
+//                return false;
         }
         return false;
     }
