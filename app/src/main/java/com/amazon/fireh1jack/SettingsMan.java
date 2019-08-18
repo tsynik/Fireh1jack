@@ -8,6 +8,10 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.widget.Toast;
 import com.amazon.fireh1jack.R;
+import java.util.LinkedHashMap;
+//import java.util.List;
+import java.util.Map;
+//import java.util.Set;
 
 import static android.content.Context.MODE_PRIVATE;
 import static android.content.Context.UI_MODE_SERVICE;
@@ -47,7 +51,7 @@ public class SettingsMan
             RecentAppOverride = settings.getBoolean("RecentAppOverride", false);
             SetLanguage = settings.getBoolean("SetLanguage", false);
             UseGSearch = settings.getBoolean("UseGSearch", false);
-            uLocale = settings.getString("uLocale", "RU");
+            uLocale = settings.getString("uLocale", "en");
             cLauncher = settings.getString("ChosenLauncher", "com.amazon.fireh1jack");
         }
 
@@ -63,7 +67,7 @@ public class SettingsMan
             BroadcastRecieverDetection = true;
             ApplicationOpenDetection = !tv; // Fall back enabled by default for non tv users
             SetLanguage = false; // Override Language
-            uLocale = "RU"; // User Locale
+            uLocale = "en"; // User Locale
             UseGSearch = false; // Swap Alexa with Google
 
             SharedPreferences.Editor editor = settings.edit();
@@ -99,4 +103,16 @@ public class SettingsMan
             settingStore = new SettingStore();
         return settingStore;
     }
+    
+    public static final Map<String, String> LANG = new LinkedHashMap<String, String>()
+    {{
+        // Key is the static field name of Locale (e.g. Locale.GERMAN or Locale.ENGLISH)
+        // Value is the displayed value for the settings
+        // put("", "Auto");
+        put("ru", "Русский");
+        put("uk", "Українська");
+        put("GERMAN", "Deutsch");
+        put("ENGLISH", "English");
+    }};
+    
 }

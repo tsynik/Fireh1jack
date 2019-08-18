@@ -285,29 +285,44 @@ public class MainActivity extends AppCompatActivity
         {
             // Locale newLocale = new Locale("ru");
             // Locale newLocale = new Locale(SettingsMan.GetSettings().uLocale);
-            String lang = context.getSharedPreferences("FireH1jack", MODE_PRIVATE).getString("uLocale", "EN").toLowerCase();
-            String ccode = "US";
-            switch(lang) 
-            { 
-                case "ru":
-                    ccode = "RU";
-                    break; 
-                case "uk": 
-                    ccode = "UA";
-                    break; 
-                case "de": 
-                    ccode = "DE";
-                    break; 
-                default: 
-                    ccode = "US";
-            } 
-            Locale newLocale = new Locale(lang, ccode);
-            if (setLocale(newLocale)) {
-                Toast.makeText(context, R.string.lang_set_ok, Toast.LENGTH_LONG).show();
-                return true;
-            } else {
-                Toast.makeText(context, R.string.lang_not_ok, Toast.LENGTH_LONG).show();
-            //  showSecurityAlert();
+            String lang = context.getSharedPreferences("FireH1jack", MODE_PRIVATE).getString("uLocale", "en").toLowerCase();
+            if(lang != null && !lang.equals("")) {
+                try {
+                Locale newLocale;
+                // If lang is <= 3 chars, it is a language code
+                if (lang.length() <= 3) {
+                    String ccode = "US";
+                    switch(lang)
+                    {
+                    case "ru":
+                        ccode = "RU";
+                        break;
+                    case "uk":
+                        ccode = "UA";
+                        break;
+                    case "de":
+                        ccode = "DE";
+                        break;
+                    default: 
+                        break;
+                    }
+                    newLocale = new Locale(lang, ccode);
+                } else {
+                    newLocale = (Locale) Locale.class.getField(lang).get(Locale.getDefault());
+                }
+                Locale.setDefault(newLocale);
+
+                if (setLocale(newLocale)) {
+                    Toast.makeText(context, R.string.lang_set_ok, Toast.LENGTH_LONG).show();
+                    return true;
+                } else {
+                    Toast.makeText(context, R.string.lang_not_ok, Toast.LENGTH_LONG).show();
+                //  showSecurityAlert();
+                }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
         return false;

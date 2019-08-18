@@ -102,7 +102,7 @@ public class SettingsActivity extends AppCompatActivity
         // localeSpinner.setAdapter(staticAdapter);
 
         Spinner dynamicSpinner = (Spinner) findViewById(R.id.locale_spinner);
-        String[] items = new String[] { "RU", "UK", "DE", "EN" };
+        String[] items = new String[] { "Русский", "Українська", "Deutsch", "English" };
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, items);
         dynamicSpinner.setAdapter(adapter);
@@ -111,19 +111,27 @@ public class SettingsActivity extends AppCompatActivity
         uLoc = settings.uLocale;
 	    // Toast.makeText(SettingsActivity.this, "uLoc : " +  uLoc, Toast.LENGTH_SHORT).show();
         // set selection
-        if (uLoc == "EN")
-          dynamicSpinner.setSelection(3);
-        else if (uLoc == "DE")
-          dynamicSpinner.setSelection(2);
-        else if (uLoc == "UK")
-          dynamicSpinner.setSelection(1);
-        else if (uLoc == "RU")
+        if (uLoc == "ru")
           dynamicSpinner.setSelection(0);
+        else if (uLoc == "uk")
+          dynamicSpinner.setSelection(1);
+        else if (uLoc == "de")
+          dynamicSpinner.setSelection(2);
+        else if (uLoc == "en")
+          dynamicSpinner.setSelection(3);
         dynamicSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Log.v("item", (String) parent.getItemAtPosition(position));
-                uLoc = (String) parent.getItemAtPosition(position);
+                // uLoc = (String) parent.getItemAtPosition(position);
+                if (position == 0)
+                    uLoc = "ru";
+                else if (position == 1)
+                    uLoc = "uk";
+                else if (position == 2)
+                    uLoc = "de";
+                else if (position == 3)
+                    uLoc = "en";
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -132,7 +140,7 @@ public class SettingsActivity extends AppCompatActivity
             }
         });
         // override uLoc var on select
-        uLoc = (String) dynamicSpinner.getSelectedItem(); // .toString()
+        // uLoc = (String) dynamicSpinner.getSelectedItem(); // .toString()
 	    // Toast.makeText(SettingsActivity.this, "selected : " +  uLoc, Toast.LENGTH_SHORT).show();
 
         // Hardware button detection
