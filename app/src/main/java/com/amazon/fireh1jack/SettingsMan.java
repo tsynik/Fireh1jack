@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.amazon.fireh1jack.R;
 import java.util.LinkedHashMap;
 //import java.util.List;
-import java.util.Map;
+//import java.util.Map;
 //import java.util.Set;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -94,6 +94,8 @@ public class SettingsMan
             MainActivity.SetLanguage();
             // Apply KFTM Mode
             MainActivity.FreezeLauncher(ApplicationOpenDetection);
+            // Setup GSearch
+            // MainActivity.setupSearch();
         }
     }
 
@@ -104,15 +106,15 @@ public class SettingsMan
         return settingStore;
     }
     
-    public static final Map<String, String> LANG = new LinkedHashMap<String, String>()
-    {{
-        // Key is the static field name of Locale (e.g. Locale.GERMAN or Locale.ENGLISH)
-        // Value is the displayed value for the settings
-        // put("", "Auto");
-        put("ru", "Русский");
-        put("uk", "Українська");
-        put("GERMAN", "Deutsch");
-        put("ENGLISH", "English");
-    }};
+//    public static final Map<String, String> LANG = new LinkedHashMap<String, String>()
+//    {{
+//        // Key is the static field name of Locale (e.g. Locale.GERMAN or Locale.ENGLISH)
+//        // Value is the displayed value for the settings
+//        put("", "Auto");
+//        put("ru", "Русский");
+//        put("uk", "Українська");
+//        put("GERMAN", "Deutsch");
+//        put("ENGLISH", "English");
+//    }};
     
 }

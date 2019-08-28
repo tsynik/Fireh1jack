@@ -378,21 +378,50 @@ public class MainActivity extends AppCompatActivity
         try {
             Settings.Global.putString(context.getContentResolver(), "frozenMode", mode ? "enabled" : "disabled");
             return true;
-//            String state = Settings.Global.getString(context.getContentResolver(), "frozenMode");
-//            if (mode) { // freeze
-//                if (!state.equals("enabled")) 
-//                    Settings.Global.putString(context.getContentResolver(), "frozenMode", "enabled");
-//                return true;
-//            } else { // unfreeze
-//                if (state.equals("enabled"))
-//                    Settings.Global.putString(context.getContentResolver(), "frozenMode", "disabled");
-//                return true;
-//            }
         } catch(Exception e) {
-//            Toast.makeText(context, "Can't change launcher mode!", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Can't change launcher mode!", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
         return false;
+    }
+    // Alexa TERMS hack
+    public static void setupSearch() {
+        if (SettingsMan.GetSettings().UseGSearch)
+        {
+            if (Utilities.isPackageEnabled(context, "com.amazon.vizzini"))
+            try {
+                Runtime runtime = Runtime.getRuntime();
+                runtime.exec("pm clear com.amazon.vizzini");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            passOOBE();
+        }
+    }
+    // override OOBE keys block
+    public static boolean passOOBE() {
+        try {
+            Settings.Global.putString(context.getContentResolver(), "com.amazon.tv.oobe.RESTRICT_REMOTE_BUTTONS", "0");
+            return true;
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    private void clearSelfData() {
+        try {
+            // clearing app data
+            if (Build.VERSION_CODES.KITKAT <= Build.VERSION.SDK_INT) {
+                ((ActivityManager)getSystemService(ACTIVITY_SERVICE)).clearApplicationUserData(); // note: it has a return value!
+            } else {
+                String packageName = getApplicationContext().getPackageName();
+                Runtime runtime = Runtime.getRuntime();
+                runtime.exec("pm clear "+packageName);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -402,23 +431,17 @@ public class MainActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
 
-        // LOCALE
-        // SetLanguage();
-        
-        // KFTM Mode
-        // FreezeLauncher(SettingsMan.GetSettings().ApplicationOpenDetection);
-
         // GOOGLE
         // PackageManager pm = getApplicationContext().getPackageManager();
-        if (SettingsMan.GetSettings().UseGSearch)
-        {
-            try
-            {
+        // if (SettingsMan.GetSettings().UseGSearch)
+        //	try
+        //    {
                 // disable Alexa
                 // https://www.xda-developers.com/replace-alexa-google-assistant-amazon-fire-7-hd-8-hd-10/
                 // getApplicationContext().getPackageManager().setApplicationEnabledSetting("com.amazon.vizzini", PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0)
-                Secure.putString(getContentResolver(), "alexa_enabled", "0");
-
+                // alexa setting off
+                // Secure.putString(getContentResolver(), "alexa_enabled", "0");
+                // alexa package off
                 // if (isPackageEnabled("com.amazon.vizzini", pm))
                 //    pm.setApplicationEnabledSetting("com.amazon.vizzini", PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0);
                 
@@ -427,16 +450,16 @@ public class MainActivity extends AppCompatActivity
                     // Secure.putString(getContentResolver(), "voice_recognition_service", "com.google.android.katniss/.search.serviceapi.KatnissRecognitionService");
                 // }
 
-            } catch(SecurityException e) {
-                showSecurityAlert();
-                } catch(Exception e1) {
-                    e1.printStackTrace();
-                }
+        //    } catch(SecurityException e) {
+        //        showSecurityAlert();
+        //        } catch(Exception e1) {
+        //            e1.printStackTrace();
+        //        }
 
-        } else {
-            try {
+        // } else {
+        //    try {
                 // alexa setting on
-                Secure.putString(getContentResolver(), "alexa_enabled", "1");
+                // Secure.putString(getContentResolver(), "alexa_enabled", "1");
                 // alexa package on
                 // if (!isPackageEnabled("com.amazon.vizzini", pm))
                 //    pm.setApplicationEnabledSetting("com.amazon.vizzini", PackageManager.COMPONENT_ENABLED_STATE_ENABLED, 0);
@@ -444,12 +467,13 @@ public class MainActivity extends AppCompatActivity
                 // if (isPackageEnabled("com.google.android.katniss", pm))
                 //    pm.setApplicationEnabledSetting("com.google.android.katniss", PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0);
                 
-            } catch(SecurityException e) {
-                showSecurityAlert();
-                } catch(Exception e1) {
-                     e1.printStackTrace();
-            }
-        }
+        //    } catch(SecurityException e) {
+        //        showSecurityAlert();
+        //        } catch(Exception e1) {
+        //             e1.printStackTrace();
+        //    }
+        // }
+
         // PERMS
         if (!isAccessibilityEnabled(context, "com.amazon.fireh1jack/.AccServ"))
         {
@@ -496,8 +520,6 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onClick(DialogInterface dialog, int id)
                     {
-                        // Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
-                        // startActivity(intent);
                         startActivityForResult(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS), 0);
                     }
                 });

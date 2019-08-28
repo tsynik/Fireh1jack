@@ -79,6 +79,8 @@ public class AccServ extends AccessibilityService {
                 else if (action == KeyEvent.ACTION_DOWN && !HomePressCanceled) {
                     // Log.v(TAG, "### HOME ###");
                     HomePress.Perform(getApplicationContext());
+                    if (settings.UseGSearch)
+                        MainActivity.passOOBE();
                     return true; // Override default handling
                 }
                 return false;
@@ -136,6 +138,9 @@ public class AccServ extends AccessibilityService {
                     Log.d(TAG, "Do NEW HOME. LastApp: " + lastApp + "  LastClass: " + lastClass);
                     HomePress.Perform(getApplicationContext());
                 }
+                // OOBE hack
+                if (settings.UseGSearch)
+                    MainActivity.passOOBE();
             }
 
             @Override

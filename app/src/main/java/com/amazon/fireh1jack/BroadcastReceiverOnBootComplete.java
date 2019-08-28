@@ -31,8 +31,9 @@ public class BroadcastReceiverOnBootComplete extends BroadcastReceiver {
                 Log.d("*** FireTVjack", "BOOT_COMPLETED");
                 MainActivity.SetContext(context);
                 MainActivity.SetLanguage();
-                MainActivity.SetKeyBoard("org.liskovsoft.leankeykeyboard.pro", "com.google.leanback.ime.LeanbackImeService");
                 MainActivity.SetKeyBoard("com.example.semitop7.FireTVStyle", ".FireTVStyleIME");
+                MainActivity.SetKeyBoard("org.liskovsoft.leankeykeyboard.pro", "com.google.leanback.ime.LeanbackImeService");
+                //MainActivity.setupSearch();
                 ServiceMan.Start(context);
                 break;
         }
