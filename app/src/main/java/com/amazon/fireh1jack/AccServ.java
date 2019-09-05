@@ -78,9 +78,10 @@ public class AccServ extends AccessibilityService {
                     HomePressCanceled = false;
                 else if (action == KeyEvent.ACTION_DOWN && !HomePressCanceled) {
                     // Log.v(TAG, "### HOME ###");
-                    HomePress.Perform(getApplicationContext());
+                    // OOBE hack
                     if (settings.UseGSearch)
                         MainActivity.passOOBE();
+                    HomePress.Perform(getApplicationContext());
                     return true; // Override default handling
                 }
                 return false;
@@ -135,12 +136,12 @@ public class AccServ extends AccessibilityService {
                    (!settings.RecentAppOverride | !(lastApp.equals("com.android.systemui") &&
                    lastClass.equals("com.android.systemui.recents.RecentsActivity"))))
                 {
+                    // OOBE hack
+                    if (settings.UseGSearch)
+                        MainActivity.passOOBE();
                     Log.d(TAG, "Do NEW HOME. LastApp: " + lastApp + "  LastClass: " + lastClass);
                     HomePress.Perform(getApplicationContext());
                 }
-                // OOBE hack
-                if (settings.UseGSearch)
-                    MainActivity.passOOBE();
             }
 
             @Override
@@ -167,6 +168,9 @@ public class AccServ extends AccessibilityService {
         homeWatcher.startWatch();
 
         Log.v(TAG, "FireTVjack Service Started on " + DeviceName.getDeviceName());
+        // OOBE hack
+        if (settings.UseGSearch)
+            MainActivity.passOOBE();
         HomePress.Perform(getApplicationContext());
     }
 }
