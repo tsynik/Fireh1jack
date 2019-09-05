@@ -62,10 +62,10 @@ public class SettingsMan
             boolean android7 = Build.VERSION.SDK_INT >= 25;
 
             HardwareDetection = MenuButtonOverride = tv; // Enable hardware detection on TV's
-            OverlayApplicationDetection = !android7; // Disabled for new fire tablets and tv
+            OverlayApplicationDetection = !android7; // Disabled for new fire tablets and TV
             RecentAppOverride = android7 & !tv; // Enable for new fire tablets
             BroadcastRecieverDetection = true;
-            ApplicationOpenDetection = !tv; // Fall back enabled by default for non tv users
+            ApplicationOpenDetection = !tv; // Fall back enabled by default for non TV users
             SetLanguage = false; // Override Language
             uLocale = "en"; // User Locale
             UseGSearch = false; // Swap Alexa with Google

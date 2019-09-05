@@ -10,7 +10,7 @@
     <string name="close">Закрыть</string>
     <string name="choose_launcher">Выберите рабочий стол из списка</string>
     <string name="disable_in_task_switcher">Откл. «Домой» в диспетчере приложений</string>
-    <string name="disable_while_menu_is_held_hardware_buttons_only">Откл. «Домой» при нажатой «Меню» (только для физических кнопок)</string>
+    <string name="disable_while_menu_is_held_hardware_buttons_only">Откл. «Домой» после нажатой «Меню» (только для физических кнопок)</string>
     <string name="donate">Поддержать</string>
     <string name="hardware_button_detection">Обрабатывать кнопки пульта</string>
     <string name="help">Помощь</string>

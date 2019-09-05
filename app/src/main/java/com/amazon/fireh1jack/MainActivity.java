@@ -161,9 +161,9 @@ public class MainActivity extends AppCompatActivity
         // Notify User
         CharSequence welcomeMessage = getResources().getText(R.string.welcome);
         CharSequence welcomeMessage2 = getResources().getText(R.string.welcome2);
-        String adbCommand1 = "# adb tcpip 5555";
-        String adbCommand2 = "# adb connect (FireTV IP)";
-        String adbCommand3 = "# adb shell";
+        String adbCommand1 = "adb tcpip 5555";
+        String adbCommand2 = "adb connect (FireTV IP)";
+        String adbCommand3 = "adb shell";
         String adbCommand4 = "# pm grant com.amazon.fireh1jack android.permission.WRITE_SECURE_SETTINGS";
         String adbCommand5 = "# pm grant com.amazon.fireh1jack android.permission.CHANGE_CONFIGURATION";
         String adbCommand6 = "# pm grant com.amazon.fireh1jack android.permission.SYSTEM_ALERT_WINDOW";
